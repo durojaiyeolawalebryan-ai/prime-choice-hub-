@@ -1,256 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Prime Choice Hub | Curated Kitchen, Meat & Home Essentials</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prime Choice Hub | Curated Kitchen & Gear Reviews</title>
   <style>
+    /* Global Styles */
     :root {
-      --bg-dark: #0f172a;
+      --bg-color: #0f172a;
       --card-bg: #1e293b;
-      --border-color: #334155;
-      --accent-red: #ef4444;
-      --accent-blue: #38bdf8;
-      --accent-gold: #f59e0b;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
+      --accent-color: #f97316;
+      --accent-hover: #ea580c;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-    body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.5; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-    /* Amazon Mandatory Compliance Banner */
-    .affiliate-notice-top {
-      background: #1e1b4b;
-      color: #c7d2fe;
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding-bottom: 50px;
+    }
+
+    /* Header */
+    header {
+      background-color: var(--card-bg);
       text-align: center;
-      padding: 10px 15px;
+      padding: 2.5rem 1rem;
+      border-bottom: 1px solid #334155;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      color: var(--accent-color);
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    /* Grid Layout */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    /* Card Styling */
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #334155;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      background-color: #334155;
+    }
+
+    .card-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    /* Button Styling */
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 0.8rem;
+      text-align: center;
+      background-color: var(--accent-color);
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--accent-hover);
+    }
+
+    /* Footer Disclosure */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+      color: var(--text-muted);
       font-size: 0.85rem;
-      border-bottom: 1px solid #3730a3;
+      border-top: 1px solid #334155;
     }
-
-    header { padding: 40px 0 25px; text-align: center; border-bottom: 1px solid var(--border-color); }
-    header h1 { font-size: 2.5rem; font-weight: 800; color: var(--accent-red); margin-bottom: 8px; }
-    header p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
-
-    .nav-filters { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin: 30px 0; }
-    .filter-btn {
-      background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border-color);
-      padding: 10px 20px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 600;
-      transition: all 0.2s ease;
-    }
-    .filter-btn:hover, .filter-btn.active { background: var(--accent-gold); color: var(--bg-dark); border-color: var(--accent-gold); }
-
-    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-bottom: 60px; }
-    
-    .card { 
-      background: var(--card-bg); 
-      border-radius: 12px; 
-      border: 1px solid var(--border-color); 
-      overflow: hidden; 
-      display: flex; 
-      flex-direction: column; 
-      transition: transform 0.2s ease, border-color 0.2s ease; 
-      position: relative;
-    }
-    .card:hover { transform: translateY(-4px); border-color: var(--accent-blue); }
-    
-    .img-wrapper { position: relative; width: 100%; height: 210px; }
-    .card img { width: 100%; height: 100%; object-fit: cover; }
-
-    .card-badge {
-      position: absolute; top: 12px; left: 12px;
-      background: rgba(15, 23, 42, 0.9); color: var(--accent-gold);
-      padding: 4px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.5px;
-      border: 1px solid rgba(245, 158, 11, 0.4);
-    }
-
-    .card-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
-    .card-category { font-size: 0.75rem; text-transform: uppercase; color: var(--accent-blue); font-weight: 700; margin-bottom: 6px; }
-    .card-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; line-height: 1.35; color: #ffffff; }
-    .card-desc { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 15px; flex-grow: 1; }
-    .card-footer { display: flex; align-items: center; justify-content: flex-end; padding-top: 15px; border-top: 1px solid var(--border-color); margin-top: auto; }
-
-    .btn-amazon {
-      background: var(--accent-gold); color: var(--bg-dark); text-decoration: none;
-      padding: 10px 16px; border-radius: 8px; font-weight: 700; font-size: 0.9rem;
-      width: 100%; text-align: center; display: block; transition: background 0.2s;
-    }
-    .btn-amazon:hover { background: #d97706; }
-
-    footer { border-top: 1px solid var(--border-color); padding: 30px 0; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
-    footer a { color: var(--accent-blue); text-decoration: none; margin: 0 10px; }
-
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; padding: 20px; z-index: 100; }
-    .modal-content { background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 12px; max-width: 550px; }
-    .close-btn { background: var(--accent-red); color: white; border: none; padding: 6px 16px; border-radius: 6px; cursor: pointer; float: right; font-weight: 600; }
   </style>
 </head>
 <body>
 
-  <!-- Required Operating Agreement Disclosure Banner -->
-  <div class="affiliate-notice-top">
-    📢 <strong>Disclosure:</strong> As an Amazon Associate, I earn from qualifying purchases made through links on this site.
-  </div>
+  <header>
+    <h1>Prime Choice Hub</h1>
+    <p>Top-rated kitchen gear, outdoor cooking tools, and home setup essentials.</p>
+  </header>
 
   <div class="container">
-    <header>
-      <h1>🥩 Prime Choice Hub</h1>
-      <p>Curated recommendations for premium cuts, grilling gear, and daily home essentials.</p>
-    </header>
+    <div class="product-grid">
 
-    <!-- Category Filter Bar -->
-    <div class="nav-filters">
-      <button class="filter-btn active" onclick="filterCategory(event, 'all')">All Recommendations</button>
-      <button class="filter-btn" onclick="filterCategory(event, 'meats')">Meats & Cuts</button>
-      <button class="filter-btn" onclick="filterCategory(event, 'kitchen')">Kitchen & Grilling</button>
-      <button class="filter-btn" onclick="filterCategory(event, 'home')">Home & Personal Care</button>
-    </div>
-
-    <!-- Product Grid -->
-    <div class="product-grid" id="productGrid">
-      
-      <!-- ITEM 1: Meats -->
-      <div class="card" data-category="meats">
-        <div class="img-wrapper">
-          <span class="card-badge">Top Pick</span>
-          <img src="https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=600&q=80" alt="Ribeye Steak">
-        </div>
-        <div class="card-body">
-          <span class="card-category">Meats & Cuts</span>
-          <h3 class="card-title">USDA Prime Ribeye Steak Box (4-Pack)</h3>
-          <p class="card-desc">Thick-cut, highly marbled ribeye steaks, wet-aged and vacuum-sealed for maximum flavor.</p>
-          <div class="card-footer">
-            <a href="https://www.amazon.com" target="_blank" rel="noopener" class="btn-amazon">
-              Check Price on Amazon ↗
-            </a>
-          </div>
+      <!-- Product 1: ThermoPro TP19 (UPDATED WITH YOUR LINK) -->
+      <div class="card">
+        <img class="card-img" src="https://images.unsplash.com/photo-1555244162-803834f70033?w=500&auto=format&fit=crop&q=60" alt="ThermoPro TP19 Digital Meat Thermometer">
+        <div class="card-content">
+          <h2 class="card-title">ThermoPro TP19 Digital Meat Thermometer</h2>
+          <p class="card-desc">Ultra-fast 1-second instant readout, motion-sensing backlit display, and IP65 waterproof rating. A must-have tool for accurate steak and barbecue cooking.</p>
+          <a href="https://amzn.to/4coIIYn" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
         </div>
       </div>
 
-      <!-- ITEM 2: Kitchen -->
-      <div class="card" data-category="kitchen">
-        <div class="img-wrapper">
-          <span class="card-badge">Must Have</span>
-          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80" alt="Meat Thermometer">
-        </div>
-        <div class="card-body">
-          <span class="card-category">Kitchen & Grilling</span>
-          <h3 class="card-title">Wireless Bluetooth Smart Meat Thermometer</h3>
-          <p class="card-desc">Dual temp sensors with phone app alerts so you never overcook steak or brisket.</p>
-          <div class="card-footer">
-            <a href="https://www.amazon.com" target="_blank" rel="noopener" class="btn-amazon">
-              Check Price on Amazon ↗
-            </a>
-          </div>
+      <!-- Product 2: Placeholder for Cast Iron Skillet -->
+      <div class="card">
+        <img class="card-img" src="https://images.unsplash.com/photo-1584947898604-1b11ec4a8d0b?w=500&auto=format&fit=crop&q=60" alt="Cast Iron Skillet">
+        <div class="card-content">
+          <h2 class="card-title">Pre-Seasoned Cast Iron Skillet (10.25 Inch)</h2>
+          <p class="card-desc">Heavy-duty cast iron for perfect searing, baking, and grilling. Offers superior heat retention and distribution for thick steak cuts.</p>
+          <a href="#" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
         </div>
       </div>
 
-      <!-- ITEM 3: Kitchen -->
-      <div class="card" data-category="kitchen">
-        <div class="img-wrapper">
-          <span class="card-badge">Essential</span>
-          <img src="https://images.unsplash.com/photo-1585238342024-78d387f4a707?auto=format&fit=crop&w=600&q=80" alt="Cast Iron Skillet">
-        </div>
-        <div class="card-body">
-          <span class="card-category">Kitchen & Grilling</span>
-          <h3 class="card-title">Pre-Seasoned Heavy Duty Cast Iron Skillet (12-Inch)</h3>
-          <p class="card-desc">Essential tool for getting a high-heat steak sear. Built to last a lifetime.</p>
-          <div class="card-footer">
-            <a href="https://www.amazon.com" target="_blank" rel="noopener" class="btn-amazon">
-              Check Price on Amazon ↗
-            </a>
-          </div>
+      <!-- Product 3: Placeholder for Wireless Earbuds -->
+      <div class="card">
+        <img class="card-img" src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&auto=format&fit=crop&q=60" alt="Wireless Earbuds">
+        <div class="card-content">
+          <h2 class="card-title">Active Noise Cancelling Wireless Earbuds</h2>
+          <p class="card-desc">Deep bass performance, long battery life, and crystal-clear audio output for everyday music and hands-free calls.</p>
+          <a href="#" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
         </div>
       </div>
 
-      <!-- ITEM 4: Home -->
-      <div class="card" data-category="home">
-        <div class="img-wrapper">
-          <span class="card-badge">Best Value</span>
-          <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80" alt="Glass Food Containers">
-        </div>
-        <div class="card-body">
-          <span class="card-category">Home & Storage</span>
-          <h3 class="card-title">Glass Meal Prep Containers (24-Piece)</h3>
-          <p class="card-desc">Leak-proof, microwave and freezer-safe glass containers perfect for daily meal prepping.</p>
-          <div class="card-footer">
-            <a href="https://www.amazon.com" target="_blank" rel="noopener" class="btn-amazon">
-              Check Price on Amazon ↗
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- ITEM 5: Personal Care -->
-      <div class="card" data-category="home">
-        <div class="img-wrapper">
-          <span class="card-badge">Popular</span>
-          <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&q=80" alt="Skincare Care Kit">
-        </div>
-        <div class="card-body">
-          <span class="card-category">Personal Care</span>
-          <h3 class="card-title">Hydrocolloid Acne Pimple Patches (112 Count)</h3>
-          <p class="card-desc">Top-selling daily skin care essential for quick blemishes and overnight recovery.</p>
-          <div class="card-footer">
-            <a href="https://www.amazon.com" target="_blank" rel="noopener" class="btn-amazon">
-              Check Price on Amazon ↗
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- ITEM 6: Meats -->
-      <div class="card" data-category="meats">
-        <div class="img-wrapper">
-          <span class="card-badge">Favorite</span>
-          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" alt="Beef Jerky Variety Pack">
-        </div>
-        <div class="card-body">
-          <span class="card-category">Meats & Cuts</span>
-          <h3 class="card-title">Old Country Beef Jerky Sampler Box (12 oz)</h3>
-          <p class="card-desc">High-protein, low-sugar hardwood smoked beef jerky sticks and tender strips.</p>
-          <div class="card-footer">
-            <a href="https://www.amazon.com" target="_blank" rel="noopener" class="btn-amazon">
-              Check Price on Amazon ↗
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <footer>
-      <p>© 2026 Prime Choice Hub. All product fulfillment and customer service provided directly by Amazon.com.</p>
-      <p style="margin-top: 10px;">
-        <a href="#" onclick="openModal(); return false;">Privacy Policy & Cookie Disclosure</a>
-      </p>
-    </footer>
-  </div>
-
-  <!-- Privacy Policy Modal -->
-  <div class="modal" id="privacyModal">
-    <div class="modal-content">
-      <button class="close-btn" onclick="closeModal()">Close</button>
-      <h2 style="color: var(--accent-gold); margin-bottom: 15px;">Privacy Policy</h2>
-      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px;">This site participates in the Amazon Services LLC Associates Program. When visitors click affiliate links, Amazon uses cookies to track referral traffic for commission allocation.</p>
     </div>
   </div>
 
-  <script>
-    function filterCategory(evt, cat) {
-      const cards = document.querySelectorAll('.card');
-      const buttons = document.querySelectorAll('.filter-btn');
-      buttons.forEach(btn => btn.classList.remove('active'));
-      evt.target.classList.add('active');
-      cards.forEach(card => {
-        card.style.display = (cat === 'all' || card.getAttribute('data-category') === cat) ? 'flex' : 'none';
-      });
-    }
-    function openModal() { document.getElementById('privacyModal').style.display = 'flex'; }
-    function closeModal() { document.getElementById('privacyModal').style.display = 'none'; }
-  </script>
+  <footer>
+    <p><strong>Amazon Affiliate Disclosure:</strong> As an Amazon Associate, Prime Choice Hub earns from qualifying purchases.</p>
+  </footer>
+
 </body>
 </html>
+
