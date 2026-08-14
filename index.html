@@ -54,8 +54,8 @@
     .card:hover { transform: translateY(-4px); }
     .card.hidden { display: none; }
     .image-container { background: #ffffff; height: 210px; display: flex; align-items: center; justify-content: center; padding: 1.25rem; position: relative; }
-    .card-img { max-width: 100%; max-height: 100%; object-fit: contain; }
-    .category-badge { position: absolute; top: 10px; left: 10px; background: rgba(15, 23, 42, 0.85); color: #fff; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; padding: 4px 10px; border-radius: 12px; }
+    .card-img { max-width: 100%; max-height: 100%; object-fit: cover; width: 100%; height: 100%; border-radius: 8px; }
+    .category-badge { position: absolute; top: 10px; left: 10px; background: rgba(15, 23, 42, 0.85); color: #fff; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; padding: 4px 10px; border-radius: 12px; z-index: 2; }
     .card-body { padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; }
     .card-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.7em; }
     .rating-row { display: flex; align-items: center; gap: 6px; margin-bottom: 0.8rem; }
@@ -106,7 +106,7 @@
 
       <!-- 1 -->
       <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="IMAGE_URL_1" alt="Amazon Grocery Ground Beef"></div>
+        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1588168333986-5078d3ae3976?auto=format&fit=crop&w=500&q=80" alt="Amazon Grocery Ground Beef"></div>
         <div class="card-body">
           <h2 class="card-title">Amazon Grocery Ground Beef 80/20 (3 lb Pack of 3)</h2>
           <div class="rating-row"><span class="stars">★★★★☆</span><span class="rating-score">4.5 Verified</span></div>
@@ -118,7 +118,7 @@
 
       <!-- 2 -->
       <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="IMAGE_URL_2" alt="COOKER KING Skillet"></div>
+        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=500&q=80" alt="COOKER KING Skillet"></div>
         <div class="card-body">
           <h2 class="card-title">COOKER KING 10 Inch Stainless Steel Frying Pan</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.6 Rated</span></div>
@@ -130,7 +130,7 @@
 
       <!-- 3 -->
       <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="IMAGE_URL_3" alt="INKBIRD Sous Vide"></div>
+        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=500&q=80" alt="INKBIRD Sous Vide"></div>
         <div class="card-body">
           <h2 class="card-title">INKBIRD WIFI Sous Vide Cooker & Vacuum Sealer</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 App Control</span></div>
@@ -142,7 +142,7 @@
 
       <!-- 4 -->
       <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="IMAGE_URL_4" alt="Anova Sous Vide"></div>
+        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=500&q=80" alt="Anova Sous Vide"></div>
         <div class="card-body">
           <h2 class="card-title">Anova Culinary Sous Vide Precision Cooker 3.0</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Precision</span></div>
@@ -154,7 +154,7 @@
 
       <!-- 5 -->
       <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="IMAGE_URL_5" alt="imarku Chef Knife"></div>
+        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=500&q=80" alt="imarku Chef Knife"></div>
         <div class="card-body">
           <h2 class="card-title">imarku Japanese 8 Inch Chef Knife</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Razor Sharp</span></div>
@@ -166,7 +166,7 @@
 
       <!-- 6 -->
       <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="IMAGE_URL_6" alt="imarku Nakiri Knife"></div>
+        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=500&q=80" alt="imarku Nakiri Knife"></div>
         <div class="card-body">
           <h2 class="card-title">imarku Nakiri Knife 7 Inch Japanese Knife</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Precision</span></div>
@@ -178,7 +178,7 @@
 
       <!-- 7 -->
       <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="IMAGE_URL_7" alt="Cuisinart Chef Knife"></div>
+        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=500&q=80" alt="Cuisinart Chef Knife"></div>
         <div class="card-body">
           <h2 class="card-title">Cuisinart 8" Stainless Steel Chef's Knife with Guard</h2>
           <div class="rating-row"><span class="stars">★★★★☆</span><span class="rating-score">4.6 Graphix</span></div>
@@ -190,7 +190,7 @@
 
       <!-- 8 -->
       <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="IMAGE_URL_8" alt="Amazon Basics Knife"></div>
+        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=500&q=80" alt="Amazon Basics Knife"></div>
         <div class="card-body">
           <h2 class="card-title">Amazon Basics Classic 8-inch Full Tang Chef's Knife</h2>
           <div class="rating-row"><span class="stars">★★★★☆</span><span class="rating-score">4.5 Value</span></div>
@@ -202,7 +202,7 @@
 
       <!-- 9 -->
       <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="IMAGE_URL_9" alt="Titanium Board"></div>
+        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?auto=format&fit=crop&w=500&q=80" alt="Titanium Board"></div>
         <div class="card-body">
           <h2 class="card-title">Titanium Cutting Board Pure Titanium/PP (16"x11")</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Hygienic</span></div>
@@ -214,7 +214,7 @@
 
       <!-- 10 -->
       <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="IMAGE_URL_10" alt="Royal Craft Board"></div>
+        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?auto=format&fit=crop&w=500&q=80" alt="Royal Craft Board"></div>
         <div class="card-body">
           <h2 class="card-title">ROYAL CRAFT WOOD Board with Juice Groove</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Heavy Duty</span></div>
@@ -226,7 +226,7 @@
 
       <!-- 11 -->
       <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="IMAGE_URL_11" alt="SNOWCLAD Board"></div>
+        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?auto=format&fit=crop&w=500&q=80" alt="SNOWCLAD Board"></div>
         <div class="card-body">
           <h2 class="card-title">SNOWCLAD Stainless Steel Chopping Board</h2>
           <div class="rating-row"><span class="stars">★★★★☆</span><span class="rating-score">4.6 Non-Toxic</span></div>
@@ -238,7 +238,7 @@
 
       <!-- 12 -->
       <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="IMAGE_URL_12" alt="Electric Sharpener"></div>
+        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1589119908995-c6837fa14848?auto=format&fit=crop&w=500&q=80" alt="Electric Sharpener"></div>
         <div class="card-body">
           <h2 class="card-title">Electric Knife Sharpener 3-Stage System with 15° Guide</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Fast Sharpen</span></div>
@@ -250,7 +250,7 @@
 
       <!-- 13 -->
       <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="IMAGE_URL_13" alt="Yatoshi Sharpener"></div>
+        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1589119908995-c6837fa14848?auto=format&fit=crop&w=500&q=80" alt="Yatoshi Sharpener"></div>
         <div class="card-body">
           <h2 class="card-title">Yatoshi 50W Diamond Abrasive Electric Sharpener</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 20-Degree</span></div>
@@ -262,7 +262,7 @@
 
       <!-- 14 -->
       <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="IMAGE_URL_14" alt="ZWILLING Block"></div>
+        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=500&q=80" alt="ZWILLING Block"></div>
         <div class="card-body">
           <h2 class="card-title">ZWILLING Bamboo Bristle Knife Storage Block</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Bamboo</span></div>
@@ -274,7 +274,7 @@
 
       <!-- 15 -->
       <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="IMAGE_URL_15" alt="GRILLART Brush 16.5"></div>
+        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=500&q=80" alt="GRILLART Brush 16.5"></div>
         <div class="card-body">
           <h2 class="card-title">GRILLART 16.5” Grill Brush and Scraper</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Wire Scraper</span></div>
@@ -286,7 +286,7 @@
 
       <!-- 16 -->
       <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="IMAGE_URL_16" alt="GRILLART Helix"></div>
+        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=500&q=80" alt="GRILLART Helix"></div>
         <div class="card-body">
           <h2 class="card-title">GRILLART Wire + Helix Combined 18" BBQ Brush</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Safe & Fast</span></div>
@@ -298,7 +298,7 @@
 
       <!-- 17 -->
       <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="IMAGE_URL_17" alt="GRILLART 3 in 1"></div>
+        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=500&q=80" alt="GRILLART 3 in 1"></div>
         <div class="card-body">
           <h2 class="card-title">GRILLART 18" Stainless Steel 3 in 1 Bristles Brush</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Triple Power</span></div>
@@ -310,7 +310,7 @@
 
       <!-- 18 -->
       <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="IMAGE_URL_18" alt="Kaluns Tools Set"></div>
+        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=500&q=80" alt="Kaluns Tools Set"></div>
         <div class="card-body">
           <h2 class="card-title">Kaluns BBQ Grill Tools Set with Aluminum Case & Apron</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Complete Kit</span></div>
@@ -322,7 +322,7 @@
 
       <!-- 19 -->
       <div class="card" data-category="audio">
-        <div class="image-container"><span class="category-badge">Audio</span><img class="card-img" src="IMAGE_URL_19" alt="AI Translation Earbuds"></div>
+        <div class="image-container"><span class="category-badge">Audio</span><img class="card-img" src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=500&q=80" alt="AI Translation Earbuds"></div>
         <div class="card-body">
           <h2 class="card-title">AI Translation Earbuds 164 Languages 80H Playtime</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Real-Time</span></div>
@@ -334,7 +334,7 @@
 
       <!-- 20 -->
       <div class="card" data-category="audio">
-        <div class="image-container"><span class="category-badge">Audio</span><img class="card-img" src="IMAGE_URL_20" alt="Soundcore P42i"></div>
+        <div class="image-container"><span class="category-badge">Audio</span><img class="card-img" src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=500&q=80" alt="Soundcore P42i"></div>
         <div class="card-body">
           <h2 class="card-title">Soundcore Anker P42i Adaptive ANC Earbuds</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Deep Bass</span></div>
@@ -346,7 +346,7 @@
 
       <!-- 21 -->
       <div class="card" data-category="audio">
-        <div class="image-container"><span class="category-badge">Audio</span><img class="card-img" src="IMAGE_URL_21" alt="TOZO Hybrid ANC"></div>
+        <div class="image-container"><span class="category-badge">Audio</span><img class="card-img" src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=500&q=80" alt="TOZO Hybrid ANC"></div>
         <div class="card-body">
           <h2 class="card-title">TOZO Hybrid Active Noise Cancelling Earbuds (68H)</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 68H Battery</span></div>
@@ -358,7 +358,7 @@
 
       <!-- 22 -->
       <div class="card" data-category="audio">
-        <div class="image-container"><span class="category-badge">Audio</span><img class="card-img" src="IMAGE_URL_22" alt="Apple AirPods Pro 3"></div>
+        <div class="image-container"><span class="category-badge">Audio</span><img class="card-img" src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=500&q=80" alt="Apple AirPods Pro 3"></div>
         <div class="card-body">
           <h2 class="card-title">Apple AirPods Pro 3 Wireless Earbuds USB-C</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.9 Spatial Audio</span></div>
@@ -370,7 +370,7 @@
 
       <!-- 23 -->
       <div class="card" data-category="tech">
-        <div class="image-container"><span class="category-badge">Tech</span><img class="card-img" src="IMAGE_URL_23" alt="NOBIS Power Bank"></div>
+        <div class="image-container"><span class="category-badge">Tech</span><img class="card-img" src="https://images.unsplash.com/photo-1609592424009-41716503c4f7?auto=format&fit=crop&w=500&q=80" alt="NOBIS Power Bank"></div>
         <div class="card-body">
           <h2 class="card-title">NOBIS Power Bank 90W 20,000mAh Laptop Charger</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 90W Output</span></div>
@@ -382,7 +382,7 @@
 
       <!-- 24 -->
       <div class="card" data-category="tech">
-        <div class="image-container"><span class="category-badge">Tech</span><img class="card-img" src="IMAGE_URL_24" alt="Charmast Power Bank"></div>
+        <div class="image-container"><span class="category-badge">Tech</span><img class="card-img" src="https://images.unsplash.com/photo-1609592424009-41716503c4f7?auto=format&fit=crop&w=500&q=80" alt="Charmast Power Bank"></div>
         <div class="card-body">
           <h2 class="card-title">Charmast 20000mAh Power Bank with Built-in Cables</h2>
           <div class="rating-row"><span class="stars">★★★★☆</span><span class="rating-score">4.6 6-Output</span></div>
@@ -394,7 +394,7 @@
 
       <!-- 25 -->
       <div class="card" data-category="tech">
-        <div class="image-container"><span class="category-badge">Tech</span><img class="card-img" src="IMAGE_URL_25" alt="Belkin Power Bank"></div>
+        <div class="image-container"><span class="category-badge">Tech</span><img class="card-img" src="https://images.unsplash.com/photo-1609592424009-41716503c4f7?auto=format&fit=crop&w=500&q=80" alt="Belkin Power Bank"></div>
         <div class="card-body">
           <h2 class="card-title">Belkin 10K 23W Portable Charger Power Bank</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Integrated</span></div>
@@ -406,7 +406,7 @@
 
       <!-- 26 -->
       <div class="card" data-category="tech">
-        <div class="image-container"><span class="category-badge">Tech</span><img class="card-img" src="IMAGE_URL_26" alt="INIU Power Bank"></div>
+        <div class="image-container"><span class="category-badge">Tech</span><img class="card-img" src="https://images.unsplash.com/photo-1609592424009-41716503c4f7?auto=format&fit=crop&w=500&q=80" alt="INIU Power Bank"></div>
         <div class="card-body">
           <h2 class="card-title">INIU 45W Fast Charging 10000mAh Travel Power Bank</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Compact</span></div>
@@ -418,7 +418,7 @@
 
       <!-- 27 -->
       <div class="card" data-category="wearables">
-        <div class="image-container"><span class="category-badge">Wearables</span><img class="card-img" src="IMAGE_URL_27" alt="WHOOP 5.0 Option 1"></div>
+        <div class="image-container"><span class="category-badge">Wearables</span><img class="card-img" src="https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?auto=format&fit=crop&w=500&q=80" alt="WHOOP 5.0 Option 1"></div>
         <div class="card-body">
           <h2 class="card-title">WHOOP 5.0/MG Tracker (12 Mo. Membership)</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Health Data</span></div>
@@ -430,7 +430,7 @@
 
       <!-- 28 -->
       <div class="card" data-category="wearables">
-        <div class="image-container"><span class="category-badge">Wearables</span><img class="card-img" src="IMAGE_URL_28" alt="WHOOP 5.0 Option 2"></div>
+        <div class="image-container"><span class="category-badge">Wearables</span><img class="card-img" src="https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?auto=format&fit=crop&w=500&q=80" alt="WHOOP 5.0 Option 2"></div>
         <div class="card-body">
           <h2 class="card-title">WHOOP 5.0/MG Health & Activity Tracker Band</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Screenless</span></div>
@@ -442,7 +442,7 @@
 
       <!-- 29 -->
       <div class="card" data-category="wearables">
-        <div class="image-container"><span class="category-badge">Wearables</span><img class="card-img" src="IMAGE_URL_29" alt="Apple Watch 11"></div>
+        <div class="image-container"><span class="category-badge">Wearables</span><img class="card-img" src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=500&q=80" alt="Apple Watch 11"></div>
         <div class="card-body">
           <h2 class="card-title">Apple Watch Series 11 GPS 46mm Smartwatch</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.9 Jet Black</span></div>
@@ -454,7 +454,7 @@
 
       <!-- 30 -->
       <div class="card" data-category="wearables">
-        <div class="image-container"><span class="category-badge">Wearables</span><img class="card-img" src="IMAGE_URL_30" alt="TOZO S8 Watch"></div>
+        <div class="image-container"><span class="category-badge">Wearables</span><img class="card-img" src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=500&q=80" alt="TOZO S8 Watch"></div>
         <div class="card-body">
           <h2 class="card-title">TOZO S8 AMOLED Smart Watch 3ATM Waterproof</h2>
           <div class="rating-row"><span class="stars">★★★★☆</span><span class="rating-score">4.6 AMOLED</span></div>
@@ -466,7 +466,7 @@
 
       <!-- 31 -->
       <div class="card" data-category="wearables">
-        <div class="image-container"><span class="category-badge">Wearables</span><img class="card-img" src="IMAGE_URL_31" alt="Amazfit Active Max"></div>
+        <div class="image-container"><span class="category-badge">Wearables</span><img class="card-img" src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=500&q=80" alt="Amazfit Active Max"></div>
         <div class="card-body">
           <h2 class="card-title">Amazfit Active Max Smart Watch 1.5" AMOLED GPS</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Built-in GPS</span></div>
@@ -478,7 +478,7 @@
 
       <!-- 32 -->
       <div class="card" data-category="wearables">
-        <div class="image-container"><span class="category-badge">Wearables</span><img class="card-img" src="IMAGE_URL_32" alt="Amazfit Bip 6"></div>
+        <div class="image-container"><span class="category-badge">Wearables</span><img class="card-img" src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=500&q=80" alt="Amazfit Bip 6"></div>
         <div class="card-body">
           <h2 class="card-title">Amazfit Bip 6 Smart Watch 1.97" AMOLED Screen</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Large Screen</span></div>
@@ -490,7 +490,7 @@
 
       <!-- 33 -->
       <div class="card" data-category="drinkware">
-        <div class="image-container"><span class="category-badge">Drinkware</span><img class="card-img" src="IMAGE_URL_33" alt="RAYMYLO Bottle"></div>
+        <div class="image-container"><span class="category-badge">Drinkware</span><img class="card-img" src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=500&q=80" alt="RAYMYLO Bottle"></div>
         <div class="card-body">
           <h2 class="card-title">RAYMYLO Insulated Water Bottle 64 oz Stainless Steel</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 64oz Capacity</span></div>
@@ -502,7 +502,7 @@
 
       <!-- 34 -->
       <div class="card" data-category="drinkware">
-        <div class="image-container"><span class="category-badge">Drinkware</span><img class="card-img" src="IMAGE_URL_34" alt="Tervis Tumblers"></div>
+        <div class="image-container"><span class="category-badge">Drinkware</span><img class="card-img" src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=500&q=80" alt="Tervis Tumblers"></div>
         <div class="card-body">
           <h2 class="card-title">Tervis Clear Double Walled Tumblers 16oz (4-Pack)</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Made in USA</span></div>
@@ -514,7 +514,7 @@
 
       <!-- 35 -->
       <div class="card" data-category="drinkware">
-        <div class="image-container"><span class="category-badge">Drinkware</span><img class="card-img" src="IMAGE_URL_35" alt="BrüMate Nightfall Blue"></div>
+        <div class="image-container"><span class="category-badge">Drinkware</span><img class="card-img" src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=500&q=80" alt="BrüMate Nightfall Blue"></div>
         <div class="card-body">
           <h2 class="card-title">BrüMate Era 40 oz Tumbler (Nightfall Blue)</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.9 Leakproof</span></div>
@@ -526,7 +526,7 @@
 
       <!-- 36 -->
       <div class="card" data-category="drinkware">
-        <div class="image-container"><span class="category-badge">Drinkware</span><img class="card-img" src="IMAGE_URL_36" alt="BrüMate Dark Aura"></div>
+        <div class="image-container"><span class="category-badge">Drinkware</span><img class="card-img" src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=500&q=80" alt="BrüMate Dark Aura"></div>
         <div class="card-body">
           <h2 class="card-title">BrüMate Era 40 oz Tumbler (Dark Aura)</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.9 Leakproof</span></div>
@@ -538,7 +538,7 @@
 
       <!-- 37 -->
       <div class="card" data-category="drinkware">
-        <div class="image-container"><span class="category-badge">Drinkware</span><img class="card-img" src="IMAGE_URL_37" alt="GreenPurple Tumbler"></div>
+        <div class="image-container"><span class="category-badge">Drinkware</span><img class="card-img" src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=500&q=80" alt="GreenPurple Tumbler"></div>
         <div class="card-body">
           <h2 class="card-title">40 oz Tumbler with Handle and Straw Lid (GreenPurple)</h2>
           <div class="rating-row"><span class="stars">★★★★☆</span><span class="rating-score">4.6 100% Leakproof</span></div>
@@ -550,7 +550,7 @@
 
       <!-- 38 -->
       <div class="card" data-category="drinkware">
-        <div class="image-container"><span class="category-badge">Drinkware</span><img class="card-img" src="IMAGE_URL_38" alt="STANLEY Quencher"></div>
+        <div class="image-container"><span class="category-badge">Drinkware</span><img class="card-img" src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=500&q=80" alt="STANLEY Quencher"></div>
         <div class="card-body">
           <h2 class="card-title">STANLEY Quencher H2.0 FlowState 40 oz Tumbler (Black)</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Iconic</span></div>
@@ -562,7 +562,7 @@
 
       <!-- 39 -->
       <div class="card" data-category="desk">
-        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="IMAGE_URL_39" alt="Nulaxy Stand Gray"></div>
+        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=500&q=80" alt="Nulaxy Stand Gray"></div>
         <div class="card-body">
           <h2 class="card-title">Nulaxy 18" Telescopic 360 Rotating Laptop Stand</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Ergonomic</span></div>
@@ -574,7 +574,7 @@
 
       <!-- 40 -->
       <div class="card" data-category="desk">
-        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="IMAGE_URL_40" alt="Lumbar Support Pillow"></div>
+        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=500&q=80" alt="Lumbar Support Pillow"></div>
         <div class="card-body">
           <h2 class="card-title">Lumbar Support Memory Foam Pillow for Office Chair</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Posture Relief</span></div>
@@ -586,7 +586,7 @@
 
       <!-- 41 -->
       <div class="card" data-category="desk">
-        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="IMAGE_URL_41" alt="tounee Laptop Stand"></div>
+        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=500&q=80" alt="tounee Laptop Stand"></div>
         <div class="card-body">
           <h2 class="card-title">tounee Telescopic 360° Swivel Base Laptop Stand</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Sit-to-Stand</span></div>
@@ -598,7 +598,7 @@
 
       <!-- 42 -->
       <div class="card" data-category="desk">
-        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="IMAGE_URL_42" alt="Branch Wooden Stand"></div>
+        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=500&q=80" alt="Branch Wooden Stand"></div>
         <div class="card-body">
           <h2 class="card-title">Branch Adjustable Wooden Laptop Stand Riser</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Wood Aesthetic</span></div>
@@ -610,7 +610,7 @@
 
       <!-- 43 -->
       <div class="card" data-category="desk">
-        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="IMAGE_URL_43" alt="Aothia Leather Pad"></div>
+        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=500&q=80" alt="Aothia Leather Pad"></div>
         <div class="card-body">
           <h2 class="card-title">Aothia Leather Desk Pad Protector (31.5" x 15.7")</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Waterproof</span></div>
@@ -622,7 +622,7 @@
 
       <!-- 44 -->
       <div class="card" data-category="desk">
-        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="IMAGE_URL_44" alt="Compact Leather Pad"></div>
+        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=500&q=80" alt="Compact Leather Pad"></div>
         <div class="card-body">
           <h2 class="card-title">Non-Slip Leather Desk Pad (Black, 23.6" x 13.7")</h2>
           <div class="rating-row"><span class="stars">★★★★☆</span><span class="rating-score">4.6 Compact</span></div>
@@ -634,7 +634,7 @@
 
       <!-- 45 -->
       <div class="card" data-category="desk">
-        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="IMAGE_URL_45" alt="Kanagawa Wave Mat"></div>
+        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=500&q=80" alt="Kanagawa Wave Mat"></div>
         <div class="card-body">
           <h2 class="card-title">Kanagawa Japanese Sea Wave Gaming Desk Mat</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Great Wave</span></div>
@@ -646,7 +646,7 @@
 
       <!-- 46 -->
       <div class="card" data-category="desk">
-        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="IMAGE_URL_46" alt="DAWNTREES Felt Mat"></div>
+        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=500&q=80" alt="DAWNTREES Felt Mat"></div>
         <div class="card-body">
           <h2 class="card-title">DAWNTREES Felt Dark Gray Desk Mat (36x12 Inches)</h2>
           <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Warm Felt</span></div>
