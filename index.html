@@ -160,7 +160,6 @@
       border-left: 3px solid var(--accent-orange);
     }
 
-    /* Subheader Announcement */
     .sub-header {
       text-align: center;
       padding: 1.5rem 1rem 0.5rem;
@@ -311,7 +310,7 @@
 </head>
 <body>
 
-  <!-- Header Navigation with Hamburger Menu -->
+  <!-- Header Navigation -->
   <nav class="navbar">
     <button class="hamburger-btn" onclick="toggleSidebar()" aria-label="Open Menu">
       <span></span>
@@ -319,7 +318,7 @@
       <span></span>
     </button>
     <div class="nav-title">Prime Choice <span>Hub</span></div>
-    <div style="width: 24px;"></div> <!-- Spacer for center alignment -->
+    <div style="width: 24px;"></div>
   </nav>
 
   <!-- Sidebar Overlay & Menu -->
@@ -331,8 +330,8 @@
     </div>
     <div class="menu-title">Select Category</div>
     <ul class="category-list">
-      <li class="category-item active" onclick="selectCategory('all', this)">📁 All Products</li>
-      <li class="category-item" onclick="selectCategory('kitchen', this)">🥩 Kitchen & Cooking</li>
+      <li class="category-item active" onclick="selectCategory('all', this)">📁 All Categories</li>
+      <li class="category-item" onclick="selectCategory('kitchen', this)">🥩 Kitchen & Meat Prep</li>
       <li class="category-item" onclick="selectCategory('audio', this)">🎧 Wireless Audio</li>
       <li class="category-item" onclick="selectCategory('tech', this)">🔋 Power & Tech</li>
       <li class="category-item" onclick="selectCategory('wearables', this)">⌚ Smartwatches</li>
@@ -341,64 +340,160 @@
   </aside>
 
   <div class="sub-header">
-    <p>Curated Kitchen, Tech, Audio & Office Essentials</p>
+    <p>Curated Kitchen, Tech, Outdoor Gear & Desk Essentials</p>
   </div>
 
   <!-- Product Grid -->
   <div class="container">
     <div class="product-grid">
 
-      <!-- Product 1 -->
+      <!-- Item 1 -->
       <div class="card" data-category="kitchen">
         <div class="image-container">
           <span class="category-badge">Kitchen</span>
-          <img class="card-img" src="https://images.weserv.nl/?url=https://m.media-amazon.com/images/I/71Y-oRIn4YL._AC_SL1500_.jpg" alt="ThermoPro TP19">
+          <img class="card-img" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/71Y-oRIn4YL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1588854337221-4cf9fa96059c?w=500'" alt="ThermoPro TP19">
         </div>
         <div class="card-body">
           <h2 class="card-title">ThermoPro TP19 Digital Meat Thermometer</h2>
-          <div class="rating-row">
-            <span class="stars">★★★★★</span>
-            <span class="rating-score">4.7 (55,700+)</span>
-          </div>
-          <div class="quote-box">"Instant temperature reads in under a second!"</div>
-          <p class="card-desc">Waterproof motion-sensing digital thermometer with backlight for grilling and cooking.</p>
+          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 / 5 (55,700+)</span></div>
+          <div class="quote-box">"Reads temperature in under a second! No more guessing while grilling."</div>
+          <p class="card-desc">Ultra-fast instant readout with motion sensing backlit display and IP65 waterproof rating.</p>
           <a href="https://amzn.to/4coIIYn" target="_blank" rel="noopener sponsored" class="amazon-btn">Check Price on Amazon</a>
         </div>
       </div>
 
-      <!-- Product 2 -->
+      <!-- Item 2 -->
       <div class="card" data-category="kitchen">
         <div class="image-container">
           <span class="category-badge">Grocery</span>
-          <img class="card-img" src="https://images.weserv.nl/?url=https://m.media-amazon.com/images/I/81I2-Pq5aKL._SL1500_.jpg" alt="Ground Beef Pack">
+          <img class="card-img" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/81I2-Pq5aKL._SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1551028150-64b9f398f678?w=500'" alt="Ground Beef Pack">
         </div>
         <div class="card-body">
-          <h2 class="card-title">Amazon Grocery Ground Beef 80/20 (3 lb Pack)</h2>
-          <div class="rating-row">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-score">4.5 Verified</span>
-          </div>
-          <div class="quote-box">"Perfect fat ratio for juicy homemade burgers."</div>
-          <p class="card-desc">80% Lean / 20% Fat fresh ground beef pack delivered directly to your doorstep.</p>
+          <h2 class="card-title">Amazon Grocery Ground Beef 80/20 (3 lb Pack of 3)</h2>
+          <div class="rating-row"><span class="stars">★★★★☆</span><span class="rating-score">4.5 / 5 Amazon Verified</span></div>
+          <div class="quote-box">"Fresh quality meat, perfect fat ratio for juicy burgers and meatballs."</div>
+          <p class="card-desc">80% Lean / 20% Fat fresh ground beef value pack delivered straight to your home.</p>
           <a href="https://amzn.to/4qla9Iy" target="_blank" rel="noopener sponsored" class="amazon-btn">Check Price on Amazon</a>
         </div>
       </div>
 
-      <!-- Product 3 -->
+      <!-- Item 3 -->
+      <div class="card" data-category="kitchen">
+        <div class="image-container">
+          <span class="category-badge">Kitchen</span>
+          <img class="card-img" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/71N1o3+C0rL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1584992236310-6edddc08acff?w=500'" alt="COOKER KING Skillet">
+        </div>
+        <div class="card-body">
+          <h2 class="card-title">COOKER KING 10" Stainless Steel Frying Pan</h2>
+          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.6 / 5 Highly Rated</span></div>
+          <div class="quote-box">"Heats evenly across induction and gas stoves with zero warping."</div>
+          <p class="card-desc">Tri-ply stainless steel induction-ready frying skillet for professional searing.</p>
+          <a href="https://amzn.to/4xFvmiv" target="_blank" rel="noopener sponsored" class="amazon-btn">Check Price on Amazon</a>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="card" data-category="kitchen">
+        <div class="image-container">
+          <span class="category-badge">Kitchen</span>
+          <img class="card-img" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/71x4xS-z8GL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500'" alt="Sous Vide">
+        </div>
+        <div class="card-body">
+          <h2 class="card-title">INKBIRD WIFI Sous Vide Cooker & Vacuum Sealer Bundle</h2>
+          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 / 5 App Controlled</span></div>
+          <div class="quote-box">"Complete kit with sealer. Cooks restaurant-grade steaks effortlessly."</div>
+          <p class="card-desc">1000W immersion circulator with app integration, timer, and sealer machine included.</p>
+          <a href="https://amzn.to/4bc3m10" target="_blank" rel="noopener sponsored" class="amazon-btn">Check Price on Amazon</a>
+        </div>
+      </div>
+
+      <!-- Item 5 -->
+      <div class="card" data-category="kitchen">
+        <div class="image-container">
+          <span class="category-badge">Kitchen</span>
+          <img class="card-img" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/71J1xZg7xBL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1590794056226-77ef3a6c4743?w=500'" alt="Anova Precision Cooker">
+        </div>
+        <div class="card-body">
+          <h2 class="card-title">Anova Culinary Sous Vide Precision Cooker Nano</h2>
+          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 / 5 Precision Chef</span></div>
+          <div class="quote-box">"Locks in moisture and flavor for perfectly cooked meats every single time."</div>
+          <p class="card-desc">Compact immersion circulator with Bluetooth connectivity and recipe app support.</p>
+          <a href="https://amzn.to/4f1l1yO" target="_blank" rel="noopener sponsored" class="amazon-btn">Check Price on Amazon</a>
+        </div>
+      </div>
+
+      <!-- Item 6 -->
+      <div class="card" data-category="kitchen">
+        <div class="image-container">
+          <span class="category-badge">Kitchen</span>
+          <img class="card-img" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/71R2H2N-mDL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1593618998160-e34014e67546?w=500'" alt="imarku Chef Knife">
+        </div>
+        <div class="card-body">
+          <h2 class="card-title">imarku 8-Inch Japanese High Carbon Chef Knife</h2>
+          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 / 5 Razor Sharp</span></div>
+          <div class="quote-box">"Slices through raw meats and brisket like soft butter."</div>
+          <p class="card-desc">Ergonomic Pakkawood handle with ultra-sharp German stainless steel blade.</p>
+          <a href="https://amzn.to/3S6K128" target="_blank" rel="noopener sponsored" class="amazon-btn">Check Price on Amazon</a>
+        </div>
+      </div>
+
+      <!-- Item 7 -->
       <div class="card" data-category="audio">
         <div class="image-container">
           <span class="category-badge">Audio</span>
-          <img class="card-img" src="https://images.weserv.nl/?url=https://m.media-amazon.com/images/I/61S1gG3PVAL._AC_SL1500_.jpg" alt="Soundcore Earbuds">
+          <img class="card-img" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/61S1gG3PVAL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500'" alt="Soundcore P42i">
         </div>
         <div class="card-body">
-          <h2 class="card-title">Soundcore Anker P42i ANC Wireless Earbuds</h2>
-          <div class="rating-row">
-            <span class="stars">★★★★★</span>
-            <span class="rating-score">4.7 Deep Bass</span>
-          </div>
-          <div class="quote-box">"Incredible noise cancelling and punchy bass."</div>
-          <p class="card-desc">Adaptive ANC earbuds featuring custom sound app control and clear call microphones.</p>
+          <h2 class="card-title">Soundcore Anker P42i Adaptive ANC Earbuds</h2>
+          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 / 5 Deep Bass</span></div>
+          <div class="quote-box">"Insane noise cancellation and punchy bass for a great price point."</div>
+          <p class="card-desc">Adaptive active noise cancelling earbuds with custom EQ app and clear calls.</p>
           <a href="https://amzn.to/4g5LuTq" target="_blank" rel="noopener sponsored" class="amazon-btn">Check Price on Amazon</a>
+        </div>
+      </div>
+
+      <!-- Item 8 -->
+      <div class="card" data-category="tech">
+        <div class="image-container">
+          <span class="category-badge">Tech</span>
+          <img class="card-img" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/61O2O8T8vYL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1609592424109-dd9892f1b177?w=500'" alt="NOBIS Power Bank">
+        </div>
+        <div class="card-body">
+          <h2 class="card-title">NOBIS 90W 20,000mAh Laptop Portable Charger</h2>
+          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 / 5 Laptop Power</span></div>
+          <div class="quote-box">"Fast charges my MacBook Pro and iPhone at full speed simultaneously!"</div>
+          <p class="card-desc">High-output 90W fast charging battery pack for laptops, tablets, and mobile devices.</p>
+          <a href="https://amzn.to/4ga3onU" target="_blank" rel="noopener sponsored" class="amazon-btn">Check Price on Amazon</a>
+        </div>
+      </div>
+
+      <!-- Item 9 -->
+      <div class="card" data-category="wearables">
+        <div class="image-container">
+          <span class="category-badge">Wearables</span>
+          <img class="card-img" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/71L51A313xL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500'" alt="Apple Watch Series 11">
+        </div>
+        <div class="card-body">
+          <h2 class="card-title">Apple Watch Series 11 GPS 46mm Smartwatch</h2>
+          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.9 / 5 Flagship Watch</span></div>
+          <div class="quote-box">"Bright display, precise ECG monitoring, and great sleep score insights."</div>
+          <p class="card-desc">Jet Black aluminum case smartwatch with fitness tracking and health monitoring.</p>
+          <a href="https://amzn.to/4wx2kRx" target="_blank" rel="noopener sponsored" class="amazon-btn">Check Price on Amazon</a>
+        </div>
+      </div>
+
+      <!-- Item 10 -->
+      <div class="card" data-category="desk">
+        <div class="image-container">
+          <span class="category-badge">Desk Setup</span>
+          <img class="card-img" src="https://images.weserv.nl/?url=m.media-amazon.com/images/I/71Y8K9O2pFL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=500'" alt="Nulaxy Stand">
+        </div>
+        <div class="card-body">
+          <h2 class="card-title">Nulaxy 18" Telescopic 360° Swivel Laptop Stand</h2>
+          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 / 5 Ergonomic Desk</span></div>
+          <div class="quote-box">"Smooth 360 rotation makes showing screens to coworkers super convenient."</div>
+          <p class="card-desc">Height adjustable rotating aluminum laptop riser promoting better neck posture.</p>
+          <a href="https://amzn.to/4wD2ln2" target="_blank" rel="noopener sponsored" class="amazon-btn">Check Price on Amazon</a>
         </div>
       </div>
 
@@ -416,11 +511,9 @@
     }
 
     function selectCategory(category, element) {
-      // Highlight active menu item
       document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
       element.classList.add('active');
 
-      // Filter product cards
       const cards = document.querySelectorAll('.card');
       cards.forEach(card => {
         if (category === 'all' || card.getAttribute('data-category') === category) {
@@ -430,10 +523,10 @@
         }
       });
 
-      // Close menu drawer
       toggleSidebar();
     }
   </script>
 
 </body>
 </html>
+
