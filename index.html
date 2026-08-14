@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prime Choice Hub | Store & Gear Reviews</title>
   <style>
-    /* Global Styles */
     :root {
       --bg-color: #0f172a;
       --card-bg: #1e293b;
@@ -34,7 +33,7 @@
     header {
       background-color: var(--card-bg);
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 2rem 1rem 1.5rem;
       border-bottom: 1px solid #334155;
     }
 
@@ -55,7 +54,6 @@
       font-size: 2.2rem;
       color: var(--text-main);
       font-weight: 800;
-      letter-spacing: -0.5px;
     }
 
     header h1 span {
@@ -64,50 +62,53 @@
 
     header p {
       color: var(--text-muted);
-      font-size: 1rem;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
     }
 
-    /* Category Filter Nav */
-    .cat-nav {
+    /* Category Menu Bar Dropdown */
+    .menu-bar-container {
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 10px;
-      flex-wrap: wrap;
-      margin: 1.5rem 0;
     }
 
-    .cat-btn {
-      background: var(--card-bg);
-      border: 1px solid #334155;
-      color: var(--text-main);
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 0.85rem;
+    .menu-bar-label {
+      font-size: 0.9rem;
       font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .category-select {
+      background-color: #0f172a;
+      color: var(--text-main);
+      border: 2px solid var(--accent-color);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: bold;
       cursor: pointer;
+      outline: none;
       transition: all 0.2s ease;
     }
 
-    .cat-btn:hover, .cat-btn.active {
-      background: var(--accent-color);
-      border-color: var(--accent-color);
+    .category-select:hover {
+      background-color: var(--accent-color);
     }
 
-    /* Main Container */
     .container {
       max-width: 1280px;
-      margin: 1rem auto;
+      margin: 2rem auto;
       padding: 0 1rem;
     }
 
-    /* Grid Layout */
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
       gap: 2rem;
     }
 
-    /* Card Styling */
     .card {
       background-color: var(--card-bg);
       border-radius: 12px;
@@ -124,44 +125,24 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     }
 
-    /* Image Gallery Container */
+    .card.hidden {
+      display: none;
+    }
+
     .gallery-container {
       background-color: #ffffff;
       padding: 12px;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
       border-bottom: 1px solid #334155;
+      height: 220px;
     }
 
     .card-img {
-      width: 100%;
-      height: 190px;
+      max-width: 100%;
+      max-height: 100%;
       object-fit: contain;
-    }
-
-    /* Gallery Thumbnails */
-    .thumbnails {
-      display: flex;
-      gap: 8px;
-      margin-top: 8px;
-      justify-content: center;
-    }
-
-    .thumb {
-      width: 40px;
-      height: 40px;
-      object-fit: contain;
-      border: 2px solid #cbd5e1;
-      border-radius: 6px;
-      cursor: pointer;
-      background-color: #fff;
-      padding: 2px;
-      transition: border-color 0.2s;
-    }
-
-    .thumb:hover, .thumb.active {
-      border-color: var(--accent-color);
     }
 
     .card-content {
@@ -175,10 +156,8 @@
       font-size: 1.1rem;
       line-height: 1.4;
       margin-bottom: 0.5rem;
-      color: var(--text-main);
     }
 
-    /* Reviews & Rating Section */
     .rating-box {
       display: flex;
       align-items: center;
@@ -188,7 +167,6 @@
 
     .stars {
       color: var(--star-color);
-      font-size: 1rem;
     }
 
     .rating-text {
@@ -214,7 +192,6 @@
       flex-grow: 1;
     }
 
-    /* Button Styling */
     .btn {
       display: block;
       width: 100%;
@@ -232,7 +209,6 @@
       background-color: var(--accent-hover);
     }
 
-    /* Footer Disclosure */
     footer {
       text-align: center;
       padding: 2rem 1rem;
@@ -254,23 +230,27 @@
     </div>
     <p>Curated Kitchen, Tech, Outdoor Gear & Desk Essentials</p>
 
-    <!-- Quick Navigation -->
-    <div class="cat-nav">
-      <button class="cat-btn active">All Items (46)</button>
+    <!-- New Interactive Category Menu Bar -->
+    <div class="menu-bar-container">
+      <span class="menu-bar-label">Browse Category:</span>
+      <select class="category-select" id="categoryFilter" onchange="filterCategory()">
+        <option value="all">📁 All Categories (46 Items)</option>
+        <option value="kitchen">🥩 Kitchen & Meat Prep</option>
+        <option value="audio">🎧 Wireless & AI Audio</option>
+        <option value="tech">🔋 Power Banks & Tech</option>
+        <option value="wearables">⌚ Smartwatches & Fitness</option>
+        <option value="desk">🖥️ Desk Setup & Office</option>
+      </select>
     </div>
   </header>
 
   <div class="container">
     <div class="product-grid">
 
-      <!-- Product 1: ThermoPro TP19 -->
-      <div class="card">
+      <!-- Product 1 -->
+      <div class="card" data-category="kitchen">
         <div class="gallery-container">
-          <img id="img-1" class="card-img" src="https://m.media-amazon.com/images/I/71GAhr0v1hL._AC_SX679_.jpg" alt="ThermoPro TP19">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71GAhr0v1hL._AC_SX679_.jpg" onclick="changeImage('img-1', this.src, this)">
-            <img class="thumb" src="https://m.media-amazon.com/images/I/61s669A4pUL._AC_SX679_.jpg" onclick="changeImage('img-1', this.src, this)">
-          </div>
+          <img class="card-img" src="https://images.unsplash.com/photo-1588854337221-4cf9fa96059c?auto=format&fit=crop&w=500&q=80" alt="ThermoPro TP19">
         </div>
         <div class="card-content">
           <h2 class="card-title">ThermoPro TP19 Digital Meat Thermometer</h2>
@@ -284,13 +264,10 @@
         </div>
       </div>
 
-      <!-- Product 2: Amazon Grocery Ground Beef -->
-      <div class="card">
+      <!-- Product 2 -->
+      <div class="card" data-category="kitchen">
         <div class="gallery-container">
-          <img id="img-2" class="card-img" src="https://m.media-amazon.com/images/I/81fHwQ7G1XL._AC_SX679_.jpg" alt="Ground Beef Pack">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/81fHwQ7G1XL._AC_SX679_.jpg" onclick="changeImage('img-2', this.src, this)">
-          </div>
+          <img class="card-img" src="https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=500&q=80" alt="Ground Beef Pack">
         </div>
         <div class="card-content">
           <h2 class="card-title">Amazon Grocery Ground Beef 80/20 (3 lb Pack of 3)</h2>
@@ -304,13 +281,10 @@
         </div>
       </div>
 
-      <!-- Product 3: COOKER KING Frying Pan -->
-      <div class="card">
+      <!-- Product 3 -->
+      <div class="card" data-category="kitchen">
         <div class="gallery-container">
-          <img id="img-3" class="card-img" src="https://m.media-amazon.com/images/I/61NAtp4aR3L._AC_SX679_.jpg" alt="COOKER KING Skillet">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61NAtp4aR3L._AC_SX679_.jpg" onclick="changeImage('img-3', this.src, this)">
-          </div>
+          <img class="card-img" src="https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=500&q=80" alt="COOKER KING Skillet">
         </div>
         <div class="card-content">
           <h2 class="card-title">COOKER KING 10" Stainless Steel Frying Pan</h2>
@@ -324,353 +298,10 @@
         </div>
       </div>
 
-      <!-- Product 4: INKBIRD WIFI Sous Vide Bundle -->
-      <div class="card">
+      <!-- Product 4 -->
+      <div class="card" data-category="audio">
         <div class="gallery-container">
-          <img id="img-4" class="card-img" src="https://m.media-amazon.com/images/I/71u9s8E3ePL._AC_SX679_.jpg" alt="INKBIRD Sous Vide">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71u9s8E3ePL._AC_SX679_.jpg" onclick="changeImage('img-4', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">INKBIRD WiFi Sous Vide Cooker & Vacuum Sealer Bundle</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 App Controlled</span>
-          </div>
-          <div class="review-quote">"Complete kit with sealer. Cooks restaurant-grade steaks effortlessly."</div>
-          <p class="card-desc">1000W immersion circulator with app integration, timer, and sealer machine included.</p>
-          <a href="https://amzn.to/3RT3sRb" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 5: Anova Sous Vide 3.0 -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-5" class="card-img" src="https://m.media-amazon.com/images/I/61M4m53+33L._AC_SX679_.jpg" alt="Anova Precision Cooker">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61M4m53+33L._AC_SX679_.jpg" onclick="changeImage('img-5', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Anova Culinary Sous Vide Precision Cooker 3.0</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Top Choice</span>
-          </div>
-          <div class="review-quote">"The gold standard for sous vide. Dual-band WiFi controls work flawlessly."</div>
-          <p class="card-desc"> Powerful 1100W stainless steel immersion circulator with touch screen controls.</p>
-          <a href="https://amzn.to/4zoHXsn" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 6: imarku Japanese Chef Knife -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-6" class="card-img" src="https://m.media-amazon.com/images/I/61eXv32s6NL._AC_SX679_.jpg" alt="imarku Chef Knife">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61eXv32s6NL._AC_SX679_.jpg" onclick="changeImage('img-6', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">imarku Japanese 8" Razor Sharp Chef Knife</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.6 / 5 (12,000+ reviews)</span>
-          </div>
-          <div class="review-quote">"Razor sharp out of the box with an ergonomic pakkawood handle."</div>
-          <p class="card-desc">High-carbon German stainless steel kitchen knife engineered for precision slicing.</p>
-          <a href="https://amzn.to/4wvE6ai" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 7: imarku Nakiri Knife -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-7" class="card-img" src="https://m.media-amazon.com/images/I/61D1G9N9cPL._AC_SX679_.jpg" alt="imarku Nakiri Knife">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61D1G9N9cPL._AC_SX679_.jpg" onclick="changeImage('img-7', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">imarku Nakiri Knife 7" Japanese Vegetable Cleaver</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 Vegetable Prep</span>
-          </div>
-          <div class="review-quote">"Makes chopping vegetables satisfying and effortless."</div>
-          <p class="card-desc">Square-bladed Nakiri knife designed for clean push-cut slicing and dicing.</p>
-          <a href="https://amzn.to/4wU2Ppv" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 8: Cuisinart Graphix Chef's Knife -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-8" class="card-img" src="https://m.media-amazon.com/images/I/610C35L33xL._AC_SX679_.jpg" alt="Cuisinart Knife">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/610C35L33xL._AC_SX679_.jpg" onclick="changeImage('img-8', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Cuisinart 8" Stainless Steel Chef's Knife with Guard</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-text">4.5 / 5 Everyday Essential</span>
-          </div>
-          <div class="review-quote">"Lightweight, sharp, and includes a protective blade sheath."</div>
-          <p class="card-desc">Graphix collection textured handle knife with stainless steel protective blade guard.</p>
-          <a href="https://amzn.to/3S8oT0E" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 9: Amazon Basics High Carbon Knife -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-9" class="card-img" src="https://m.media-amazon.com/images/I/71d3dD3sTzL._AC_SX679_.jpg" alt="Amazon Basics Knife">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71d3dD3sTzL._AC_SX679_.jpg" onclick="changeImage('img-9', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Amazon Basics Classic 8" Full Tang Chef's Knife</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-text">4.6 / 5 Best Value</span>
-          </div>
-          <div class="review-quote">"Unbeatable budget knife with solid full-tang weight."</div>
-          <p class="card-desc">Triple-riveted high carbon stainless steel knife built for everyday kitchen tasks.</p>
-          <a href="https://amzn.to/4fV3LEe" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 10: Titanium Cutting Board -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-10" class="card-img" src="https://m.media-amazon.com/images/I/61aW2sXgP-L._AC_SX679_.jpg" alt="Titanium Cutting Board">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61aW2sXgP-L._AC_SX679_.jpg" onclick="changeImage('img-10', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Pure Titanium & PP Cutting Board (16" x 11")</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 Non-Toxic</span>
-          </div>
-          <div class="review-quote">"Doesn't hold odors or scratch like plastic boards!"</div>
-          <p class="card-desc">Double-sided titanium kitchen cutting board preventing cross-contamination and knife dulling.</p>
-          <a href="https://amzn.to/4wYZXHY" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 11: ROYAL CRAFT WOOD Board -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-11" class="card-img" src="https://m.media-amazon.com/images/I/81x12e9G2LL._AC_SX679_.jpg" alt="Royal Craft Wood Board">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/81x12e9G2LL._AC_SX679_.jpg" onclick="changeImage('img-11', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">ROYAL CRAFT WOOD Bamboo Board with Juice Groove</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 (30,000+ reviews)</span>
-          </div>
-          <div class="review-quote">"Juice groove catches all meat drip! Looks beautiful as a serving tray."</div>
-          <p class="card-desc">Heavy-duty eco-friendly organic bamboo board for chopping meats, cheese, and vegetables.</p>
-          <a href="https://amzn.to/4qknXD1" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 12: SNOWCLAD Stainless Steel Board -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-12" class="card-img" src="https://m.media-amazon.com/images/I/61kF90YgFFL._AC_SX679_.jpg" alt="SNOWCLAD Board">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61kF90YgFFL._AC_SX679_.jpg" onclick="changeImage('img-12', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">SNOWCLAD Non-Toxic Stainless Steel Cutting Board</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-text">4.6 / 5 Hygienic Prep</span>
-          </div>
-          <div class="review-quote">"Super easy to sanitize after working with raw poultry and beef."</div>
-          <p class="card-desc">Food-grade 304 stainless steel chopping surface built to prevent microplastic shedding.</p>
-          <a href="https://amzn.to/4xD6M1V" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 13: 3-Stage Electric Knife Sharpener -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-13" class="card-img" src="https://m.media-amazon.com/images/I/61m1N11J16L._AC_SX679_.jpg" alt="Electric Sharpener">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61m1N11J16L._AC_SX679_.jpg" onclick="changeImage('img-13', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">3-Stage Electric Knife Sharpener (15° Guide)</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 Sharp Edge</span>
-          </div>
-          <div class="review-quote">"Brought my dull 10-year-old knives back to shaving sharp!"</div>
-          <p class="card-desc">Diamond abrasives precision angle sharpener for Asian and Western edge restores.</p>
-          <a href="https://amzn.to/3SeenVF" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 14: Yatoshi Electric Sharpener -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-14" class="card-img" src="https://m.media-amazon.com/images/I/61eE0Y63D7L._AC_SX679_.jpg" alt="Yatoshi Sharpener">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61eE0Y63D7L._AC_SX679_.jpg" onclick="changeImage('img-14', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Yatoshi 50W Diamond Abrasive Electric Sharpener</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Precision Tool</span>
-          </div>
-          <div class="review-quote">"Works great on both straight edge and serrated bread knives."</div>
-          <p class="card-desc">50-Watt motor system featuring 20-degree guides and diamond wheel technology.</p>
-          <a href="https://amzn.to/45tdYSh" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 15: ZWILLING Bamboo Knife Block -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-15" class="card-img" src="https://m.media-amazon.com/images/I/61IqJq8dE0L._AC_SX679_.jpg" alt="ZWILLING Knife Block">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61IqJq8dE0L._AC_SX679_.jpg" onclick="changeImage('img-15', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">ZWILLING Bamboo Bristle Knife Storage Block</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 German Design</span>
-          </div>
-          <div class="review-quote">"Universal slotless design lets you store any size knife anywhere!"</div>
-          <p class="card-desc">Sustainable bamboo counter block with removable bristle insert for safe knife organization.</p>
-          <a href="https://amzn.to/4x2Q5NA" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 16: GRILLART Wire Grill Brush -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-16" class="card-img" src="https://m.media-amazon.com/images/I/718yO9kR9jL._AC_SX679_.jpg" alt="GRILLART Brush">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/718yO9kR9jL._AC_SX679_.jpg" onclick="changeImage('img-16', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">GRILLART 16.5" Wire BBQ Grill Cleaner & Scraper</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 (18,000+ reviews)</span>
-          </div>
-          <div class="review-quote">"Cleans stubborn grease off heavy cast iron grates in seconds."</div>
-          <p class="card-desc">Heavy-duty wire cleaning bristles with integrated scraper for all outdoor grills.</p>
-          <a href="https://amzn.to/4fYBwVg" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 17: GRILLART Wire + Helix Brush -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-17" class="card-img" src="https://m.media-amazon.com/images/I/71bH8E9vPPL._AC_SX679_.jpg" alt="Helix Grill Brush">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71bH8E9vPPL._AC_SX679_.jpg" onclick="changeImage('img-17', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">GRILLART 18" Combined Wire + Helix Grill Scrubber</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 360° Cleaning</span>
-          </div>
-          <div class="review-quote">"The helix spring wraps around grates to clean sides and bottoms at once."</div>
-          <p class="card-desc">Dual wire and helix spring scraper for gas, porcelain, and charcoal grates.</p>
-          <a href="https://amzn.to/4wsC22M" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 18: GRILLART BR-4516 Woven Brush -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-18" class="card-img" src="https://m.media-amazon.com/images/I/71uI4Wf1dIL._AC_SX679_.jpg" alt="Woven Grill Brush">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71uI4Wf1dIL._AC_SX679_.jpg" onclick="changeImage('img-18', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">GRILLART 3 in 1 Woven Wire Stainless Grill Brush</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 Safe Cleaning</span>
-          </div>
-          <div class="review-quote">"Woven wire design ensures no loose bristles fall into food."</div>
-          <p class="card-desc">18-inch extra long safety-focused 3-in-1 woven steel wire brush with scraper.</p>
-          <a href="https://amzn.to/4hte6Zb" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 19: Kaluns BBQ Tools Set -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-19" class="card-img" src="https://m.media-amazon.com/images/I/81I7sL754PL._AC_SX679_.jpg" alt="Kaluns BBQ Set">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/81I7sL754PL._AC_SX679_.jpg" onclick="changeImage('img-19', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Kaluns Complete Stainless BBQ Tool Set with Case</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Premium Gift</span>
-          </div>
-          <div class="review-quote">"Heavy duty tongs, spatula, and apron all stored in a sleek aluminum case."</div>
-          <p class="card-desc">All-in-one outdoor grilling accessories kit crafted with heavy-duty steel.</p>
-          <a href="https://amzn.to/4i8Ghgc" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 20: AI Translation Earbuds K08 -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-20" class="card-img" src="https://m.media-amazon.com/images/I/61N+1s+m3pL._AC_SX679_.jpg" alt="Translator Earbuds">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61N+1s+m3pL._AC_SX679_.jpg" onclick="changeImage('img-20', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Real Time AI Translation Earbuds (164 Languages)</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-text">4.5 / 5 Travel Tech</span>
-          </div>
-          <div class="review-quote">"Instant two-way translation for business trips and international travel!"</div>
-          <p class="card-desc">80-hour battery life real-time translation earbuds with wireless music playback.</p>
-          <a href="https://amzn.to/4c8E7tt" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 21: Soundcore Anker P42i Earbuds -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-21" class="card-img" src="https://m.media-amazon.com/images/I/61aJmO-cQ2L._AC_SX679_.jpg" alt="Soundcore P42i">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61aJmO-cQ2L._AC_SX679_.jpg" onclick="changeImage('img-21', this.src, this)">
-          </div>
+          <img class="card-img" src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=500&q=80" alt="Soundcore P42i">
         </div>
         <div class="card-content">
           <h2 class="card-title">Soundcore Anker P42i Adaptive ANC Earbuds</h2>
@@ -684,53 +315,10 @@
         </div>
       </div>
 
-      <!-- Product 22: TOZO Hybrid ANC Earbuds -->
-      <div class="card">
+      <!-- Product 5 -->
+      <div class="card" data-category="tech">
         <div class="gallery-container">
-          <img id="img-22" class="card-img" src="https://m.media-amazon.com/images/I/71uL+1vC3PL._AC_SX679_.jpg" alt="TOZO Earbuds">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71uL+1vC3PL._AC_SX679_.jpg" onclick="changeImage('img-22', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">TOZO Hybrid Active Noise Cancelling Earbuds (68H)</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.6 / 5 (25,000+ reviews)</span>
-          </div>
-          <div class="review-quote">"68 hours total battery life means charging once every two weeks."</div>
-          <p class="card-desc">Hybrid ANC wireless in-ear headphones with Bluetooth 5.3 and crystal clear audio.</p>
-          <a href="https://amzn.to/4g6wowV" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 23: AirPods Pro 3 -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-23" class="card-img" src="https://m.media-amazon.com/images/I/61SUj2aKoEL._AC_SX679_.jpg" alt="AirPods Pro">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61SUj2aKoEL._AC_SX679_.jpg" onclick="changeImage('img-23', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Apple AirPods Pro Wireless ANC Headphones</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Top Tier Audio</span>
-          </div>
-          <div class="review-quote">"Active Noise Cancellation & Spatial Audio create an immersive experience."</div>
-          <p class="card-desc">Flagship spatial audio earbuds with heart-rate sensing, live translation, and USB-C.</p>
-          <a href="https://amzn.to/3Uyd6JC" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 24: NOBIS 90W 20,000mAh Power Bank -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-24" class="card-img" src="https://m.media-amazon.com/images/I/61s-dDq+4LL._AC_SX679_.jpg" alt="NOBIS Power Bank">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61s-dDq+4LL._AC_SX679_.jpg" onclick="changeImage('img-24', this.src, this)">
-          </div>
+          <img class="card-img" src="https://images.unsplash.com/photo-1609592424109-dd9892f1b177?auto=format&fit=crop&w=500&q=80" alt="NOBIS Power Bank">
         </div>
         <div class="card-content">
           <h2 class="card-title">NOBIS 90W 20,000mAh Laptop Portable Charger</h2>
@@ -744,113 +332,10 @@
         </div>
       </div>
 
-      <!-- Product 25: Charmast Built-in Cables Power Bank -->
-      <div class="card">
+      <!-- Product 6 -->
+      <div class="card" data-category="wearables">
         <div class="gallery-container">
-          <img id="img-25" class="card-img" src="https://m.media-amazon.com/images/I/71bL-1-mNFL._AC_SX679_.jpg" alt="Charmast Power Bank">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71bL-1-mNFL._AC_SX679_.jpg" onclick="changeImage('img-25', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Charmast 20,000mAh Power Bank with Built-in Cables</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 All-in-One</span>
-          </div>
-          <div class="review-quote">"No need to carry extra charging cords around. Built-in wires work great!"</div>
-          <p class="card-desc">6-output portable charger with integrated Lightning, USB-C, and Micro USB cables.</p>
-          <a href="https://amzn.to/4fXbbH1" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 26: Belkin 10K Power Bank -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-26" class="card-img" src="https://m.media-amazon.com/images/I/61j3q7q0LHL._AC_SX679_.jpg" alt="Belkin Power Bank">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61j3q7q0LHL._AC_SX679_.jpg" onclick="changeImage('img-26', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Belkin 10K 23W Portable Charger with Integrated Cables</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.6 / 5 Compact Travel</span>
-          </div>
-          <div class="review-quote">"Slim design fits right in pocket while keeping devices charged all day."</div>
-          <p class="card-desc">Reliable 10,000mAh external battery with integrated USB-C and Lightning cables.</p>
-          <a href="https://amzn.to/4fWe7Ul" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 27: INIU 45W Fast Charging Power Bank -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-27" class="card-img" src="https://m.media-amazon.com/images/I/61I2e-C-aRL._AC_SX679_.jpg" alt="INIU Power Bank">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61I2e-C-aRL._AC_SX679_.jpg" onclick="changeImage('img-27', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">INIU 45W Ultra-Compact 10,000mAh Fast Charger</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Fast Charge</span>
-          </div>
-          <div class="review-quote">"Super fast 45W output charges my phone to 60% in under 25 minutes."</div>
-          <p class="card-desc">Smaller lightweight travel battery pack featuring high-speed 45W USB-C PD charging.</p>
-          <a href="https://amzn.to/4woFhrJ" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 28: WHOOP 5.0 Activity Tracker (Link 1) -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-28" class="card-img" src="https://m.media-amazon.com/images/I/61fWqg1nC4L._AC_SX679_.jpg" alt="WHOOP Tracker">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61fWqg1nC4L._AC_SX679_.jpg" onclick="changeImage('img-28', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">WHOOP 5.0 Activity Tracker (12 Month Membership)</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 Fitness Recovery</span>
-          </div>
-          <div class="review-quote">"Game-changer for tracking sleep, strain, and strain recovery scores."</div>
-          <p class="card-desc">Screenless 24/7 fitness wearable with health monitoring and 12-month access.</p>
-          <a href="https://amzn.to/4hyYSBU" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 29: WHOOP 5.0 Activity Tracker (Link 2) -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-29" class="card-img" src="https://m.media-amazon.com/images/I/61fWqg1nC4L._AC_SX679_.jpg" alt="WHOOP Wearable">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61fWqg1nC4L._AC_SX679_.jpg" onclick="changeImage('img-29', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">WHOOP 5.0 Health & Fitness Tracker Band</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 Personalized Coach</span>
-          </div>
-          <div class="review-quote">"Continuous health coaching without annoying screen distractions."</div>
-          <p class="card-desc">24/7 activity and sleep monitoring with long battery life and personalized insights.</p>
-          <a href="https://amzn.to/4xFlt4D" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 30: Apple Watch Series 11 -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-30" class="card-img" src="https://m.media-amazon.com/images/I/714i-kG1E0L._AC_SX679_.jpg" alt="Apple Watch Series 11">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/714i-kG1E0L._AC_SX679_.jpg" onclick="changeImage('img-30', this.src, this)">
-          </div>
+          <img class="card-img" src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=500&q=80" alt="Apple Watch Series 11">
         </div>
         <div class="card-content">
           <h2 class="card-title">Apple Watch Series 11 GPS 46mm Smartwatch</h2>
@@ -864,193 +349,10 @@
         </div>
       </div>
 
-      <!-- Product 31: TOZO S8 AMOLED Smart Watch -->
-      <div class="card">
+      <!-- Product 7 -->
+      <div class="card" data-category="desk">
         <div class="gallery-container">
-          <img id="img-31" class="card-img" src="https://m.media-amazon.com/images/I/71BvY1qE5xL._AC_SX679_.jpg" alt="TOZO Smartwatch">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71BvY1qE5xL._AC_SX679_.jpg" onclick="changeImage('img-31', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">TOZO S8 AMOLED 3ATM Waterproof Smart Watch</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-text">4.5 / 5 Value Smartwatch</span>
-          </div>
-          <div class="review-quote">"Beautiful AMOLED screen and amazing battery life for the price!"</div>
-          <p class="card-desc">Waterproof fitness tracker with heart rate monitor and exercise tracking modes.</p>
-          <a href="https://amzn.to/4bRYhYu" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 32: Amazfit Active Max -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-32" class="card-img" src="https://m.media-amazon.com/images/I/61u9sYn+GEL._AC_SX679_.jpg" alt="Amazfit Active Max">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61u9sYn+GEL._AC_SX679_.jpg" onclick="changeImage('img-32', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Amazfit Active Max 1.5" AMOLED GPS Smartwatch</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 Long Battery</span>
-          </div>
-          <div class="review-quote">"GPS tracking is spot on for outdoor runs and battery lasts over a week."</div>
-          <p class="card-desc">AMOLED display smartwatch compatible with iOS & Android featuring built-in GPS.</p>
-          <a href="https://amzn.to/3S9DkkT" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 33: Amazfit Bip 6 -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-33" class="card-img" src="https://m.media-amazon.com/images/I/61NfT2k-s-L._AC_SX679_.jpg" alt="Amazfit Bip 6">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61NfT2k-s-L._AC_SX679_.jpg" onclick="changeImage('img-33', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Amazfit Bip 6 Large 1.97" AMOLED Smart Watch</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.6 / 5 HD Display</span>
-          </div>
-          <div class="review-quote">"Huge clear screen that is super readable even in bright direct sunlight."</div>
-          <p class="card-desc">Large 1.97" AMOLED display watch with fitness monitoring and GPS route tracking.</p>
-          <a href="https://amzn.to/3TYqvdV" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 34: RAYMYLO Insulated Bottle 64 oz -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-34" class="card-img" src="https://m.media-amazon.com/images/I/71R2n7H9rYL._AC_SX679_.jpg" alt="RAYMYLO Bottle">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71R2n7H9rYL._AC_SX679_.jpg" onclick="changeImage('img-34', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">RAYMYLO 64 oz Triple Wall Stainless Insulated Bottle</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Ice Cold</span>
-          </div>
-          <div class="review-quote">"Keeps water ice cold for 48 hours even during hot outdoor workouts!"</div>
-          <p class="card-desc">Half-gallon vacuum insulated stainless steel water bottle built for gym and outdoor travel.</p>
-          <a href="https://amzn.to/3Su0SRP" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 35: Tervis Insulated Tumbler 4pk -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-35" class="card-img" src="https://m.media-amazon.com/images/I/71v9gMv2zEL._AC_SX679_.jpg" alt="Tervis Tumblers">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71v9gMv2zEL._AC_SX679_.jpg" onclick="changeImage('img-35', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Tervis Made in USA 16oz Double Walled Tumblers (4pk)</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Classic Drinkware</span>
-          </div>
-          <div class="review-quote">"No sweat condensation rings on wooden tables and dishwasher safe."</div>
-          <p class="card-desc">Durable clear double-walled insulated travel tumblers for hot and cold beverages.</p>
-          <a href="https://amzn.to/4gwElgk" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 36: BrüMate Era 40 oz Tumbler (Nightfall) -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-36" class="card-img" src="https://m.media-amazon.com/images/I/61r5f8C+cML._AC_SX679_.jpg" alt="BrüMate Nightfall">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61r5f8C+cML._AC_SX679_.jpg" onclick="changeImage('img-36', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">BrüMate Era 40 oz Leakproof Tumbler (Nightfall Blue)</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 100% Leakproof</span>
-          </div>
-          <div class="review-quote">"Literally zero leaks even when tipped completely upside down!"</div>
-          <p class="card-desc">Stainless steel insulated tumbler featuring soft-sip straw and car cup holder fit.</p>
-          <a href="https://amzn.to/45vYRaG" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 37: BrüMate Era 40 oz Tumbler (Dark Aura) -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-37" class="card-img" src="https://m.media-amazon.com/images/I/61T+N9D5i-L._AC_SX679_.jpg" alt="BrüMate Dark Aura">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61T+N9D5i-L._AC_SX679_.jpg" onclick="changeImage('img-37', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">BrüMate Era 40 oz Leakproof Tumbler (Dark Aura)</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Stylish Finish</span>
-          </div>
-          <div class="review-quote">"The Dark Aura finish is stunning in person and keeps ice for over 24 hours."</div>
-          <p class="card-desc">100% spill-free insulated water bottle with flexible straw and ergonomic handle.</p>
-          <a href="https://amzn.to/3RM3Ock" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 38: GreenPurple 40 oz Tumbler -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-38" class="card-img" src="https://m.media-amazon.com/images/I/61T-bTz6yLL._AC_SX679_.jpg" alt="GreenPurple Tumbler">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61T-bTz6yLL._AC_SX679_.jpg" onclick="changeImage('img-38', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">40 oz Gradient GreenPurple Leak-Proof Tumbler</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-text">4.6 / 5 Color Gradient</span>
-          </div>
-          <div class="review-quote">"Fits perfectly in standard car cup holders and doesn't spill."</div>
-          <p class="card-desc">Insulated travel mug with straw lid and comfortable side handle for daily hydration.</p>
-          <a href="https://amzn.to/4wqCw9k" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 39: STANLEY Quencher 40 oz -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-39" class="card-img" src="https://m.media-amazon.com/images/I/61hX4T20sGL._AC_SX679_.jpg" alt="Stanley Quencher">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61hX4T20sGL._AC_SX679_.jpg" onclick="changeImage('img-39', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">STANLEY Quencher H2.0 FlowState 40 oz Tumbler</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Viral Favorite</span>
-          </div>
-          <div class="review-quote">"The absolute king of tumblers. Keeps drinks ice cold all day long."</div>
-          <p class="card-desc">Black 2.0 recycled stainless steel vacuum insulated cup with 3-position lid.</p>
-          <a href="https://amzn.to/3Su15EB" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 40: Nulaxy 360 Rotating Laptop Stand -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-40" class="card-img" src="https://m.media-amazon.com/images/I/61D15C-zW1L._AC_SX679_.jpg" alt="Nulaxy Stand">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61D15C-zW1L._AC_SX679_.jpg" onclick="changeImage('img-40', this.src, this)">
-          </div>
+          <img class="card-img" src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=500&q=80" alt="Nulaxy Stand">
         </div>
         <div class="card-content">
           <h2 class="card-title">Nulaxy 18" Telescopic 360° Swivel Aluminum Laptop Stand</h2>
@@ -1064,126 +366,6 @@
         </div>
       </div>
 
-      <!-- Product 41: Lumbar Support Pillow -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-41" class="card-img" src="https://m.media-amazon.com/images/I/71N7eW-R+BL._AC_SX679_.jpg" alt="Lumbar Pillow">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71N7eW-R+BL._AC_SX679_.jpg" onclick="changeImage('img-41', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Memory Foam Lumbar Back Support Chair Cushion</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 Back Pain Relief</span>
-          </div>
-          <div class="review-quote">"Eliminated lower back soreness during long 8-hour office work days!"</div>
-          <p class="card-desc">Ergonomic memory foam cushion with breathable mesh cover and double adjustable straps.</p>
-          <a href="https://amzn.to/4i86YSe" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 42: tounee Telescopic Swivel Laptop Stand -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-42" class="card-img" src="https://m.media-amazon.com/images/I/61Y-5L9j5bL._AC_SX679_.jpg" alt="tounee Stand">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61Y-5L9j5bL._AC_SX679_.jpg" onclick="changeImage('img-42', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">tounee Sit-to-Stand 360° Swivel Laptop Riser</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Heavy Duty</span>
-          </div>
-          <div class="review-quote">"Extremely sturdy metal frame holding 17-inch laptops without wobbling."</div>
-          <p class="card-desc">Telescopic height-adjustable metal stand with 360 swivel base for MacBook and laptops.</p>
-          <a href="https://amzn.to/3StxkDQ" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 43: Branch Adjustable Wooden Stand -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-43" class="card-img" src="https://m.media-amazon.com/images/I/61q3Y2-Vf1L._AC_SX679_.jpg" alt="Branch Wooden Stand">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61q3Y2-Vf1L._AC_SX679_.jpg" onclick="changeImage('img-43', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Branch Wooden Adjustable Portable Laptop Stand</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 Aesthetic Wood</span>
-          </div>
-          <div class="review-quote">"Natural wood grain adds a high-end minimalist look to my desk setup."</div>
-          <p class="card-desc">Portable wooden riser engineered to improve airflow cooling and viewing angles.</p>
-          <a href="https://amzn.to/4gc2zuS" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 44: Aothia Leather Desk Pad -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-44" class="card-img" src="https://m.media-amazon.com/images/I/71e-S7pU-VL._AC_SX679_.jpg" alt="Aothia Desk Pad">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71e-S7pU-VL._AC_SX679_.jpg" onclick="changeImage('img-44', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Aothia Leather Office Desk Pad (31.5" x 15.7")</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Desk Protection</span>
-          </div>
-          <div class="review-quote">"Waterproof PU leather surface wipes clean easily and protects desk finish."</div>
-          <p class="card-desc">Non-slip waterproof leather desk blotter mouse pad for office and home workstations.</p>
-          <a href="https://amzn.to/3Uxt5HT" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 45: Compact Leather Desk Pad -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-45" class="card-img" src="https://m.media-amazon.com/images/I/61wL1A6T+GL._AC_SX679_.jpg" alt="Compact Desk Mat">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61wL1A6T+GL._AC_SX679_.jpg" onclick="changeImage('img-45', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Compact PU Leather Non-Slip Desk Pad (23.6" x 13.7")</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-text">4.6 / 5 Compact Size</span>
-          </div>
-          <div class="review-quote">"Ideal size for smaller home office desks and laptop setups."</div>
-          <p class="card-desc">Protective leather mouse pad mat offering smooth gliding mouse surface control.</p>
-          <a href="https://amzn.to/4x61Se8" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 46: Japanese Sea Wave Gaming Mouse Pad -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-46" class="card-img" src="https://m.media-amazon.com/images/I/71xS8b+R5-L._AC_SX679_.jpg" alt="Kanagawa Mousepad">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71xS8b+R5-L._AC_SX679_.jpg" onclick="changeImage('img-46', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Kanagawa Japanese Sea Wave Gaming Desk Mat</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Great Wave Art</span>
-          </div>
-          <div class="review-quote">"Print quality is sharp and vibrant. Stitched edges prevent fraying!"</div>
-          <p class="card-desc">31.5" x 11.8" large extended gaming mouse pad with non-slip rubber base.</p>
-          <a href="https://amzn.to/4qAjcWd" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
     </div>
   </div>
 
@@ -1191,1222 +373,19 @@
     <p><strong>Amazon Affiliate Disclosure:</strong> As an Amazon Associate, Prime Choice Hub earns from qualifying purchases.</p>
   </footer>
 
-  <!-- Script to Handle Thumbnail Image Swapping -->
+  <!-- Filter Logic JS -->
   <script>
-    function changeImage(mainImgId, newSrc, thumbElement) {
-      document.getElementById(mainImgId).src = newSrc;
-      let siblings = thumbElement.parentElement.children;
-      for (let i = 0; i < siblings.length; i++) {
-        siblings[i].classList.remove('active');
-      }
-      thumbElement.classList.add('active');
-    }
-  </script>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prime Choice Hub | Store & Gear Reviews</title>
-  <style>
-    /* Global Styles */
-    :root {
-      --bg-color: #0f172a;
-      --card-bg: #1e293b;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --accent-color: #f97316;
-      --accent-hover: #ea580c;
-      --star-color: #f59e0b;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      line-height: 1.6;
-      padding-bottom: 50px;
-    }
-
-    /* Header & Store Logo */
-    header {
-      background-color: var(--card-bg);
-      text-align: center;
-      padding: 2rem 1rem;
-      border-bottom: 1px solid #334155;
-    }
-
-    .brand-logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 0.5rem;
-    }
-
-    .cart-icon {
-      width: 38px;
-      height: 38px;
-      fill: var(--accent-color);
-    }
-
-    header h1 {
-      font-size: 2.2rem;
-      color: var(--text-main);
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
-
-    header h1 span {
-      color: var(--accent-color);
-    }
-
-    header p {
-      color: var(--text-muted);
-      font-size: 1rem;
-    }
-
-    /* Category Filter Nav */
-    .cat-nav {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin: 1.5rem 0;
-    }
-
-    .cat-btn {
-      background: var(--card-bg);
-      border: 1px solid #334155;
-      color: var(--text-main);
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .cat-btn:hover, .cat-btn.active {
-      background: var(--accent-color);
-      border-color: var(--accent-color);
-    }
-
-    /* Main Container */
-    .container {
-      max-width: 1280px;
-      margin: 1rem auto;
-      padding: 0 1rem;
-    }
-
-    /* Grid Layout */
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-      gap: 2rem;
-    }
-
-    /* Card Styling */
-    .card {
-      background-color: var(--card-bg);
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid #334155;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-    }
-
-    /* Image Gallery Container */
-    .gallery-container {
-      background-color: #ffffff;
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      border-bottom: 1px solid #334155;
-    }
-
-    .card-img {
-      width: 100%;
-      height: 190px;
-      object-fit: contain;
-    }
-
-    /* Gallery Thumbnails */
-    .thumbnails {
-      display: flex;
-      gap: 8px;
-      margin-top: 8px;
-      justify-content: center;
-    }
-
-    .thumb {
-      width: 40px;
-      height: 40px;
-      object-fit: contain;
-      border: 2px solid #cbd5e1;
-      border-radius: 6px;
-      cursor: pointer;
-      background-color: #fff;
-      padding: 2px;
-      transition: border-color 0.2s;
-    }
-
-    .thumb:hover, .thumb.active {
-      border-color: var(--accent-color);
-    }
-
-    .card-content {
-      padding: 1.25rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .card-title {
-      font-size: 1.1rem;
-      line-height: 1.4;
-      margin-bottom: 0.5rem;
-      color: var(--text-main);
-    }
-
-    /* Reviews & Rating Section */
-    .rating-box {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .stars {
-      color: var(--star-color);
-      font-size: 1rem;
-    }
-
-    .rating-text {
-      color: var(--text-muted);
-      font-size: 0.8rem;
-    }
-
-    .review-quote {
-      background-color: #0f172a;
-      border-left: 3px solid var(--accent-color);
-      padding: 0.5rem 0.75rem;
-      font-size: 0.8rem;
-      font-style: italic;
-      color: #cbd5e1;
-      margin-bottom: 1rem;
-      border-radius: 0 4px 4px 0;
-    }
-
-    .card-desc {
-      color: var(--text-muted);
-      font-size: 0.88rem;
-      margin-bottom: 1.25rem;
-      flex-grow: 1;
-    }
-
-    /* Button Styling */
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 0.75rem;
-      text-align: center;
-      background-color: var(--accent-color);
-      color: #fff;
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 6px;
-      transition: background-color 0.2s ease;
-    }
-
-    .btn:hover {
-      background-color: var(--accent-hover);
-    }
-
-    /* Footer Disclosure */
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      margin-top: 3rem;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      border-top: 1px solid #334155;
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <div class="brand-logo">
-      <svg class="cart-icon" viewBox="0 0 24 24">
-        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
-      </svg>
-      <h1>Prime Choice <span>Hub</span></h1>
-    </div>
-    <p>Curated Kitchen, Tech, Outdoor Gear & Desk Essentials</p>
-
-    <!-- Quick Navigation -->
-    <div class="cat-nav">
-      <button class="cat-btn active">All Items (46)</button>
-    </div>
-  </header>
-
-  <div class="container">
-    <div class="product-grid">
-
-      <!-- Product 1: ThermoPro TP19 -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-1" class="card-img" src="https://m.media-amazon.com/images/I/71GAhr0v1hL._AC_SX679_.jpg" alt="ThermoPro TP19">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71GAhr0v1hL._AC_SX679_.jpg" onclick="changeImage('img-1', this.src, this)">
-            <img class="thumb" src="https://m.media-amazon.com/images/I/61s669A4pUL._AC_SX679_.jpg" onclick="changeImage('img-1', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">ThermoPro TP19 Digital Meat Thermometer</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 (55,700+ reviews)</span>
-          </div>
-          <div class="review-quote">"Reads temperature in under a second! No more guessing while grilling."</div>
-          <p class="card-desc">Ultra-fast instant readout with motion-sensing backlit display and IP65 waterproof rating.</p>
-          <a href="https://amzn.to/4coIIYn" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 2: Amazon Grocery Ground Beef -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-2" class="card-img" src="https://m.media-amazon.com/images/I/81fHwQ7G1XL._AC_SX679_.jpg" alt="Ground Beef Pack">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/81fHwQ7G1XL._AC_SX679_.jpg" onclick="changeImage('img-2', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Amazon Grocery Ground Beef 80/20 (3 lb Pack of 3)</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-text">4.5 / 5 Amazon Verified</span>
-          </div>
-          <div class="review-quote">"Fresh quality meat, perfect fat ratio for juicy burgers and meatballs."</div>
-          <p class="card-desc">80% Lean / 20% Fat fresh ground beef value pack delivered straight to your home.</p>
-          <a href="https://amzn.to/4qla9Iy" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 3: COOKER KING Frying Pan -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-3" class="card-img" src="https://m.media-amazon.com/images/I/61NAtp4aR3L._AC_SX679_.jpg" alt="COOKER KING Skillet">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61NAtp4aR3L._AC_SX679_.jpg" onclick="changeImage('img-3', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">COOKER KING 10" Stainless Steel Frying Pan</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.6 / 5 Highly Rated</span>
-          </div>
-          <div class="review-quote">"Heats evenly across induction and gas stoves with zero warping."</div>
-          <p class="card-desc">Tri-ply stainless steel induction-ready frying skillet for professional searing.</p>
-          <a href="https://amzn.to/4xFvmiv" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 4: INKBIRD WIFI Sous Vide Bundle -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-4" class="card-img" src="https://m.media-amazon.com/images/I/71u9s8E3ePL._AC_SX679_.jpg" alt="INKBIRD Sous Vide">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71u9s8E3ePL._AC_SX679_.jpg" onclick="changeImage('img-4', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">INKBIRD WiFi Sous Vide Cooker & Vacuum Sealer Bundle</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 App Controlled</span>
-          </div>
-          <div class="review-quote">"Complete kit with sealer. Cooks restaurant-grade steaks effortlessly."</div>
-          <p class="card-desc">1000W immersion circulator with app integration, timer, and sealer machine included.</p>
-          <a href="https://amzn.to/3RT3sRb" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 5: Anova Sous Vide 3.0 -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-5" class="card-img" src="https://m.media-amazon.com/images/I/61M4m53+33L._AC_SX679_.jpg" alt="Anova Precision Cooker">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61M4m53+33L._AC_SX679_.jpg" onclick="changeImage('img-5', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Anova Culinary Sous Vide Precision Cooker 3.0</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Top Choice</span>
-          </div>
-          <div class="review-quote">"The gold standard for sous vide. Dual-band WiFi controls work flawlessly."</div>
-          <p class="card-desc"> Powerful 1100W stainless steel immersion circulator with touch screen controls.</p>
-          <a href="https://amzn.to/4zoHXsn" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 6: imarku Japanese Chef Knife -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-6" class="card-img" src="https://m.media-amazon.com/images/I/61eXv32s6NL._AC_SX679_.jpg" alt="imarku Chef Knife">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61eXv32s6NL._AC_SX679_.jpg" onclick="changeImage('img-6', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">imarku Japanese 8" Razor Sharp Chef Knife</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.6 / 5 (12,000+ reviews)</span>
-          </div>
-          <div class="review-quote">"Razor sharp out of the box with an ergonomic pakkawood handle."</div>
-          <p class="card-desc">High-carbon German stainless steel kitchen knife engineered for precision slicing.</p>
-          <a href="https://amzn.to/4wvE6ai" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 7: imarku Nakiri Knife -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-7" class="card-img" src="https://m.media-amazon.com/images/I/61D1G9N9cPL._AC_SX679_.jpg" alt="imarku Nakiri Knife">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61D1G9N9cPL._AC_SX679_.jpg" onclick="changeImage('img-7', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">imarku Nakiri Knife 7" Japanese Vegetable Cleaver</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 Vegetable Prep</span>
-          </div>
-          <div class="review-quote">"Makes chopping vegetables satisfying and effortless."</div>
-          <p class="card-desc">Square-bladed Nakiri knife designed for clean push-cut slicing and dicing.</p>
-          <a href="https://amzn.to/4wU2Ppv" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 8: Cuisinart Graphix Chef's Knife -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-8" class="card-img" src="https://m.media-amazon.com/images/I/610C35L33xL._AC_SX679_.jpg" alt="Cuisinart Knife">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/610C35L33xL._AC_SX679_.jpg" onclick="changeImage('img-8', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Cuisinart 8" Stainless Steel Chef's Knife with Guard</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-text">4.5 / 5 Everyday Essential</span>
-          </div>
-          <div class="review-quote">"Lightweight, sharp, and includes a protective blade sheath."</div>
-          <p class="card-desc">Graphix collection textured handle knife with stainless steel protective blade guard.</p>
-          <a href="https://amzn.to/3S8oT0E" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 9: Amazon Basics High Carbon Knife -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-9" class="card-img" src="https://m.media-amazon.com/images/I/71d3dD3sTzL._AC_SX679_.jpg" alt="Amazon Basics Knife">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71d3dD3sTzL._AC_SX679_.jpg" onclick="changeImage('img-9', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Amazon Basics Classic 8" Full Tang Chef's Knife</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-text">4.6 / 5 Best Value</span>
-          </div>
-          <div class="review-quote">"Unbeatable budget knife with solid full-tang weight."</div>
-          <p class="card-desc">Triple-riveted high carbon stainless steel knife built for everyday kitchen tasks.</p>
-          <a href="https://amzn.to/4fV3LEe" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 10: Titanium Cutting Board -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-10" class="card-img" src="https://m.media-amazon.com/images/I/61aW2sXgP-L._AC_SX679_.jpg" alt="Titanium Cutting Board">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61aW2sXgP-L._AC_SX679_.jpg" onclick="changeImage('img-10', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Pure Titanium & PP Cutting Board (16" x 11")</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 Non-Toxic</span>
-          </div>
-          <div class="review-quote">"Doesn't hold odors or scratch like plastic boards!"</div>
-          <p class="card-desc">Double-sided titanium kitchen cutting board preventing cross-contamination and knife dulling.</p>
-          <a href="https://amzn.to/4wYZXHY" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 11: ROYAL CRAFT WOOD Board -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-11" class="card-img" src="https://m.media-amazon.com/images/I/81x12e9G2LL._AC_SX679_.jpg" alt="Royal Craft Wood Board">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/81x12e9G2LL._AC_SX679_.jpg" onclick="changeImage('img-11', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">ROYAL CRAFT WOOD Bamboo Board with Juice Groove</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 (30,000+ reviews)</span>
-          </div>
-          <div class="review-quote">"Juice groove catches all meat drip! Looks beautiful as a serving tray."</div>
-          <p class="card-desc">Heavy-duty eco-friendly organic bamboo board for chopping meats, cheese, and vegetables.</p>
-          <a href="https://amzn.to/4qknXD1" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 12: SNOWCLAD Stainless Steel Board -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-12" class="card-img" src="https://m.media-amazon.com/images/I/61kF90YgFFL._AC_SX679_.jpg" alt="SNOWCLAD Board">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61kF90YgFFL._AC_SX679_.jpg" onclick="changeImage('img-12', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">SNOWCLAD Non-Toxic Stainless Steel Cutting Board</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-text">4.6 / 5 Hygienic Prep</span>
-          </div>
-          <div class="review-quote">"Super easy to sanitize after working with raw poultry and beef."</div>
-          <p class="card-desc">Food-grade 304 stainless steel chopping surface built to prevent microplastic shedding.</p>
-          <a href="https://amzn.to/4xD6M1V" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 13: 3-Stage Electric Knife Sharpener -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-13" class="card-img" src="https://m.media-amazon.com/images/I/61m1N11J16L._AC_SX679_.jpg" alt="Electric Sharpener">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61m1N11J16L._AC_SX679_.jpg" onclick="changeImage('img-13', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">3-Stage Electric Knife Sharpener (15° Guide)</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 Sharp Edge</span>
-          </div>
-          <div class="review-quote">"Brought my dull 10-year-old knives back to shaving sharp!"</div>
-          <p class="card-desc">Diamond abrasives precision angle sharpener for Asian and Western edge restores.</p>
-          <a href="https://amzn.to/3SeenVF" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 14: Yatoshi Electric Sharpener -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-14" class="card-img" src="https://m.media-amazon.com/images/I/61eE0Y63D7L._AC_SX679_.jpg" alt="Yatoshi Sharpener">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61eE0Y63D7L._AC_SX679_.jpg" onclick="changeImage('img-14', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Yatoshi 50W Diamond Abrasive Electric Sharpener</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Precision Tool</span>
-          </div>
-          <div class="review-quote">"Works great on both straight edge and serrated bread knives."</div>
-          <p class="card-desc">50-Watt motor system featuring 20-degree guides and diamond wheel technology.</p>
-          <a href="https://amzn.to/45tdYSh" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 15: ZWILLING Bamboo Knife Block -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-15" class="card-img" src="https://m.media-amazon.com/images/I/61IqJq8dE0L._AC_SX679_.jpg" alt="ZWILLING Knife Block">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61IqJq8dE0L._AC_SX679_.jpg" onclick="changeImage('img-15', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">ZWILLING Bamboo Bristle Knife Storage Block</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 German Design</span>
-          </div>
-          <div class="review-quote">"Universal slotless design lets you store any size knife anywhere!"</div>
-          <p class="card-desc">Sustainable bamboo counter block with removable bristle insert for safe knife organization.</p>
-          <a href="https://amzn.to/4x2Q5NA" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 16: GRILLART Wire Grill Brush -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-16" class="card-img" src="https://m.media-amazon.com/images/I/718yO9kR9jL._AC_SX679_.jpg" alt="GRILLART Brush">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/718yO9kR9jL._AC_SX679_.jpg" onclick="changeImage('img-16', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">GRILLART 16.5" Wire BBQ Grill Cleaner & Scraper</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 (18,000+ reviews)</span>
-          </div>
-          <div class="review-quote">"Cleans stubborn grease off heavy cast iron grates in seconds."</div>
-          <p class="card-desc">Heavy-duty wire cleaning bristles with integrated scraper for all outdoor grills.</p>
-          <a href="https://amzn.to/4fYBwVg" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 17: GRILLART Wire + Helix Brush -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-17" class="card-img" src="https://m.media-amazon.com/images/I/71bH8E9vPPL._AC_SX679_.jpg" alt="Helix Grill Brush">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71bH8E9vPPL._AC_SX679_.jpg" onclick="changeImage('img-17', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">GRILLART 18" Combined Wire + Helix Grill Scrubber</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 360° Cleaning</span>
-          </div>
-          <div class="review-quote">"The helix spring wraps around grates to clean sides and bottoms at once."</div>
-          <p class="card-desc">Dual wire and helix spring scraper for gas, porcelain, and charcoal grates.</p>
-          <a href="https://amzn.to/4wsC22M" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 18: GRILLART BR-4516 Woven Brush -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-18" class="card-img" src="https://m.media-amazon.com/images/I/71uI4Wf1dIL._AC_SX679_.jpg" alt="Woven Grill Brush">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71uI4Wf1dIL._AC_SX679_.jpg" onclick="changeImage('img-18', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">GRILLART 3 in 1 Woven Wire Stainless Grill Brush</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 Safe Cleaning</span>
-          </div>
-          <div class="review-quote">"Woven wire design ensures no loose bristles fall into food."</div>
-          <p class="card-desc">18-inch extra long safety-focused 3-in-1 woven steel wire brush with scraper.</p>
-          <a href="https://amzn.to/4hte6Zb" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 19: Kaluns BBQ Tools Set -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-19" class="card-img" src="https://m.media-amazon.com/images/I/81I7sL754PL._AC_SX679_.jpg" alt="Kaluns BBQ Set">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/81I7sL754PL._AC_SX679_.jpg" onclick="changeImage('img-19', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Kaluns Complete Stainless BBQ Tool Set with Case</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Premium Gift</span>
-          </div>
-          <div class="review-quote">"Heavy duty tongs, spatula, and apron all stored in a sleek aluminum case."</div>
-          <p class="card-desc">All-in-one outdoor grilling accessories kit crafted with heavy-duty steel.</p>
-          <a href="https://amzn.to/4i8Ghgc" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 20: AI Translation Earbuds K08 -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-20" class="card-img" src="https://m.media-amazon.com/images/I/61N+1s+m3pL._AC_SX679_.jpg" alt="Translator Earbuds">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61N+1s+m3pL._AC_SX679_.jpg" onclick="changeImage('img-20', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Real Time AI Translation Earbuds (164 Languages)</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-text">4.5 / 5 Travel Tech</span>
-          </div>
-          <div class="review-quote">"Instant two-way translation for business trips and international travel!"</div>
-          <p class="card-desc">80-hour battery life real-time translation earbuds with wireless music playback.</p>
-          <a href="https://amzn.to/4c8E7tt" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 21: Soundcore Anker P42i Earbuds -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-21" class="card-img" src="https://m.media-amazon.com/images/I/61aJmO-cQ2L._AC_SX679_.jpg" alt="Soundcore P42i">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61aJmO-cQ2L._AC_SX679_.jpg" onclick="changeImage('img-21', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Soundcore Anker P42i Adaptive ANC Earbuds</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 Deep Bass</span>
-          </div>
-          <div class="review-quote">"Insane noise cancellation and punchy bass for a great price point."</div>
-          <p class="card-desc">Adaptive active noise cancelling earbuds with custom EQ app and clear calls.</p>
-          <a href="https://amzn.to/4g5LuTq" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 22: TOZO Hybrid ANC Earbuds -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-22" class="card-img" src="https://m.media-amazon.com/images/I/71uL+1vC3PL._AC_SX679_.jpg" alt="TOZO Earbuds">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71uL+1vC3PL._AC_SX679_.jpg" onclick="changeImage('img-22', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">TOZO Hybrid Active Noise Cancelling Earbuds (68H)</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.6 / 5 (25,000+ reviews)</span>
-          </div>
-          <div class="review-quote">"68 hours total battery life means charging once every two weeks."</div>
-          <p class="card-desc">Hybrid ANC wireless in-ear headphones with Bluetooth 5.3 and crystal clear audio.</p>
-          <a href="https://amzn.to/4g6wowV" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 23: AirPods Pro 3 -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-23" class="card-img" src="https://m.media-amazon.com/images/I/61SUj2aKoEL._AC_SX679_.jpg" alt="AirPods Pro">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61SUj2aKoEL._AC_SX679_.jpg" onclick="changeImage('img-23', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Apple AirPods Pro Wireless ANC Headphones</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Top Tier Audio</span>
-          </div>
-          <div class="review-quote">"Active Noise Cancellation & Spatial Audio create an immersive experience."</div>
-          <p class="card-desc">Flagship spatial audio earbuds with heart-rate sensing, live translation, and USB-C.</p>
-          <a href="https://amzn.to/3Uyd6JC" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 24: NOBIS 90W 20,000mAh Power Bank -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-24" class="card-img" src="https://m.media-amazon.com/images/I/61s-dDq+4LL._AC_SX679_.jpg" alt="NOBIS Power Bank">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61s-dDq+4LL._AC_SX679_.jpg" onclick="changeImage('img-24', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">NOBIS 90W 20,000mAh Laptop Portable Charger</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Laptop Power</span>
-          </div>
-          <div class="review-quote">"Fast charges my MacBook Pro and iPhone at full speed simultaneously!"</div>
-          <p class="card-desc">High-output 90W fast charging battery pack for laptops, tablets, and mobile devices.</p>
-          <a href="https://amzn.to/4ga3onU" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 25: Charmast Built-in Cables Power Bank -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-25" class="card-img" src="https://m.media-amazon.com/images/I/71bL-1-mNFL._AC_SX679_.jpg" alt="Charmast Power Bank">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71bL-1-mNFL._AC_SX679_.jpg" onclick="changeImage('img-25', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Charmast 20,000mAh Power Bank with Built-in Cables</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 All-in-One</span>
-          </div>
-          <div class="review-quote">"No need to carry extra charging cords around. Built-in wires work great!"</div>
-          <p class="card-desc">6-output portable charger with integrated Lightning, USB-C, and Micro USB cables.</p>
-          <a href="https://amzn.to/4fXbbH1" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 26: Belkin 10K Power Bank -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-26" class="card-img" src="https://m.media-amazon.com/images/I/61j3q7q0LHL._AC_SX679_.jpg" alt="Belkin Power Bank">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61j3q7q0LHL._AC_SX679_.jpg" onclick="changeImage('img-26', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Belkin 10K 23W Portable Charger with Integrated Cables</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.6 / 5 Compact Travel</span>
-          </div>
-          <div class="review-quote">"Slim design fits right in pocket while keeping devices charged all day."</div>
-          <p class="card-desc">Reliable 10,000mAh external battery with integrated USB-C and Lightning cables.</p>
-          <a href="https://amzn.to/4fWe7Ul" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 27: INIU 45W Fast Charging Power Bank -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-27" class="card-img" src="https://m.media-amazon.com/images/I/61I2e-C-aRL._AC_SX679_.jpg" alt="INIU Power Bank">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61I2e-C-aRL._AC_SX679_.jpg" onclick="changeImage('img-27', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">INIU 45W Ultra-Compact 10,000mAh Fast Charger</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Fast Charge</span>
-          </div>
-          <div class="review-quote">"Super fast 45W output charges my phone to 60% in under 25 minutes."</div>
-          <p class="card-desc">Smaller lightweight travel battery pack featuring high-speed 45W USB-C PD charging.</p>
-          <a href="https://amzn.to/4woFhrJ" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 28: WHOOP 5.0 Activity Tracker (Link 1) -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-28" class="card-img" src="https://m.media-amazon.com/images/I/61fWqg1nC4L._AC_SX679_.jpg" alt="WHOOP Tracker">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61fWqg1nC4L._AC_SX679_.jpg" onclick="changeImage('img-28', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">WHOOP 5.0 Activity Tracker (12 Month Membership)</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 Fitness Recovery</span>
-          </div>
-          <div class="review-quote">"Game-changer for tracking sleep, strain, and strain recovery scores."</div>
-          <p class="card-desc">Screenless 24/7 fitness wearable with health monitoring and 12-month access.</p>
-          <a href="https://amzn.to/4hyYSBU" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 29: WHOOP 5.0 Activity Tracker (Link 2) -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-29" class="card-img" src="https://m.media-amazon.com/images/I/61fWqg1nC4L._AC_SX679_.jpg" alt="WHOOP Wearable">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61fWqg1nC4L._AC_SX679_.jpg" onclick="changeImage('img-29', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">WHOOP 5.0 Health & Fitness Tracker Band</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 Personalized Coach</span>
-          </div>
-          <div class="review-quote">"Continuous health coaching without annoying screen distractions."</div>
-          <p class="card-desc">24/7 activity and sleep monitoring with long battery life and personalized insights.</p>
-          <a href="https://amzn.to/4xFlt4D" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 30: Apple Watch Series 11 -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-30" class="card-img" src="https://m.media-amazon.com/images/I/714i-kG1E0L._AC_SX679_.jpg" alt="Apple Watch Series 11">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/714i-kG1E0L._AC_SX679_.jpg" onclick="changeImage('img-30', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Apple Watch Series 11 GPS 46mm Smartwatch</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.9 / 5 Flagship Watch</span>
-          </div>
-          <div class="review-quote">"Bright always-on display, precise ECG monitoring, and great sleep score insights."</div>
-          <p class="card-desc">Jet Black aluminum case smartwatch with fitness tracking and health monitoring.</p>
-          <a href="https://amzn.to/4wx2kRx" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 31: TOZO S8 AMOLED Smart Watch -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-31" class="card-img" src="https://m.media-amazon.com/images/I/71BvY1qE5xL._AC_SX679_.jpg" alt="TOZO Smartwatch">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71BvY1qE5xL._AC_SX679_.jpg" onclick="changeImage('img-31', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">TOZO S8 AMOLED 3ATM Waterproof Smart Watch</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-text">4.5 / 5 Value Smartwatch</span>
-          </div>
-          <div class="review-quote">"Beautiful AMOLED screen and amazing battery life for the price!"</div>
-          <p class="card-desc">Waterproof fitness tracker with heart rate monitor and exercise tracking modes.</p>
-          <a href="https://amzn.to/4bRYhYu" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 32: Amazfit Active Max -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-32" class="card-img" src="https://m.media-amazon.com/images/I/61u9sYn+GEL._AC_SX679_.jpg" alt="Amazfit Active Max">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61u9sYn+GEL._AC_SX679_.jpg" onclick="changeImage('img-32', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Amazfit Active Max 1.5" AMOLED GPS Smartwatch</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 Long Battery</span>
-          </div>
-          <div class="review-quote">"GPS tracking is spot on for outdoor runs and battery lasts over a week."</div>
-          <p class="card-desc">AMOLED display smartwatch compatible with iOS & Android featuring built-in GPS.</p>
-          <a href="https://amzn.to/3S9DkkT" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 33: Amazfit Bip 6 -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-33" class="card-img" src="https://m.media-amazon.com/images/I/61NfT2k-s-L._AC_SX679_.jpg" alt="Amazfit Bip 6">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61NfT2k-s-L._AC_SX679_.jpg" onclick="changeImage('img-33', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Amazfit Bip 6 Large 1.97" AMOLED Smart Watch</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.6 / 5 HD Display</span>
-          </div>
-          <div class="review-quote">"Huge clear screen that is super readable even in bright direct sunlight."</div>
-          <p class="card-desc">Large 1.97" AMOLED display watch with fitness monitoring and GPS route tracking.</p>
-          <a href="https://amzn.to/3TYqvdV" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 34: RAYMYLO Insulated Bottle 64 oz -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-34" class="card-img" src="https://m.media-amazon.com/images/I/71R2n7H9rYL._AC_SX679_.jpg" alt="RAYMYLO Bottle">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71R2n7H9rYL._AC_SX679_.jpg" onclick="changeImage('img-34', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">RAYMYLO 64 oz Triple Wall Stainless Insulated Bottle</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Ice Cold</span>
-          </div>
-          <div class="review-quote">"Keeps water ice cold for 48 hours even during hot outdoor workouts!"</div>
-          <p class="card-desc">Half-gallon vacuum insulated stainless steel water bottle built for gym and outdoor travel.</p>
-          <a href="https://amzn.to/3Su0SRP" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 35: Tervis Insulated Tumbler 4pk -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-35" class="card-img" src="https://m.media-amazon.com/images/I/71v9gMv2zEL._AC_SX679_.jpg" alt="Tervis Tumblers">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71v9gMv2zEL._AC_SX679_.jpg" onclick="changeImage('img-35', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Tervis Made in USA 16oz Double Walled Tumblers (4pk)</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Classic Drinkware</span>
-          </div>
-          <div class="review-quote">"No sweat condensation rings on wooden tables and dishwasher safe."</div>
-          <p class="card-desc">Durable clear double-walled insulated travel tumblers for hot and cold beverages.</p>
-          <a href="https://amzn.to/4gwElgk" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 36: BrüMate Era 40 oz Tumbler (Nightfall) -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-36" class="card-img" src="https://m.media-amazon.com/images/I/61r5f8C+cML._AC_SX679_.jpg" alt="BrüMate Nightfall">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61r5f8C+cML._AC_SX679_.jpg" onclick="changeImage('img-36', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">BrüMate Era 40 oz Leakproof Tumbler (Nightfall Blue)</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 100% Leakproof</span>
-          </div>
-          <div class="review-quote">"Literally zero leaks even when tipped completely upside down!"</div>
-          <p class="card-desc">Stainless steel insulated tumbler featuring soft-sip straw and car cup holder fit.</p>
-          <a href="https://amzn.to/45vYRaG" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 37: BrüMate Era 40 oz Tumbler (Dark Aura) -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-37" class="card-img" src="https://m.media-amazon.com/images/I/61T+N9D5i-L._AC_SX679_.jpg" alt="BrüMate Dark Aura">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61T+N9D5i-L._AC_SX679_.jpg" onclick="changeImage('img-37', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">BrüMate Era 40 oz Leakproof Tumbler (Dark Aura)</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Stylish Finish</span>
-          </div>
-          <div class="review-quote">"The Dark Aura finish is stunning in person and keeps ice for over 24 hours."</div>
-          <p class="card-desc">100% spill-free insulated water bottle with flexible straw and ergonomic handle.</p>
-          <a href="https://amzn.to/3RM3Ock" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 38: GreenPurple 40 oz Tumbler -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-38" class="card-img" src="https://m.media-amazon.com/images/I/61T-bTz6yLL._AC_SX679_.jpg" alt="GreenPurple Tumbler">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61T-bTz6yLL._AC_SX679_.jpg" onclick="changeImage('img-38', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">40 oz Gradient GreenPurple Leak-Proof Tumbler</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-text">4.6 / 5 Color Gradient</span>
-          </div>
-          <div class="review-quote">"Fits perfectly in standard car cup holders and doesn't spill."</div>
-          <p class="card-desc">Insulated travel mug with straw lid and comfortable side handle for daily hydration.</p>
-          <a href="https://amzn.to/4wqCw9k" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 39: STANLEY Quencher 40 oz -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-39" class="card-img" src="https://m.media-amazon.com/images/I/61hX4T20sGL._AC_SX679_.jpg" alt="Stanley Quencher">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61hX4T20sGL._AC_SX679_.jpg" onclick="changeImage('img-39', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">STANLEY Quencher H2.0 FlowState 40 oz Tumbler</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Viral Favorite</span>
-          </div>
-          <div class="review-quote">"The absolute king of tumblers. Keeps drinks ice cold all day long."</div>
-          <p class="card-desc">Black 2.0 recycled stainless steel vacuum insulated cup with 3-position lid.</p>
-          <a href="https://amzn.to/3Su15EB" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 40: Nulaxy 360 Rotating Laptop Stand -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-40" class="card-img" src="https://m.media-amazon.com/images/I/61D15C-zW1L._AC_SX679_.jpg" alt="Nulaxy Stand">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61D15C-zW1L._AC_SX679_.jpg" onclick="changeImage('img-40', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Nulaxy 18" Telescopic 360° Swivel Aluminum Laptop Stand</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Ergonomic Desk</span>
-          </div>
-          <div class="review-quote">"Smooth 360 rotation makes showing screens to coworkers super convenient."</div>
-          <p class="card-desc">Height adjustable rotating aluminum laptop riser promoting better neck posture.</p>
-          <a href="https://amzn.to/4wD2ln2" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 41: Lumbar Support Pillow -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-41" class="card-img" src="https://m.media-amazon.com/images/I/71N7eW-R+BL._AC_SX679_.jpg" alt="Lumbar Pillow">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71N7eW-R+BL._AC_SX679_.jpg" onclick="changeImage('img-41', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Memory Foam Lumbar Back Support Chair Cushion</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 Back Pain Relief</span>
-          </div>
-          <div class="review-quote">"Eliminated lower back soreness during long 8-hour office work days!"</div>
-          <p class="card-desc">Ergonomic memory foam cushion with breathable mesh cover and double adjustable straps.</p>
-          <a href="https://amzn.to/4i86YSe" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 42: tounee Telescopic Swivel Laptop Stand -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-42" class="card-img" src="https://m.media-amazon.com/images/I/61Y-5L9j5bL._AC_SX679_.jpg" alt="tounee Stand">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61Y-5L9j5bL._AC_SX679_.jpg" onclick="changeImage('img-42', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">tounee Sit-to-Stand 360° Swivel Laptop Riser</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Heavy Duty</span>
-          </div>
-          <div class="review-quote">"Extremely sturdy metal frame holding 17-inch laptops without wobbling."</div>
-          <p class="card-desc">Telescopic height-adjustable metal stand with 360 swivel base for MacBook and laptops.</p>
-          <a href="https://amzn.to/3StxkDQ" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 43: Branch Adjustable Wooden Stand -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-43" class="card-img" src="https://m.media-amazon.com/images/I/61q3Y2-Vf1L._AC_SX679_.jpg" alt="Branch Wooden Stand">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61q3Y2-Vf1L._AC_SX679_.jpg" onclick="changeImage('img-43', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Branch Wooden Adjustable Portable Laptop Stand</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.7 / 5 Aesthetic Wood</span>
-          </div>
-          <div class="review-quote">"Natural wood grain adds a high-end minimalist look to my desk setup."</div>
-          <p class="card-desc">Portable wooden riser engineered to improve airflow cooling and viewing angles.</p>
-          <a href="https://amzn.to/4gc2zuS" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 44: Aothia Leather Desk Pad -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-44" class="card-img" src="https://m.media-amazon.com/images/I/71e-S7pU-VL._AC_SX679_.jpg" alt="Aothia Desk Pad">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71e-S7pU-VL._AC_SX679_.jpg" onclick="changeImage('img-44', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Aothia Leather Office Desk Pad (31.5" x 15.7")</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Desk Protection</span>
-          </div>
-          <div class="review-quote">"Waterproof PU leather surface wipes clean easily and protects desk finish."</div>
-          <p class="card-desc">Non-slip waterproof leather desk blotter mouse pad for office and home workstations.</p>
-          <a href="https://amzn.to/3Uxt5HT" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 45: Compact Leather Desk Pad -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-45" class="card-img" src="https://m.media-amazon.com/images/I/61wL1A6T+GL._AC_SX679_.jpg" alt="Compact Desk Mat">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/61wL1A6T+GL._AC_SX679_.jpg" onclick="changeImage('img-45', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Compact PU Leather Non-Slip Desk Pad (23.6" x 13.7")</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-text">4.6 / 5 Compact Size</span>
-          </div>
-          <div class="review-quote">"Ideal size for smaller home office desks and laptop setups."</div>
-          <p class="card-desc">Protective leather mouse pad mat offering smooth gliding mouse surface control.</p>
-          <a href="https://amzn.to/4x61Se8" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- Product 46: Japanese Sea Wave Gaming Mouse Pad -->
-      <div class="card">
-        <div class="gallery-container">
-          <img id="img-46" class="card-img" src="https://m.media-amazon.com/images/I/71xS8b+R5-L._AC_SX679_.jpg" alt="Kanagawa Mousepad">
-          <div class="thumbnails">
-            <img class="thumb active" src="https://m.media-amazon.com/images/I/71xS8b+R5-L._AC_SX679_.jpg" onclick="changeImage('img-46', this.src, this)">
-          </div>
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">Kanagawa Japanese Sea Wave Gaming Desk Mat</h2>
-          <div class="rating-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.8 / 5 Great Wave Art</span>
-          </div>
-          <div class="review-quote">"Print quality is sharp and vibrant. Stitched edges prevent fraying!"</div>
-          <p class="card-desc">31.5" x 11.8" large extended gaming mouse pad with non-slip rubber base.</p>
-          <a href="https://amzn.to/4qAjcWd" target="_blank" rel="noopener sponsored" class="btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <footer>
-    <p><strong>Amazon Affiliate Disclosure:</strong> As an Amazon Associate, Prime Choice Hub earns from qualifying purchases.</p>
-  </footer>
-
-  <!-- Script to Handle Thumbnail Image Swapping -->
-  <script>
-    function changeImage(mainImgId, newSrc, thumbElement) {
-      document.getElementById(mainImgId).src = newSrc;
-      let siblings = thumbElement.parentElement.children;
-      for (let i = 0; i < siblings.length; i++) {
-        siblings[i].classList.remove('active');
-      }
-      thumbElement.classList.add('active');
+    function filterCategory() {
+      const selected = document.getElementById('categoryFilter').value;
+      const cards = document.querySelectorAll('.card');
+
+      cards.forEach(card => {
+        if (selected === 'all' || card.getAttribute('data-category') === selected) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
     }
   </script>
 
