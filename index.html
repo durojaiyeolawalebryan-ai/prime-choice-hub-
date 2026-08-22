@@ -3,688 +3,554 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prime Choice Hub | Modern Store</title>
+  <title>Prime Choice Hub | Premium Tech & Essentials</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <style>
+    /* ==========================================================================
+       ORAIMO-INSPIRED HIGH-END DARK THEME STYLES
+       ========================================================================== */
     :root {
-      --bg-main: #0b0f19;
-      --card-bg: #151c2c;
-      --card-border: #232d42;
-      --accent-orange: #ff6b00;
-      --text-primary: #f8fafc;
-      --text-secondary: #94a3b8;
-      --star-gold: #fbbf24;
+      --bg-main: #0a0a0c;
+      --bg-card: #121216;
+      --bg-surface: #1a1a22;
+      --accent-green: #9ef01a;
+      --accent-green-hover: #70e000;
+      --text-main: #f8f9fa;
+      --text-muted: #a0a0ab;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --font-family: 'Plus Jakarta Sans', sans-serif;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-    body { background-color: var(--bg-main); color: var(--text-primary); line-height: 1.5; padding-bottom: 60px; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: var(--font-family);
+    }
 
-    /* Top Navigation Header */
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Top Announcement Bar */
+    .announcement-bar {
+      background: var(--accent-green);
+      color: #000;
+      text-align: center;
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Header & Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 12, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+    }
+
     .navbar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1rem 1.25rem; background-color: #111827;
-      border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 100;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .hamburger-btn { background: transparent; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
-    .hamburger-btn span { display: block; width: 24px; height: 2.5px; background-color: var(--text-primary); border-radius: 2px; }
-    .nav-title { font-size: 1.25rem; font-weight: 800; }
-    .nav-title span { color: var(--accent-orange); }
 
-    /* Side Navigation Drawer */
-    .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 200; }
-    .sidebar-overlay.active { opacity: 1; visibility: visible; }
-    .sidebar { position: fixed; top: 0; left: -280px; width: 280px; height: 100vh; background-color: #111827; border-right: 1px solid var(--card-border); z-index: 201; transition: left 0.3s ease; padding: 1.5rem 1rem; display: flex; flex-direction: column; }
-    .sidebar.active { left: 0; }
-    .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--card-border); }
-    .close-btn { background: transparent; border: none; color: var(--text-secondary); font-size: 1.5rem; cursor: pointer; }
-    .category-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-    .category-item { padding: 0.75rem 1rem; border-radius: 8px; color: var(--text-primary); font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: 0.2s; }
-    .category-item.active, .category-item:hover { background: var(--card-bg); color: var(--accent-orange); border-left: 3px solid var(--accent-orange); }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
 
-    /* Subheader Announcement */
-    .sub-header { text-align: center; padding: 1.5rem 1rem 0.5rem; }
-    .sub-header p { color: var(--text-secondary); font-size: 0.88rem; }
+    .logo span {
+      color: var(--accent-green);
+    }
 
-    /* Product Grid Layout */
-    .container { max-width: 1240px; margin: 1.5rem auto; padding: 0 1rem; }
-    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
-    .card { background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s ease; }
-    .card:hover { transform: translateY(-4px); }
-    .card.hidden { display: none; }
-    .image-container { background: #ffffff; height: 210px; display: flex; align-items: center; justify-content: center; padding: 1.25rem; position: relative; }
-    .card-img { max-width: 100%; max-height: 100%; object-fit: cover; width: 100%; height: 100%; border-radius: 8px; }
-    .category-badge { position: absolute; top: 10px; left: 10px; background: rgba(15, 23, 42, 0.85); color: #fff; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; padding: 4px 10px; border-radius: 12px; z-index: 2; }
-    .card-body { padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; }
-    .card-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.7em; }
-    .rating-row { display: flex; align-items: center; gap: 6px; margin-bottom: 0.8rem; }
-    .stars { color: var(--star-gold); font-size: 0.85rem; }
-    .rating-score { font-size: 0.8rem; color: var(--text-secondary); }
-    .quote-box { background: #0d1322; border-left: 2px solid var(--accent-orange); padding: 8px 12px; font-size: 0.8rem; font-style: italic; color: #cbd5e1; border-radius: 0 6px 6px 0; margin-bottom: 0.8rem; }
-    .card-desc { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 1.25rem; flex-grow: 1; }
-    .amazon-btn { display: block; width: 100%; padding: 0.75rem; text-align: center; background: linear-gradient(135deg, #ff7a00 0%, #e65c00 100%); color: #ffffff; font-weight: 700; font-size: 0.9rem; text-decoration: none; border-radius: 8px; }
-    footer { text-align: center; padding: 2rem 1rem; color: var(--text-secondary); font-size: 0.8rem; border-top: 1px solid var(--card-border); margin-top: 3rem; }
+    .search-container {
+      position: relative;
+      flex: 0 1 450px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 18px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 30px;
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-green);
+      box-shadow: 0 0 12px rgba(158, 240, 26, 0.2);
+    }
+
+    .cart-trigger {
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-size: 1.2rem;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cart-badge {
+      background: var(--accent-green);
+      color: #000;
+      font-weight: 800;
+      font-size: 0.75rem;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: radial-gradient(circle at top, rgba(158, 240, 26, 0.08) 0%, rgba(10, 10, 12, 1) 70%);
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Main Grid Layout */
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    /* Product Cards */
+    .oraimo-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .oraimo-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(158, 240, 26, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--accent-green);
+      color: #000;
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 20px;
+      z-index: 2;
+    }
+
+    .card-media {
+      position: relative;
+      width: 100%;
+      padding-top: 100%; /* 1:1 Aspect Ratio */
+      background: #000;
+      overflow: hidden;
+    }
+
+    .card-media img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .card-media .hover-img {
+      opacity: 0;
+    }
+
+    .oraimo-card:hover .primary-img {
+      opacity: 0;
+    }
+
+    .oraimo-card:hover .hover-img {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .quick-view-btn {
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(18, 18, 22, 0.9);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: var(--transition);
+    }
+
+    .oraimo-card:hover .quick-view-btn {
+      bottom: 12px;
+    }
+
+    .card-info {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    .product-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+
+    .btn-primary {
+      width: 100%;
+      background: var(--accent-green);
+      color: #000;
+      border: none;
+      padding: 12px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-green-hover);
+      box-shadow: 0 0 15px rgba(158, 240, 26, 0.4);
+    }
+
+    /* Modal Overlay & Quick View */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      width: 90%;
+      max-width: 900px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 32px;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    @media (max-width: 768px) {
+      .modal-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    .modal-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .main-modal-img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    .modal-thumbnails {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+
+    .modal-thumbnails img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      opacity: 0.6;
+      transition: var(--transition);
+    }
+
+    .modal-thumbnails img.active {
+      border-color: var(--accent-green);
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Top Bar with Hamburger Menu Icon -->
-  <nav class="navbar">
-    <button class="hamburger-btn" onclick="toggleSidebar()" aria-label="Open Menu">
-      <span></span><span></span><span></span>
-    </button>
-    <div class="nav-title">Prime Choice <span>Hub</span></div>
-    <div style="width: 24px;"></div>
-  </nav>
-
-  <!-- Side Drawer Menu -->
-  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <h3>Categories</h3>
-      <button class="close-btn" onclick="toggleSidebar()">&times;</button>
-    </div>
-    <ul class="category-list">
-      <li class="category-item active" onclick="selectCategory('all', this)">📁 All Products (46)</li>
-      <li class="category-item" onclick="selectCategory('kitchen', this)">🥩 Kitchen & Cooking</li>
-      <li class="category-item" onclick="selectCategory('audio', this)">🎧 Audio & Earbuds</li>
-      <li class="category-item" onclick="selectCategory('tech', this)">🔋 Power & Chargers</li>
-      <li class="category-item" onclick="selectCategory('wearables', this)">⌚ Wearables & Fitness</li>
-      <li class="category-item" onclick="selectCategory('drinkware', this)">🥤 Drinkware & Tumblers</li>
-      <li class="category-item" onclick="selectCategory('desk', this)">🖥️ Desk Setup</li>
-    </ul>
-  </aside>
-
-  <div class="sub-header">
-    <p>Curated Kitchen, Tech, Outdoor Gear & Desk Essentials</p>
+  <div class="announcement-bar">
+    ⚡ Upgrade Your Setup — Free Nationwide Delivery Available
   </div>
 
-  <!-- Product Grid Container (All 46 Items) -->
-  <div class="container">
-    <div class="product-grid">
-
-      <!-- 1 -->
-      <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1588168333986-5078d3ae3976?auto=format&fit=crop&w=500&q=80" alt="Amazon Grocery Ground Beef"></div>
-        <div class="card-body">
-          <h2 class="card-title">Amazon Grocery Ground Beef 80/20 (3 lb Pack of 3)</h2>
-          <div class="rating-row"><span class="stars">★★★★☆</span><span class="rating-score">4.5 Verified</span></div>
-          <div class="quote-box">"Perfect fat ratio for juicy homemade burgers."</div>
-          <p class="card-desc">Fresh ground beef value pack delivered straight to your door.</p>
-          <a href="https://amzn.to/4qla9Iy" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
+  <header>
+    <div class="navbar">
+      <a href="#" class="logo">PRIME CHOICE <span>HUB</span></a>
+      <div class="search-container">
+        <input type="text" id="search-input" class="search-input" placeholder="Search product catalog..." oninput="filterProducts()">
       </div>
+      <button class="cart-trigger">
+        🛒 <span class="cart-badge" id="cart-count">0</span>
+      </button>
+    </div>
+  </header>
 
-      <!-- 2 -->
-      <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=500&q=80" alt="COOKER KING Skillet"></div>
-        <div class="card-body">
-          <h2 class="card-title">COOKER KING 10 Inch Stainless Steel Frying Pan</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.6 Rated</span></div>
-          <div class="quote-box">"Heats evenly across induction and gas stoves."</div>
-          <p class="card-desc">Tri-ply stainless steel induction-ready skillet for searing.</p>
-          <a href="https://amzn.to/4xFvmiv" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
+  <section class="hero">
+    <h1>Next-Gen Gear & Lifestyle</h1>
+    <p>Discover flagship tech, high-performance audio, premium kitchenware, and desktop ergonomics.</p>
+  </section>
+
+  <main class="container">
+    <div id="product-grid" class="catalog-grid"></div>
+  </main>
+
+  <!-- Quick View Modal -->
+  <div class="modal-overlay" id="quickview-modal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal()">&times;</button>
+      <div class="modal-gallery">
+        <img id="modal-display-img" class="main-modal-img" src="" alt="Product Image">
+        <div class="modal-thumbnails" id="modal-thumbs"></div>
       </div>
-
-      <!-- 3 -->
-      <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=500&q=80" alt="INKBIRD Sous Vide"></div>
-        <div class="card-body">
-          <h2 class="card-title">INKBIRD WIFI Sous Vide Cooker & Vacuum Sealer</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 App Control</span></div>
-          <div class="quote-box">"Cooks restaurant-grade steaks effortlessly."</div>
-          <p class="card-desc">1000W immersion circulator with 14 app recipes and sealer.</p>
-          <a href="https://amzn.to/3RT3sRb" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
+      <div style="display: flex; flex-direction: column; justify-content: center;">
+        <h2 id="modal-title" style="font-size: 1.6rem; margin-bottom: 12px;"></h2>
+        <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem;">
+          Premium high-performance product built to the highest specifications. Designed for longevity and seamless daily utility.
+        </p>
+        <button id="modal-add-btn" class="btn-primary">Add To Cart</button>
       </div>
-
-      <!-- 4 -->
-      <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=500&q=80" alt="Anova Sous Vide"></div>
-        <div class="card-body">
-          <h2 class="card-title">Anova Culinary Sous Vide Precision Cooker 3.0</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Precision</span></div>
-          <div class="quote-box">"Locks in moisture and flavor every single time."</div>
-          <p class="card-desc">1100W stainless steel immersion circulator with Wi-Fi capability.</p>
-          <a href="https://amzn.to/4zoHXsn" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 5 -->
-      <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=500&q=80" alt="imarku Chef Knife"></div>
-        <div class="card-body">
-          <h2 class="card-title">imarku Japanese 8 Inch Chef Knife</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Razor Sharp</span></div>
-          <div class="quote-box">"Slices raw meats and vegetables smoothly."</div>
-          <p class="card-desc">Ergonomic handle with sharp high carbon stainless blade.</p>
-          <a href="https://amzn.to/4wvE6ai" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 6 -->
-      <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=500&q=80" alt="imarku Nakiri Knife"></div>
-        <div class="card-body">
-          <h2 class="card-title">imarku Nakiri Knife 7 Inch Japanese Knife</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Precision</span></div>
-          <div class="quote-box">"Perfect balance for quick vegetable and meat chopping."</div>
-          <p class="card-desc">Ultra-sharp Japanese steel blade tailored for rapid prep work.</p>
-          <a href="https://amzn.to/4wU2Ppv" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 7 -->
-      <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=500&q=80" alt="Cuisinart Chef Knife"></div>
-        <div class="card-body">
-          <h2 class="card-title">Cuisinart 8" Stainless Steel Chef's Knife with Guard</h2>
-          <div class="rating-row"><span class="stars">★★★★☆</span><span class="rating-score">4.6 Graphix</span></div>
-          <div class="quote-box">"Sleek design with comfortable ergonomic grip."</div>
-          <p class="card-desc">Includes protective blade guard for safe kitchen storage.</p>
-          <a href="https://amzn.to/3S8oT0E" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 8 -->
-      <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=500&q=80" alt="Amazon Basics Knife"></div>
-        <div class="card-body">
-          <h2 class="card-title">Amazon Basics Classic 8-inch Full Tang Chef's Knife</h2>
-          <div class="rating-row"><span class="stars">★★★★☆</span><span class="rating-score">4.5 Value</span></div>
-          <div class="quote-box">"Durable full tang construction with solid triple rivets."</div>
-          <p class="card-desc">High carbon stainless steel multipurpose utility knife.</p>
-          <a href="https://amzn.to/4fV3LEe" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 9 -->
-      <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?auto=format&fit=crop&w=500&q=80" alt="Titanium Board"></div>
-        <div class="card-body">
-          <h2 class="card-title">Titanium Cutting Board Pure Titanium/PP (16"x11")</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Hygienic</span></div>
-          <div class="quote-box">"Non-porous surface that won't dull your knife edges."</div>
-          <p class="card-desc">Durable antibacterial titanium cutting board for raw meats.</p>
-          <a href="https://amzn.to/4wYZXHY" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 10 -->
-      <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?auto=format&fit=crop&w=500&q=80" alt="Royal Craft Board"></div>
-        <div class="card-body">
-          <h2 class="card-title">ROYAL CRAFT WOOD Board with Juice Groove</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Heavy Duty</span></div>
-          <div class="quote-box">"Catches all meat juice runoff so counters stay clean."</div>
-          <p class="card-desc">Heavy duty wood chopping board and elegant serving tray.</p>
-          <a href="https://amzn.to/4qknXD1" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 11 -->
-      <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?auto=format&fit=crop&w=500&q=80" alt="SNOWCLAD Board"></div>
-        <div class="card-body">
-          <h2 class="card-title">SNOWCLAD Stainless Steel Chopping Board</h2>
-          <div class="rating-row"><span class="stars">★★★★☆</span><span class="rating-score">4.6 Non-Toxic</span></div>
-          <div class="quote-box">"Easy to wash and completely stain and odor resistant."</div>
-          <p class="card-desc">Hygenic food grade metal cutting surface for kitchen prep.</p>
-          <a href="https://amzn.to/4xD6M1V" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 12 -->
-      <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1589119908995-c6837fa14848?auto=format&fit=crop&w=500&q=80" alt="Electric Sharpener"></div>
-        <div class="card-body">
-          <h2 class="card-title">Electric Knife Sharpener 3-Stage System with 15° Guide</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Fast Sharpen</span></div>
-          <div class="quote-box">"Restores dull kitchen blades to razor sharpness in seconds."</div>
-          <p class="card-desc">3-stage electric sharpening system with precise angle guides.</p>
-          <a href="https://amzn.to/3SeenVF" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 13 -->
-      <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1589119908995-c6837fa14848?auto=format&fit=crop&w=500&q=80" alt="Yatoshi Sharpener"></div>
-        <div class="card-body">
-          <h2 class="card-title">Yatoshi 50W Diamond Abrasive Electric Sharpener</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 20-Degree</span></div>
-          <div class="quote-box">"Works brilliantly on both straight and serrated edges."</div>
-          <p class="card-desc">50W motor with diamond abrasive wheels and precision guides.</p>
-          <a href="https://amzn.to/45tdYSh" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 14 -->
-      <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=500&q=80" alt="ZWILLING Block"></div>
-        <div class="card-body">
-          <h2 class="card-title">ZWILLING Bamboo Bristle Knife Storage Block</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Bamboo</span></div>
-          <div class="quote-box">"Flexible interior fits knives of any size or shape freely."</div>
-          <p class="card-desc">Natural bamboo block with protective bristle insert design.</p>
-          <a href="https://amzn.to/4x2Q5NA" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 15 -->
-      <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=500&q=80" alt="GRILLART Brush 16.5"></div>
-        <div class="card-body">
-          <h2 class="card-title">GRILLART 16.5” Grill Brush and Scraper</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Wire Scraper</span></div>
-          <div class="quote-box">"Cleans burnt barbecue residue off grates quickly."</div>
-          <p class="card-desc">Heavy duty wire grill cleaner with built-in metal scraper.</p>
-          <a href="https://amzn.to/4fYBwVg" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 16 -->
-      <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=500&q=80" alt="GRILLART Helix"></div>
-        <div class="card-body">
-          <h2 class="card-title">GRILLART Wire + Helix Combined 18" BBQ Brush</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Safe & Fast</span></div>
-          <div class="quote-box">"Reaches deep between grate bars without shedding."</div>
-          <p class="card-desc">Safe 18-inch dual helix cleaning brush for gas and charcoal grills.</p>
-          <a href="https://amzn.to/4wsC22M" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 17 -->
-      <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=500&q=80" alt="GRILLART 3 in 1"></div>
-        <div class="card-body">
-          <h2 class="card-title">GRILLART 18" Stainless Steel 3 in 1 Bristles Brush</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Triple Power</span></div>
-          <div class="quote-box">"3x more bristle coverage to speed up grill cleanup."</div>
-          <p class="card-desc">Triple head woven wire grill brush with heavy duty scraper.</p>
-          <a href="https://amzn.to/4hte6Zb" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 18 -->
-      <div class="card" data-category="kitchen">
-        <div class="image-container"><span class="category-badge">Kitchen</span><img class="card-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=500&q=80" alt="Kaluns Tools Set"></div>
-        <div class="card-body">
-          <h2 class="card-title">Kaluns BBQ Grill Tools Set with Aluminum Case & Apron</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Complete Kit</span></div>
-          <div class="quote-box">"Includes all necessary spatulas, tongs, and apron."</div>
-          <p class="card-desc">Stainless steel outdoor grilling tool set in a protective case.</p>
-          <a href="https://amzn.to/4i8Ghgc" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 19 -->
-      <div class="card" data-category="audio">
-        <div class="image-container"><span class="category-badge">Audio</span><img class="card-img" src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=500&q=80" alt="AI Translation Earbuds"></div>
-        <div class="card-body">
-          <h2 class="card-title">AI Translation Earbuds 164 Languages 80H Playtime</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Real-Time</span></div>
-          <div class="quote-box">"Instant voice translation ideal for traveling and meetings."</div>
-          <p class="card-desc">Real-time two-way voice translation earbuds with long battery life.</p>
-          <a href="https://amzn.to/4c8E7tt" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 20 -->
-      <div class="card" data-category="audio">
-        <div class="image-container"><span class="category-badge">Audio</span><img class="card-img" src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=500&q=80" alt="Soundcore P42i"></div>
-        <div class="card-body">
-          <h2 class="card-title">Soundcore Anker P42i Adaptive ANC Earbuds</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Deep Bass</span></div>
-          <div class="quote-box">"Impressive noise cancellation and punchy bass extension."</div>
-          <p class="card-desc">Adaptive noise cancelling true wireless earbuds with EQ app.</p>
-          <a href="https://amzn.to/4g5LuTq" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 21 -->
-      <div class="card" data-category="audio">
-        <div class="image-container"><span class="category-badge">Audio</span><img class="card-img" src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=500&q=80" alt="TOZO Hybrid ANC"></div>
-        <div class="card-body">
-          <h2 class="card-title">TOZO Hybrid Active Noise Cancelling Earbuds (68H)</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 68H Battery</span></div>
-          <div class="quote-box">"Massive overall battery life with clear audio clarity."</div>
-          <p class="card-desc">In-ear ANC wireless earbuds with wireless charging case.</p>
-          <a href="https://amzn.to/4g6wowV" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 22 -->
-      <div class="card" data-category="audio">
-        <div class="image-container"><span class="category-badge">Audio</span><img class="card-img" src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=500&q=80" alt="Apple AirPods Pro 3"></div>
-        <div class="card-body">
-          <h2 class="card-title">Apple AirPods Pro 3 Wireless Earbuds USB-C</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.9 Spatial Audio</span></div>
-          <div class="quote-box">"Active noise cancellation with heart rate and translation."</div>
-          <p class="card-desc">Flagship spatial audio earbuds with hearing health features.</p>
-          <a href="https://amzn.to/3Uyd6JC" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 23 -->
-      <div class="card" data-category="tech">
-        <div class="image-container"><span class="category-badge">Tech</span><img class="card-img" src="https://images.unsplash.com/photo-1609592424009-41716503c4f7?auto=format&fit=crop&w=500&q=80" alt="NOBIS Power Bank"></div>
-        <div class="card-body">
-          <h2 class="card-title">NOBIS Power Bank 90W 20,000mAh Laptop Charger</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 90W Output</span></div>
-          <div class="quote-box">"Charges laptops and smartphones at high speed."</div>
-          <p class="card-desc">High capacity 20,000mAh battery pack with 90W power delivery.</p>
-          <a href="https://amzn.to/4ga3onU" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 24 -->
-      <div class="card" data-category="tech">
-        <div class="image-container"><span class="category-badge">Tech</span><img class="card-img" src="https://images.unsplash.com/photo-1609592424009-41716503c4f7?auto=format&fit=crop&w=500&q=80" alt="Charmast Power Bank"></div>
-        <div class="card-body">
-          <h2 class="card-title">Charmast 20000mAh Power Bank with Built-in Cables</h2>
-          <div class="rating-row"><span class="stars">★★★★☆</span><span class="rating-score">4.6 6-Output</span></div>
-          <div class="quote-box">"No need to carry extra charging cables around."</div>
-          <p class="card-desc">Multi-device portable charger with built-in output cords.</p>
-          <a href="https://amzn.to/4fXbbH1" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 25 -->
-      <div class="card" data-category="tech">
-        <div class="image-container"><span class="category-badge">Tech</span><img class="card-img" src="https://images.unsplash.com/photo-1609592424009-41716503c4f7?auto=format&fit=crop&w=500&q=80" alt="Belkin Power Bank"></div>
-        <div class="card-body">
-          <h2 class="card-title">Belkin 10K 23W Portable Charger Power Bank</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Integrated</span></div>
-          <div class="quote-box">"Compact profile with integrated USB-C and Lightning cables."</div>
-          <p class="card-desc">10,000mAh compact power pack engineered for fast travel charging.</p>
-          <a href="https://amzn.to/4fWe7Ul" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 26 -->
-      <div class="card" data-category="tech">
-        <div class="image-container"><span class="category-badge">Tech</span><img class="card-img" src="https://images.unsplash.com/photo-1609592424009-41716503c4f7?auto=format&fit=crop&w=500&q=80" alt="INIU Power Bank"></div>
-        <div class="card-body">
-          <h2 class="card-title">INIU 45W Fast Charging 10000mAh Travel Power Bank</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Compact</span></div>
-          <div class="quote-box">"Pocket-sized charger with surprisingly fast 45W output."</div>
-          <p class="card-desc">Lightweight high-speed portable battery pack for phone and tablet.</p>
-          <a href="https://amzn.to/4woFhrJ" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 27 -->
-      <div class="card" data-category="wearables">
-        <div class="image-container"><span class="category-badge">Wearables</span><img class="card-img" src="https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?auto=format&fit=crop&w=500&q=80" alt="WHOOP 5.0 Option 1"></div>
-        <div class="card-body">
-          <h2 class="card-title">WHOOP 5.0/MG Tracker (12 Mo. Membership)</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Health Data</span></div>
-          <div class="quote-box">"Detailed sleep recovery metrics and 14+ day battery life."</div>
-          <p class="card-desc">24/7 fitness tracker with personalized coaching and insights.</p>
-          <a href="https://amzn.to/4hyYSBU" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 28 -->
-      <div class="card" data-category="wearables">
-        <div class="image-container"><span class="category-badge">Wearables</span><img class="card-img" src="https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?auto=format&fit=crop&w=500&q=80" alt="WHOOP 5.0 Option 2"></div>
-        <div class="card-body">
-          <h2 class="card-title">WHOOP 5.0/MG Health & Activity Tracker Band</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Screenless</span></div>
-          <div class="quote-box">"Continuous health monitoring without screen distractions."</div>
-          <p class="card-desc">Wearables kit including 12-month full membership access.</p>
-          <a href="https://amzn.to/4xFlt4D" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 29 -->
-      <div class="card" data-category="wearables">
-        <div class="image-container"><span class="category-badge">Wearables</span><img class="card-img" src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=500&q=80" alt="Apple Watch 11"></div>
-        <div class="card-body">
-          <h2 class="card-title">Apple Watch Series 11 GPS 46mm Smartwatch</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.9 Jet Black</span></div>
-          <div class="quote-box">"Bright display, accurate sleep scores, and health tracking."</div>
-          <p class="card-desc">Aluminum case smartwatch with advanced health monitoring sensors.</p>
-          <a href="https://amzn.to/4wx2kRx" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 30 -->
-      <div class="card" data-category="wearables">
-        <div class="image-container"><span class="category-badge">Wearables</span><img class="card-img" src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=500&q=80" alt="TOZO S8 Watch"></div>
-        <div class="card-body">
-          <h2 class="card-title">TOZO S8 AMOLED Smart Watch 3ATM Waterproof</h2>
-          <div class="rating-row"><span class="stars">★★★★☆</span><span class="rating-score">4.6 AMOLED</span></div>
-          <div class="quote-box">"Vivid AMOLED touchscreen display with long battery."</div>
-          <p class="card-desc">Fitness tracker watch with heart rate and sleep tracking capabilities.</p>
-          <a href="https://amzn.to/4bRYhYu" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 31 -->
-      <div class="card" data-category="wearables">
-        <div class="image-container"><span class="category-badge">Wearables</span><img class="card-img" src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=500&q=80" alt="Amazfit Active Max"></div>
-        <div class="card-body">
-          <h2 class="card-title">Amazfit Active Max Smart Watch 1.5" AMOLED GPS</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Built-in GPS</span></div>
-          <div class="quote-box">"Accurate GPS tracking for workouts on iOS and Android."</div>
-          <p class="card-desc">Sleek smartwatch featuring sports modes and daily health tracking.</p>
-          <a href="https://amzn.to/3S9DkkT" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 32 -->
-      <div class="card" data-category="wearables">
-        <div class="image-container"><span class="category-badge">Wearables</span><img class="card-img" src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=500&q=80" alt="Amazfit Bip 6"></div>
-        <div class="card-body">
-          <h2 class="card-title">Amazfit Bip 6 Smart Watch 1.97" AMOLED Screen</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Large Screen</span></div>
-          <div class="quote-box">"Large clear display with multi-day battery endurance."</div>
-          <p class="card-desc">Lightweight fitness watch with integrated GPS navigation.</p>
-          <a href="https://amzn.to/3TYqvdV" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 33 -->
-      <div class="card" data-category="drinkware">
-        <div class="image-container"><span class="category-badge">Drinkware</span><img class="card-img" src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=500&q=80" alt="RAYMYLO Bottle"></div>
-        <div class="card-body">
-          <h2 class="card-title">RAYMYLO Insulated Water Bottle 64 oz Stainless Steel</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 64oz Capacity</span></div>
-          <div class="quote-box">"Keeps ice water freezing cold even on hot outdoor days."</div>
-          <p class="card-desc">Triple wall vacuum insulated stainless steel large water jug.</p>
-          <a href="https://amzn.to/3Su0SRP" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 34 -->
-      <div class="card" data-category="drinkware">
-        <div class="image-container"><span class="category-badge">Drinkware</span><img class="card-img" src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=500&q=80" alt="Tervis Tumblers"></div>
-        <div class="card-body">
-          <h2 class="card-title">Tervis Clear Double Walled Tumblers 16oz (4-Pack)</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Made in USA</span></div>
-          <div class="quote-box">"Reduces condensation rings on furniture."</div>
-          <p class="card-desc">Durable double-walled insulated drinking glasses for hot and cold drinks.</p>
-          <a href="https://amzn.to/4gwElgk" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 35 -->
-      <div class="card" data-category="drinkware">
-        <div class="image-container"><span class="category-badge">Drinkware</span><img class="card-img" src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=500&q=80" alt="BrüMate Nightfall Blue"></div>
-        <div class="card-body">
-          <h2 class="card-title">BrüMate Era 40 oz Tumbler (Nightfall Blue)</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.9 Leakproof</span></div>
-          <div class="quote-box">"100% leakproof even when flipped completely upside down."</div>
-          <p class="card-desc">Stainless steel cup-holder friendly tumbler with flexible straw.</p>
-          <a href="https://amzn.to/45vYRaG" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 36 -->
-      <div class="card" data-category="drinkware">
-        <div class="image-container"><span class="category-badge">Drinkware</span><img class="card-img" src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=500&q=80" alt="BrüMate Dark Aura"></div>
-        <div class="card-body">
-          <h2 class="card-title">BrüMate Era 40 oz Tumbler (Dark Aura)</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.9 Leakproof</span></div>
-          <div class="quote-box">"Stunning color finish with soft silicone sip straw."</div>
-          <p class="card-desc">Insulated travel mug designed to fit standard vehicle cup holders.</p>
-          <a href="https://amzn.to/3RM3Ock" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 37 -->
-      <div class="card" data-category="drinkware">
-        <div class="image-container"><span class="category-badge">Drinkware</span><img class="card-img" src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=500&q=80" alt="GreenPurple Tumbler"></div>
-        <div class="card-body">
-          <h2 class="card-title">40 oz Tumbler with Handle and Straw Lid (GreenPurple)</h2>
-          <div class="rating-row"><span class="stars">★★★★☆</span><span class="rating-score">4.6 100% Leakproof</span></div>
-          <div class="quote-box">"Vibrant gradient design that keeps beverages ice cold."</div>
-          <p class="card-desc">Large insulated vacuum stainless steel tumbler with comfortable grip handle.</p>
-          <a href="https://amzn.to/4wqCw9k" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 38 -->
-      <div class="card" data-category="drinkware">
-        <div class="image-container"><span class="category-badge">Drinkware</span><img class="card-img" src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=500&q=80" alt="STANLEY Quencher"></div>
-        <div class="card-body">
-          <h2 class="card-title">STANLEY Quencher H2.0 FlowState 40 oz Tumbler (Black)</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Iconic</span></div>
-          <div class="quote-box">"The gold standard for everyday hydration."</div>
-          <p class="card-desc">Famous vacuum insulated travel mug with 3-position rotating lid.</p>
-          <a href="https://amzn.to/3Su15EB" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 39 -->
-      <div class="card" data-category="desk">
-        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=500&q=80" alt="Nulaxy Stand Gray"></div>
-        <div class="card-body">
-          <h2 class="card-title">Nulaxy 18" Telescopic 360 Rotating Laptop Stand</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Ergonomic</span></div>
-          <div class="quote-box">"Elevates screen to eye level to prevent neck strain."</div>
-          <p class="card-desc">Heavy duty aluminum rotating desk riser for laptops.</p>
-          <a href="https://amzn.to/4wD2ln2" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 40 -->
-      <div class="card" data-category="desk">
-        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=500&q=80" alt="Lumbar Support Pillow"></div>
-        <div class="card-body">
-          <h2 class="card-title">Lumbar Support Memory Foam Pillow for Office Chair</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Posture Relief</span></div>
-          <div class="quote-box">"Eases lower back pain during long study and work hours."</div>
-          <p class="card-desc">Ergonomic memory foam cushion with double adjustable straps.</p>
-          <a href="https://amzn.to/4i86YSe" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 41 -->
-      <div class="card" data-category="desk">
-        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=500&q=80" alt="tounee Laptop Stand"></div>
-        <div class="card-body">
-          <h2 class="card-title">tounee Telescopic 360° Swivel Base Laptop Stand</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Sit-to-Stand</span></div>
-          <div class="quote-box">"Sturdy height adjustments for MacBook Pro and all laptops."</div>
-          <p class="card-desc">Portable sit-to-stand aluminum riser promoting better posture.</p>
-          <a href="https://amzn.to/3StxkDQ" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 42 -->
-      <div class="card" data-category="desk">
-        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=500&q=80" alt="Branch Wooden Stand"></div>
-        <div class="card-body">
-          <h2 class="card-title">Branch Adjustable Wooden Laptop Stand Riser</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Wood Aesthetic</span></div>
-          <div class="quote-box">"Adds a clean natural wood aesthetic to your workspace."</div>
-          <p class="card-desc">Portable wooden laptop elevation riser for office desks.</p>
-          <a href="https://amzn.to/4gc2zuS" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 43 -->
-      <div class="card" data-category="desk">
-        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=500&q=80" alt="Aothia Leather Pad"></div>
-        <div class="card-body">
-          <h2 class="card-title">Aothia Leather Desk Pad Protector (31.5" x 15.7")</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Waterproof</span></div>
-          <div class="quote-box">"Smooth mouse surface that protects your wooden desk."</div>
-          <p class="card-desc">Non-slip PU leather desk blotter and writing mat.</p>
-          <a href="https://amzn.to/3Uxt5HT" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 44 -->
-      <div class="card" data-category="desk">
-        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=500&q=80" alt="Compact Leather Pad"></div>
-        <div class="card-body">
-          <h2 class="card-title">Non-Slip Leather Desk Pad (Black, 23.6" x 13.7")</h2>
-          <div class="rating-row"><span class="stars">★★★★☆</span><span class="rating-score">4.6 Compact</span></div>
-          <div class="quote-box">"Ideal size for smaller desk setups and laptop spaces."</div>
-          <p class="card-desc">Waterproof leather protective surface for keyboard and mouse.</p>
-          <a href="https://amzn.to/4x61Se8" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 45 -->
-      <div class="card" data-category="desk">
-        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=500&q=80" alt="Kanagawa Wave Mat"></div>
-        <div class="card-body">
-          <h2 class="card-title">Kanagawa Japanese Sea Wave Gaming Desk Mat</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.8 Great Wave</span></div>
-          <div class="quote-box">"Stitched edges and vivid Japanese art print."</div>
-          <p class="card-desc">Large non-slip gaming mouse pad (31.5 x 11.8 inch).</p>
-          <a href="https://amzn.to/4qAjcWd" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
-      <!-- 46 -->
-      <div class="card" data-category="desk">
-        <div class="image-container"><span class="category-badge">Desk Setup</span><img class="card-img" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=500&q=80" alt="DAWNTREES Felt Mat"></div>
-        <div class="card-body">
-          <h2 class="card-title">DAWNTREES Felt Dark Gray Desk Mat (36x12 Inches)</h2>
-          <div class="rating-row"><span class="stars">★★★★★</span><span class="rating-score">4.7 Warm Felt</span></div>
-          <div class="quote-box">"Cozy felt texture that elevates your desk aesthetic."</div>
-          <p class="card-desc">Large dark gray felt pad for keyboards, mice, and accessories.</p>
-          <a href="https://amzn.to/4gxdnVO" target="_blank" class="amazon-btn">Check Price on Amazon</a>
-        </div>
-      </div>
-
     </div>
   </div>
-
-  <footer>
-    <p>As an Amazon Associate, Prime Choice Hub earns from qualifying purchases.</p>
-  </footer>
 
   <script>
-    function toggleSidebar() {
-      document.getElementById('sidebar').classList.toggle('active');
-      document.getElementById('sidebarOverlay').classList.toggle('active');
+    // ==========================================================================
+    // CATALOG DATABASE & ENGINE
+    // ==========================================================================
+    const products = [
+      { id: 1, name: "Ground Beef", slug: "ground-beef", imagesCount: 4, ext: "avif" },
+      { id: 2, name: "Cooker King Pan", slug: "cooker-king-pan", imagesCount: 7, ext: "avif" },
+      { id: 3, name: "Inkbird Sous Vide", slug: "inkbird-sousvide", imagesCount: 9, ext: "avif" },
+      { id: 4, name: "Anova Sous Vide", slug: "anova-sousvide", imagesCount: 10, ext: "avif" },
+      { id: 5, name: "Imarku Chef Knife", slug: "imarku-chef-knife", imagesCount: 9, ext: "avif" },
+      { id: 6, name: "Imarku Nakiri Knife", slug: "imarku-nakiri-knife", imagesCount: 9, ext: "avif" },
+      { id: 7, name: "Cuisinart Chef Knife", slug: "cuisinart-chef-knife", imagesCount: 1, ext: "avif" },
+      { id: 8, name: "AmazonBasics Chef Knife", slug: "amazonbasics-chef-knife", imagesCount: 6, ext: "avif" },
+      { id: 9, name: "Titanium Cutting Board", slug: "titanium-cutting-board", imagesCount: 7, ext: "avif" },
+      { id: 10, name: "Royal Craft Board", slug: "royal-craft-board", imagesCount: 9, ext: "avif" },
+      { id: 11, name: "Snowclad Steel Board", slug: "snowclad-steel-board", imagesCount: 7, ext: "avif" },
+      { id: 12, name: "Electric Sharpener", slug: "electric-sharpener", imagesCount: 9, ext: "avif" },
+      { id: 13, name: "Yatoshi Sharpener", slug: "yatoshi-sharpener", imagesCount: 8, ext: "avif" },
+      { id: 14, name: "Zwilling Knife Block", slug: "zwilling-knife-block", imagesCount: 7, ext: "avif" },
+      { id: 15, name: "GRILLART Grill Brush", slug: "grillart-grill-brush", imagesCount: 7, ext: "avif" },
+      { id: 16, name: "GRILLART Wire + Helix BBQ Brush", slug: "grillart-wire-helix-brush", imagesCount: 7, ext: "avif" },
+      { id: 17, name: "GRILLART Grill Brush and Scraper 18\"", slug: "grillart-grill-brush-and-scraper", imagesCount: 7, ext: "avif" },
+      { id: 18, name: "Kaluns BBQ Grill Tools Set", slug: "kaluns-bbq-tools-set", imagesCount: 9, ext: "avif" },
+      { id: 19, name: "AI Translation Earbuds K08 White", slug: "ai-translation-earbuds-k08", imagesCount: 8, ext: "avif" },
+      { id: 20, name: "Soundcore Anker P40i Wireless Earbuds", slug: "soundcore-p40i-earbuds", imagesCount: 7, ext: "avif" },
+      { id: 21, name: "TOZO Hybrid Active Noise Cancelling Earbuds", slug: "tozo-anc-earbuds", imagesCount: 9, ext: "avif" },
+      { id: 22, name: "Apple AirPods Pro Wireless Earbuds", slug: "apple-airpods-pro", imagesCount: 6, ext: "webp" },
+      { id: 23, name: "NOBIS 90W 20,000mAh Laptop Power Bank", slug: "nobis-90w-powerbank", imagesCount: 7, ext: "avif" },
+      { id: 24, name: "Charmast 20,000mAh Power Bank with Built-in Cables", slug: "charmast-20000mah-powerbank", imagesCount: 9, ext: "avif" },
+      { id: 25, name: "Belkin 10K 23W Portable Charger Power Bank", slug: "belkin-10k-powerbank", imagesCount: 12, ext: "avif" },
+      { id: 26, name: "INIU 45W Fast Charging 10,000mAh Travel Power Bank", slug: "iniu-45w-powerbank", imagesCount: 7, ext: "avif" },
+      { id: 27, name: "WHOOP 5.0 Activity Tracker", slug: "whoop-5-tracker", imagesCount: 8, ext: "avif" },
+      { id: 28, name: "Apple Watch Series 11 GPS 46mm Smartwatch", slug: "apple-watch-s11", imagesCount: 9, ext: "webp" },
+      { id: 29, name: "TOZO S8 Smartwatch", slug: "tozo-s8-smartwatch", imagesCount: 9, ext: "avif" },
+      { id: 30, name: "Amazfit Active Max Smart Watch", slug: "amazfit-active-max", imagesCount: 9, ext: "avif" },
+      { id: 31, name: "Amazfit Bip 6 Smart Watch", slug: "amazfit-bip-6", imagesCount: 8, ext: "avif" },
+      { id: 32, name: "RAYMYLO 64 oz Insulated Water Bottle", slug: "raymylo-64oz-water-bottle", imagesCount: 8, ext: "avif" },
+      { id: 33, name: "Tervis Clear 16 oz Double Walled Tumbler Pack", slug: "tervis-16oz-tumbler-pack", imagesCount: 10, ext: "avif" },
+      { id: 34, name: "BrüMate Era 40 oz Tumbler - Nightfall Blue", slug: "brumate-era-40oz-nightfall-blue", imagesCount: 7, ext: "avif" },
+      { id: 35, name: "BrüMate Era 40 oz Tumbler - Dark Aura", slug: "brumate-era-40oz-dark-aura", imagesCount: 7, ext: "avif" },
+      { id: 36, name: "40 oz Stainless Steel Tumbler - GreenPurple", slug: "40oz-tumbler-greenpurple", imagesCount: 8, ext: "avif" },
+      { id: 37, name: "STANLEY Quencher H2.0 FlowState 40 oz Tumbler", slug: "stanley-quencher-40oz", imagesCount: 8, ext: "avif" },
+      { id: 38, name: "Nulaxy 18\" Telescopic 360 Rotating Laptop Stand", slug: "nulaxy-laptop-stand", imagesCount: 8, ext: "avif" },
+      { id: 39, name: "Lumbar Support Memory Foam Pillow", slug: "lumbar-support-pillow", imagesCount: 9, ext: "avif" },
+      { id: 40, name: "tounee Telescopic 360-degree Swivel Base Laptop Stand", slug: "tounee-laptop-stand", imagesCount: 9, ext: "webp" },
+      { id: 41, name: "Branch Adjustable Wooden Laptop Stand Riser", slug: "branch-wooden-laptop-stand", imagesCount: 6, ext: "webp" },
+      { id: 42, name: "Aothia Leather Desk Pad Protector", slug: "aothia-leather-desk-pad", imagesCount: 8, ext: "webp" },
+      { id: 43, name: "Non-Slip Leather Desk Pad", slug: "non-slip-leather-desk-pad", imagesCount: 7, ext: "webp" },
+      { id: 44, name: "Kanagawa Japanese Sea Wave Gaming Desk Mat", slug: "kanagawa-wave-desk-mat", imagesCount: 7, ext: "avif" },
+      { id: 45, name: "Scalloped Desk Mat 31.5\" x 15.7\"", slug: "scalloped-desk-mat", imagesCount: 7, ext: "avif" },
+      { id: 46, name: "DAWNTREES Felt Dark Gray Desk Mat", slug: "dawntrees-felt-desk-mat", imagesCount: 9, ext: "avif" }
+    ];
+
+    let cartCount = 0;
+
+    function getProductImages(product) {
+      const imgs = [];
+      for (let i = 1; i <= product.imagesCount; i++) {
+        imgs.push(`images/${product.slug}-${i}.${product.ext}`);
+      }
+      return imgs;
     }
 
-    function selectCategory(category, element) {
-      document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
-      element.classList.add('active');
+    function renderProducts(list) {
+      const grid = document.getElementById("product-grid");
+      grid.innerHTML = list.map(item => {
+        const imgs = getProductImages(item);
+        const pImg = imgs[0];
+        const hImg = imgs[1] || pImg;
 
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(card => {
-        if (category === 'all' || card.getAttribute('data-category') === category) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-
-      toggleSidebar();
+        return `
+          <div class="oraimo-card">
+            <span class="card-badge">HOT</span>
+            <div class="card-media">
+              <img src="${pImg}" class="primary-img" alt="${item.name}">
+              <img src="${hImg}" class="hover-img" alt="${item.name}">
+              <button class="quick-view-btn" onclick="openModal(${item.id})">Quick View</button>
+            </div>
+            <div class="card-info">
+              <h3 class="product-title">${item.name}</h3>
+              <button class="btn-primary" onclick="addToCart()">Add To Cart</button>
+            </div>
+          </div>
+        `;
+      }).join('');
     }
+
+    function filterProducts() {
+      const query = document.getElementById("search-input").value.toLowerCase();
+      const filtered = products.filter(p => p.name.toLowerCase().includes(query));
+      renderProducts(filtered);
+    }
+
+    function addToCart() {
+      cartCount++;
+      document.getElementById("cart-count").innerText = cartCount;
+    }
+
+    function openModal(id) {
+      const product = products.find(p => p.id === id);
+      if (!product) return;
+
+      const imgs = getProductImages(product);
+      const displayImg = document.getElementById("modal-display-img");
+      const thumbsContainer = document.getElementById("modal-thumbs");
+
+      document.getElementById("modal-title").innerText = product.name;
+      displayImg.src = imgs[0];
+
+      thumbsContainer.innerHTML = imgs.map((imgSrc, idx) => `
+        <img src="${imgSrc}" class="${idx === 0 ? 'active' : ''}" onclick="switchModalImg('${imgSrc}', this)">
+      `).join('');
+
+      document.getElementById("modal-add-btn").onclick = () => {
+        addToCart();
+        closeModal();
+      };
+
+      document.getElementById("quickview-modal").classList.add("active");
+    }
+
+    function switchModalImg(src, el) {
+      document.getElementById("modal-display-img").src = src;
+      document.querySelectorAll("#modal-thumbs img").forEach(img => img.classList.remove("active"));
+      el.classList.add("active");
+    }
+
+    function closeModal() {
+      document.getElementById("quickview-modal").classList.remove("active");
+    }
+
+    // Initialize Render
+    document.addEventListener("DOMContentLoaded", () => renderProducts(products));
   </script>
-
 </body>
 </html>
