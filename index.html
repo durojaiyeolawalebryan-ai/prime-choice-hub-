@@ -774,7 +774,18 @@
       { id: 12, name: "Electric Sharpener", slug: "electric-sharpener", imagesCount: 9, ext: "avif", link: "https://amzn.to/example12", cat: "kitchen", rating: 4.7, reviews: "1,430" },
       { id: 13, name: "Yatoshi Sharpener", slug: "yatoshi-sharpener", imagesCount: 8, ext: "avif", link: "https://amzn.to/example13", cat: "kitchen", rating: 4.5, reviews: "880" },
       { id: 14, name: "Zwilling Knife Block", slug: "zwilling-knife-block", imagesCount: 7, ext: "avif", link: "https://amzn.to/example14", cat: "kitchen", rating: 4.9, reviews: "2,980" },
-      { id: 15, name: "GRILLART Grill Brush", slug: "grillart-grill-brush", imagesCount: 7, ext: "avif", link: "https://amzn.to/example15", cat: "kitchen", rating: 4.8, reviews: "6,200" },
+      { 
+        id: 15, 
+        name: "GRILLART Grill Brush", 
+        slug: "grillart-grill-brush", 
+        customFirstImage: "images/grillart-grill-brush-1.avif", 
+        imagesCount: 7, 
+        ext: "avif", 
+        link: "https://amzn.to/example15", 
+        cat: "kitchen", 
+        rating: 4.8, 
+        reviews: "6,200" 
+      },
       { id: 16, name: "GRILLART Wire + Helix BBQ Brush", slug: "grillart-wire-helix-brush", imagesCount: 7, ext: "avif", link: "https://amzn.to/example16", cat: "kitchen", rating: 4.7, reviews: "3,110" },
       { id: 17, name: "GRILLART Grill Brush and Scraper 18\"", slug: "grillart-grill-brush-and-scraper", imagesCount: 7, ext: "avif", link: "https://amzn.to/example17", cat: "kitchen", rating: 4.8, reviews: "4,500" },
       { id: 18, name: "Kaluns BBQ Grill Tools Set", slug: "kaluns-bbq-tools-set", imagesCount: 9, ext: "avif", link: "https://amzn.to/example18", cat: "kitchen", rating: 4.6, reviews: "1,740" },
@@ -810,8 +821,15 @@
 
     function getProductImages(product) {
       const imgs = [];
-      for (let i = 1; i <= product.imagesCount; i++) {
-        imgs.push(`images/${product.slug}-${i}.${product.ext}`);
+      if (product.customFirstImage) {
+        imgs.push(product.customFirstImage);
+        for (let i = 2; i <= product.imagesCount; i++) {
+          imgs.push(`images/${product.slug}-${i}.${product.ext}`);
+        }
+      } else {
+        for (let i = 1; i <= product.imagesCount; i++) {
+          imgs.push(`images/${product.slug}-${i}.${product.ext}`);
+        }
       }
       return imgs;
     }
