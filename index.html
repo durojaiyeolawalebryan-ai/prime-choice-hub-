@@ -9,9 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
-    /* ==========================================================================
-       MODERN LIGHT HERO UI WITH MULTI-DEPARTMENT SLIDESHOW & REVIEWS
-       ========================================================================== */
     :root {
       --primary-color: #6366f1;
       --primary-hover: #4f46e5;
@@ -44,7 +41,6 @@
       line-height: 1.5;
     }
 
-    /* Top Announcement */
     .announcement {
       background: linear-gradient(90deg, #6366f1, #8b5cf6);
       color: #fff;
@@ -54,7 +50,6 @@
       font-weight: 600;
     }
 
-    /* Navigation */
     header {
       background: var(--bg-surface);
       border-bottom: 1px solid var(--border-light);
@@ -110,7 +105,6 @@
       font-size: 0.85rem;
     }
 
-    /* Hero Section */
     .hero-wrapper {
       max-width: 1280px;
       margin: 24px auto 0;
@@ -129,7 +123,6 @@
       box-shadow: var(--shadow-md);
     }
 
-    /* Multi-Department Hero Image Crossfade Slideshow */
     .hero-bg-container {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -159,7 +152,7 @@
 
     .hero-slide:nth-child(3) {
       background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.4) 60%, rgba(15, 23, 42, 0.85) 100%),
-                        url('https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=1600&q=80');
+                        url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1600&q=80');
       animation-delay: 12s;
     }
 
@@ -212,7 +205,6 @@
       margin-bottom: 24px;
     }
 
-    /* Floating Search Bar */
     .hero-search-bar {
       position: relative;
       z-index: 2;
@@ -264,7 +256,6 @@
 
     .btn-search:hover { background: var(--primary-hover); }
 
-    /* Features Section */
     .features-section {
       max-width: 1280px;
       margin: 80px auto 40px;
@@ -294,7 +285,6 @@
     .feature-info h4 { font-size: 0.95rem; font-weight: 700; }
     .feature-info p { font-size: 0.85rem; color: var(--text-muted); }
 
-    /* Catalog Section */
     .catalog-container {
       max-width: 1280px;
       margin: 40px auto;
@@ -317,7 +307,6 @@
       gap: 24px;
     }
 
-    /* Cards */
     .card {
       background: var(--bg-surface);
       border: 1px solid var(--border-light);
@@ -423,7 +412,6 @@
 
     .card:hover .quick-btn { bottom: 12px; }
 
-    /* Modal Experience */
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -514,16 +502,37 @@
 
     .main-img-box:hover img { transform: scale(1.15); }
 
-    .modal-thumbs { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; }
+    .modal-thumbs {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      cursor: grab;
+      user-select: none;
+    }
+
+    .modal-thumbs:active { cursor: grabbing; }
+
+    .modal-thumbs::-webkit-scrollbar { height: 6px; }
+    .modal-thumbs::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
 
     .modal-thumbs img {
-      width: 68px; height: 68px; object-fit: cover;
-      border-radius: var(--radius-sm); cursor: pointer;
-      opacity: 0.6; border: 2px solid transparent; transition: all 0.2s;
+      flex-shrink: 0;
+      width: 72px;
+      height: 72px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      opacity: 0.6;
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
     }
 
     .modal-thumbs img.active, .modal-thumbs img:hover {
-      opacity: 1; border-color: var(--primary-color);
+      opacity: 1;
+      border-color: var(--primary-color);
     }
 
     .product-details { display: flex; flex-direction: column; }
@@ -581,7 +590,7 @@
 <body>
 
   <div class="announcement">
-    🛒 Discover Top-Rated Kitchenware, Tech Accessories, Drinkware & Amazon Deals
+    🛒 Discover Top-Rated Kitchenware, Tech Accessories, Drinkware, Beauty & Amazon Deals
   </div>
 
   <header>
@@ -607,7 +616,7 @@
       <div class="hero-content">
         <div class="hero-badge">📦 Multi-Category Amazon Essentials</div>
         <h1>Everything You Need <span>In One Modern Store</span></h1>
-        <p>Explore top-rated cookware, audio earbuds, laptop setups, tumblers, and premium everyday gear sourced directly from Amazon.</p>
+        <p>Explore top-rated cookware, audio earbuds, makeup kits, fresh beef essentials, tumblers, and premium gear sourced directly from Amazon.</p>
       </div>
     </div>
 
@@ -615,7 +624,7 @@
     <div class="hero-search-bar">
       <div class="search-field">
         <label>Search Item</label>
-        <input type="text" id="search-input" placeholder="e.g. Chef Knife, Earbuds, Stand..." oninput="filterProducts()">
+        <input type="text" id="search-input" placeholder="e.g. Beef, Makeup, Earbuds..." oninput="filterProducts()">
       </div>
       <div class="search-field">
         <label>Category</label>
@@ -624,6 +633,8 @@
           <option value="kitchen">Kitchenware & Tools</option>
           <option value="tech">Tech & Accessories</option>
           <option value="drinkware">Tumblers & Bottles</option>
+          <option value="beauty">Beauty & Cosmetics</option>
+          <option value="meats">Fresh Meats & Beef</option>
         </select>
       </div>
       <button class="btn-search" onclick="filterProducts()">Find Items</button>
@@ -667,7 +678,7 @@
     <div class="section-header">
       <div>
         <h2>Featured Amazon Products</h2>
-        <p>Explore high-performance tools, appliances, and essential goods</p>
+        <p>Explore high-performance tools, beauty kits, fresh selections, and essential goods</p>
       </div>
     </div>
 
@@ -688,6 +699,7 @@
         <div class="main-img-box">
           <img id="modal-display-img" src="" alt="Product Detail Image">
         </div>
+        <!-- Touch & Drag Swipeable Thumbnails Bar -->
         <div class="modal-thumbs" id="modal-thumbs"></div>
       </div>
 
@@ -748,7 +760,7 @@
 
   <script>
     const products = [
-      { id: 1, name: "Ground Beef", slug: "ground-beef", imagesCount: 4, ext: "avif", link: "https://amzn.to/example1", cat: "kitchen", rating: 4.8, reviews: "2,410" },
+      { id: 1, name: "Ground Beef", slug: "ground-beef", imagesCount: 4, ext: "avif", link: "https://amzn.to/example1", cat: "meats", rating: 4.8, reviews: "2,410" },
       { id: 2, name: "Cooker King Pan", slug: "cooker-king-pan", imagesCount: 7, ext: "avif", link: "https://amzn.to/example2", cat: "kitchen", rating: 4.7, reviews: "890" },
       { id: 3, name: "Inkbird Sous Vide", slug: "inkbird-sousvide", imagesCount: 9, ext: "avif", link: "https://amzn.to/example3", cat: "kitchen", rating: 4.9, reviews: "3,150" },
       { id: 4, name: "Anova Sous Vide", slug: "anova-sousvide", imagesCount: 10, ext: "avif", link: "https://amzn.to/example4", cat: "kitchen", rating: 4.8, reviews: "5,420" },
@@ -873,6 +885,7 @@
       `).join('');
 
       document.getElementById("modal-amazon-link").href = product.link;
+      initDragScroll(thumbsContainer);
 
       setTimeout(() => {
         loader.style.display = "none";
@@ -884,6 +897,30 @@
       document.getElementById("modal-display-img").src = src;
       document.querySelectorAll("#modal-thumbs img").forEach(img => img.classList.remove("active"));
       el.classList.add("active");
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+
+    function initDragScroll(slider) {
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+      });
+
+      slider.addEventListener('mouseleave', () => { isDown = false; });
+      slider.addEventListener('mouseup', () => { isDown = false; });
+
+      slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2;
+        slider.scrollLeft = scrollLeft - walk;
+      });
     }
 
     function closeModal() {
