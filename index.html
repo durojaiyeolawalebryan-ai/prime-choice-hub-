@@ -10,7 +10,7 @@
   
   <style>
     /* ==========================================================================
-       ORAIMO-INSPIRED HIGH-END DARK THEME STYLES
+       HIGH-END DARK THEME STYLES
        ========================================================================== */
     :root {
       --bg-main: #0a0a0c;
@@ -104,31 +104,6 @@
       box-shadow: 0 0 12px rgba(158, 240, 26, 0.2);
     }
 
-    .cart-trigger {
-      background: transparent;
-      border: none;
-      color: var(--text-main);
-      font-size: 1.2rem;
-      cursor: pointer;
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .cart-badge {
-      background: var(--accent-green);
-      color: #000;
-      font-weight: 800;
-      font-size: 0.75rem;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
     /* Hero Section */
     .hero {
       text-align: center;
@@ -164,7 +139,7 @@
     }
 
     /* Product Cards */
-    .oraimo-card {
+    .product-card {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 16px;
@@ -175,7 +150,7 @@
       transition: var(--transition);
     }
 
-    .oraimo-card:hover {
+    .product-card:hover {
       transform: translateY(-6px);
       border-color: rgba(158, 240, 26, 0.4);
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
@@ -216,11 +191,11 @@
       opacity: 0;
     }
 
-    .oraimo-card:hover .primary-img {
+    .product-card:hover .primary-img {
       opacity: 0;
     }
 
-    .oraimo-card:hover .hover-img {
+    .product-card:hover .hover-img {
       opacity: 1;
       transform: scale(1.05);
     }
@@ -242,7 +217,7 @@
       transition: var(--transition);
     }
 
-    .oraimo-card:hover .quick-view-btn {
+    .product-card:hover .quick-view-btn {
       bottom: 12px;
     }
 
@@ -262,10 +237,13 @@
       line-height: 1.3;
     }
 
-    .btn-primary {
+    .btn-amazon {
       width: 100%;
-      background: var(--accent-green);
+      background: #ff9900; /* Amazon Orange */
       color: #000;
+      text-decoration: none;
+      text-align: center;
+      display: block;
       border: none;
       padding: 12px;
       border-radius: 30px;
@@ -275,9 +253,9 @@
       transition: var(--transition);
     }
 
-    .btn-primary:hover {
-      background: var(--accent-green-hover);
-      box-shadow: 0 0 15px rgba(158, 240, 26, 0.4);
+    .btn-amazon:hover {
+      background: #e38800;
+      box-shadow: 0 0 15px rgba(255, 153, 0, 0.4);
     }
 
     /* Modal Overlay & Quick View */
@@ -376,7 +354,7 @@
 <body>
 
   <div class="announcement-bar">
-    ⚡ Upgrade Your Setup — Free Nationwide Delivery Available
+    ⚡ Check out the latest gear and upgrades available on Amazon
   </div>
 
   <header>
@@ -385,15 +363,12 @@
       <div class="search-container">
         <input type="text" id="search-input" class="search-input" placeholder="Search product catalog..." oninput="filterProducts()">
       </div>
-      <button class="cart-trigger">
-        🛒 <span class="cart-badge" id="cart-count">0</span>
-      </button>
     </div>
   </header>
 
   <section class="hero">
     <h1>Next-Gen Gear & Lifestyle</h1>
-    <p>Discover flagship tech, high-performance audio, premium kitchenware, and desktop ergonomics.</p>
+    <p>Discover flagship tech, high-performance audio, premium kitchenware, and desktop ergonomics. Your top Amazon finds in one place.</p>
   </section>
 
   <main class="container">
@@ -411,67 +386,65 @@
       <div style="display: flex; flex-direction: column; justify-content: center;">
         <h2 id="modal-title" style="font-size: 1.6rem; margin-bottom: 12px;"></h2>
         <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem;">
-          Premium high-performance product built to the highest specifications. Designed for longevity and seamless daily utility.
+          Premium high-performance product built to the highest specifications. View full details, reviews, and pricing directly on Amazon.
         </p>
-        <button id="modal-add-btn" class="btn-primary">Add To Cart</button>
+        <a id="modal-amazon-link" href="#" target="_blank" class="btn-amazon">Buy on Amazon</a>
       </div>
     </div>
   </div>
 
   <script>
     // ==========================================================================
-    // CATALOG DATABASE & ENGINE
+    // CATALOG DATABASE (WITH AMAZON LINKS)
     // ==========================================================================
     const products = [
-      { id: 1, name: "Ground Beef", slug: "ground-beef", imagesCount: 4, ext: "avif" },
-      { id: 2, name: "Cooker King Pan", slug: "cooker-king-pan", imagesCount: 7, ext: "avif" },
-      { id: 3, name: "Inkbird Sous Vide", slug: "inkbird-sousvide", imagesCount: 9, ext: "avif" },
-      { id: 4, name: "Anova Sous Vide", slug: "anova-sousvide", imagesCount: 10, ext: "avif" },
-      { id: 5, name: "Imarku Chef Knife", slug: "imarku-chef-knife", imagesCount: 9, ext: "avif" },
-      { id: 6, name: "Imarku Nakiri Knife", slug: "imarku-nakiri-knife", imagesCount: 9, ext: "avif" },
-      { id: 7, name: "Cuisinart Chef Knife", slug: "cuisinart-chef-knife", imagesCount: 1, ext: "avif" },
-      { id: 8, name: "AmazonBasics Chef Knife", slug: "amazonbasics-chef-knife", imagesCount: 6, ext: "avif" },
-      { id: 9, name: "Titanium Cutting Board", slug: "titanium-cutting-board", imagesCount: 7, ext: "avif" },
-      { id: 10, name: "Royal Craft Board", slug: "royal-craft-board", imagesCount: 9, ext: "avif" },
-      { id: 11, name: "Snowclad Steel Board", slug: "snowclad-steel-board", imagesCount: 7, ext: "avif" },
-      { id: 12, name: "Electric Sharpener", slug: "electric-sharpener", imagesCount: 9, ext: "avif" },
-      { id: 13, name: "Yatoshi Sharpener", slug: "yatoshi-sharpener", imagesCount: 8, ext: "avif" },
-      { id: 14, name: "Zwilling Knife Block", slug: "zwilling-knife-block", imagesCount: 7, ext: "avif" },
-      { id: 15, name: "GRILLART Grill Brush", slug: "grillart-grill-brush", imagesCount: 7, ext: "avif" },
-      { id: 16, name: "GRILLART Wire + Helix BBQ Brush", slug: "grillart-wire-helix-brush", imagesCount: 7, ext: "avif" },
-      { id: 17, name: "GRILLART Grill Brush and Scraper 18\"", slug: "grillart-grill-brush-and-scraper", imagesCount: 7, ext: "avif" },
-      { id: 18, name: "Kaluns BBQ Grill Tools Set", slug: "kaluns-bbq-tools-set", imagesCount: 9, ext: "avif" },
-      { id: 19, name: "AI Translation Earbuds K08 White", slug: "ai-translation-earbuds-k08", imagesCount: 8, ext: "avif" },
-      { id: 20, name: "Soundcore Anker P40i Wireless Earbuds", slug: "soundcore-p40i-earbuds", imagesCount: 7, ext: "avif" },
-      { id: 21, name: "TOZO Hybrid Active Noise Cancelling Earbuds", slug: "tozo-anc-earbuds", imagesCount: 9, ext: "avif" },
-      { id: 22, name: "Apple AirPods Pro Wireless Earbuds", slug: "apple-airpods-pro", imagesCount: 6, ext: "webp" },
-      { id: 23, name: "NOBIS 90W 20,000mAh Laptop Power Bank", slug: "nobis-90w-powerbank", imagesCount: 7, ext: "avif" },
-      { id: 24, name: "Charmast 20,000mAh Power Bank with Built-in Cables", slug: "charmast-20000mah-powerbank", imagesCount: 9, ext: "avif" },
-      { id: 25, name: "Belkin 10K 23W Portable Charger Power Bank", slug: "belkin-10k-powerbank", imagesCount: 12, ext: "avif" },
-      { id: 26, name: "INIU 45W Fast Charging 10,000mAh Travel Power Bank", slug: "iniu-45w-powerbank", imagesCount: 7, ext: "avif" },
-      { id: 27, name: "WHOOP 5.0 Activity Tracker", slug: "whoop-5-tracker", imagesCount: 8, ext: "avif" },
-      { id: 28, name: "Apple Watch Series 11 GPS 46mm Smartwatch", slug: "apple-watch-s11", imagesCount: 9, ext: "webp" },
-      { id: 29, name: "TOZO S8 Smartwatch", slug: "tozo-s8-smartwatch", imagesCount: 9, ext: "avif" },
-      { id: 30, name: "Amazfit Active Max Smart Watch", slug: "amazfit-active-max", imagesCount: 9, ext: "avif" },
-      { id: 31, name: "Amazfit Bip 6 Smart Watch", slug: "amazfit-bip-6", imagesCount: 8, ext: "avif" },
-      { id: 32, name: "RAYMYLO 64 oz Insulated Water Bottle", slug: "raymylo-64oz-water-bottle", imagesCount: 8, ext: "avif" },
-      { id: 33, name: "Tervis Clear 16 oz Double Walled Tumbler Pack", slug: "tervis-16oz-tumbler-pack", imagesCount: 10, ext: "avif" },
-      { id: 34, name: "BrüMate Era 40 oz Tumbler - Nightfall Blue", slug: "brumate-era-40oz-nightfall-blue", imagesCount: 7, ext: "avif" },
-      { id: 35, name: "BrüMate Era 40 oz Tumbler - Dark Aura", slug: "brumate-era-40oz-dark-aura", imagesCount: 7, ext: "avif" },
-      { id: 36, name: "40 oz Stainless Steel Tumbler - GreenPurple", slug: "40oz-tumbler-greenpurple", imagesCount: 8, ext: "avif" },
-      { id: 37, name: "STANLEY Quencher H2.0 FlowState 40 oz Tumbler", slug: "stanley-quencher-40oz", imagesCount: 8, ext: "avif" },
-      { id: 38, name: "Nulaxy 18\" Telescopic 360 Rotating Laptop Stand", slug: "nulaxy-laptop-stand", imagesCount: 8, ext: "avif" },
-      { id: 39, name: "Lumbar Support Memory Foam Pillow", slug: "lumbar-support-pillow", imagesCount: 9, ext: "avif" },
-      { id: 40, name: "tounee Telescopic 360-degree Swivel Base Laptop Stand", slug: "tounee-laptop-stand", imagesCount: 9, ext: "webp" },
-      { id: 41, name: "Branch Adjustable Wooden Laptop Stand Riser", slug: "branch-wooden-laptop-stand", imagesCount: 6, ext: "webp" },
-      { id: 42, name: "Aothia Leather Desk Pad Protector", slug: "aothia-leather-desk-pad", imagesCount: 8, ext: "webp" },
-      { id: 43, name: "Non-Slip Leather Desk Pad", slug: "non-slip-leather-desk-pad", imagesCount: 7, ext: "webp" },
-      { id: 44, name: "Kanagawa Japanese Sea Wave Gaming Desk Mat", slug: "kanagawa-wave-desk-mat", imagesCount: 7, ext: "avif" },
-      { id: 45, name: "Scalloped Desk Mat 31.5\" x 15.7\"", slug: "scalloped-desk-mat", imagesCount: 7, ext: "avif" },
-      { id: 46, name: "DAWNTREES Felt Dark Gray Desk Mat", slug: "dawntrees-felt-desk-mat", imagesCount: 9, ext: "avif" }
+      { id: 1, name: "Ground Beef", slug: "ground-beef", imagesCount: 4, ext: "avif", link: "https://amzn.to/example1" },
+      { id: 2, name: "Cooker King Pan", slug: "cooker-king-pan", imagesCount: 7, ext: "avif", link: "https://amzn.to/example2" },
+      { id: 3, name: "Inkbird Sous Vide", slug: "inkbird-sousvide", imagesCount: 9, ext: "avif", link: "https://amzn.to/example3" },
+      { id: 4, name: "Anova Sous Vide", slug: "anova-sousvide", imagesCount: 10, ext: "avif", link: "https://amzn.to/example4" },
+      { id: 5, name: "Imarku Chef Knife", slug: "imarku-chef-knife", imagesCount: 9, ext: "avif", link: "https://amzn.to/example5" },
+      { id: 6, name: "Imarku Nakiri Knife", slug: "imarku-nakiri-knife", imagesCount: 9, ext: "avif", link: "https://amzn.to/example6" },
+      { id: 7, name: "Cuisinart Chef Knife", slug: "cuisinart-chef-knife", imagesCount: 1, ext: "avif", link: "https://amzn.to/example7" },
+      { id: 8, name: "AmazonBasics Chef Knife", slug: "amazonbasics-chef-knife", imagesCount: 6, ext: "avif", link: "https://amzn.to/example8" },
+      { id: 9, name: "Titanium Cutting Board", slug: "titanium-cutting-board", imagesCount: 7, ext: "avif", link: "https://amzn.to/example9" },
+      { id: 10, name: "Royal Craft Board", slug: "royal-craft-board", imagesCount: 9, ext: "avif", link: "https://amzn.to/example10" },
+      { id: 11, name: "Snowclad Steel Board", slug: "snowclad-steel-board", imagesCount: 7, ext: "avif", link: "https://amzn.to/example11" },
+      { id: 12, name: "Electric Sharpener", slug: "electric-sharpener", imagesCount: 9, ext: "avif", link: "https://amzn.to/example12" },
+      { id: 13, name: "Yatoshi Sharpener", slug: "yatoshi-sharpener", imagesCount: 8, ext: "avif", link: "https://amzn.to/example13" },
+      { id: 14, name: "Zwilling Knife Block", slug: "zwilling-knife-block", imagesCount: 7, ext: "avif", link: "https://amzn.to/example14" },
+      { id: 15, name: "GRILLART Grill Brush", slug: "grillart-grill-brush", imagesCount: 7, ext: "avif", link: "https://amzn.to/example15" },
+      { id: 16, name: "GRILLART Wire + Helix BBQ Brush", slug: "grillart-wire-helix-brush", imagesCount: 7, ext: "avif", link: "https://amzn.to/example16" },
+      { id: 17, name: "GRILLART Grill Brush and Scraper 18\"", slug: "grillart-grill-brush-and-scraper", imagesCount: 7, ext: "avif", link: "https://amzn.to/example17" },
+      { id: 18, name: "Kaluns BBQ Grill Tools Set", slug: "kaluns-bbq-tools-set", imagesCount: 9, ext: "avif", link: "https://amzn.to/example18" },
+      { id: 19, name: "AI Translation Earbuds K08 White", slug: "ai-translation-earbuds-k08", imagesCount: 8, ext: "avif", link: "https://amzn.to/example19" },
+      { id: 20, name: "Soundcore Anker P40i Wireless Earbuds", slug: "soundcore-p40i-earbuds", imagesCount: 7, ext: "avif", link: "https://amzn.to/example20" },
+      { id: 21, name: "TOZO Hybrid Active Noise Cancelling Earbuds", slug: "tozo-anc-earbuds", imagesCount: 9, ext: "avif", link: "https://amzn.to/example21" },
+      { id: 22, name: "Apple AirPods Pro Wireless Earbuds", slug: "apple-airpods-pro", imagesCount: 6, ext: "webp", link: "https://amzn.to/example22" },
+      { id: 23, name: "NOBIS 90W 20,000mAh Laptop Power Bank", slug: "nobis-90w-powerbank", imagesCount: 7, ext: "avif", link: "https://amzn.to/example23" },
+      { id: 24, name: "Charmast 20,000mAh Power Bank with Built-in Cables", slug: "charmast-20000mah-powerbank", imagesCount: 9, ext: "avif", link: "https://amzn.to/example24" },
+      { id: 25, name: "Belkin 10K 23W Portable Charger Power Bank", slug: "belkin-10k-powerbank", imagesCount: 12, ext: "avif", link: "https://amzn.to/example25" },
+      { id: 26, name: "INIU 45W Fast Charging 10,000mAh Travel Power Bank", slug: "iniu-45w-powerbank", imagesCount: 7, ext: "avif", link: "https://amzn.to/example26" },
+      { id: 27, name: "WHOOP 5.0 Activity Tracker", slug: "whoop-5-tracker", imagesCount: 8, ext: "avif", link: "https://amzn.to/example27" },
+      { id: 28, name: "Apple Watch Series 11 GPS 46mm Smartwatch", slug: "apple-watch-s11", imagesCount: 9, ext: "webp", link: "https://amzn.to/example28" },
+      { id: 29, name: "TOZO S8 Smartwatch", slug: "tozo-s8-smartwatch", imagesCount: 9, ext: "avif", link: "https://amzn.to/example29" },
+      { id: 30, name: "Amazfit Active Max Smart Watch", slug: "amazfit-active-max", imagesCount: 9, ext: "avif", link: "https://amzn.to/example30" },
+      { id: 31, name: "Amazfit Bip 6 Smart Watch", slug: "amazfit-bip-6", imagesCount: 8, ext: "avif", link: "https://amzn.to/example31" },
+      { id: 32, name: "RAYMYLO 64 oz Insulated Water Bottle", slug: "raymylo-64oz-water-bottle", imagesCount: 8, ext: "avif", link: "https://amzn.to/example32" },
+      { id: 33, name: "Tervis Clear 16 oz Double Walled Tumbler Pack", slug: "tervis-16oz-tumbler-pack", imagesCount: 10, ext: "avif", link: "https://amzn.to/example33" },
+      { id: 34, name: "BrüMate Era 40 oz Tumbler - Nightfall Blue", slug: "brumate-era-40oz-nightfall-blue", imagesCount: 7, ext: "avif", link: "https://amzn.to/example34" },
+      { id: 35, name: "BrüMate Era 40 oz Tumbler - Dark Aura", slug: "brumate-era-40oz-dark-aura", imagesCount: 7, ext: "avif", link: "https://amzn.to/example35" },
+      { id: 36, name: "40 oz Stainless Steel Tumbler - GreenPurple", slug: "40oz-tumbler-greenpurple", imagesCount: 8, ext: "avif", link: "https://amzn.to/example36" },
+      { id: 37, name: "STANLEY Quencher H2.0 FlowState 40 oz Tumbler", slug: "stanley-quencher-40oz", imagesCount: 8, ext: "avif", link: "https://amzn.to/example37" },
+      { id: 38, name: "Nulaxy 18\" Telescopic 360 Rotating Laptop Stand", slug: "nulaxy-laptop-stand", imagesCount: 8, ext: "avif", link: "https://amzn.to/example38" },
+      { id: 39, name: "Lumbar Support Memory Foam Pillow", slug: "lumbar-support-pillow", imagesCount: 9, ext: "avif", link: "https://amzn.to/example39" },
+      { id: 40, name: "tounee Telescopic 360-degree Swivel Base Laptop Stand", slug: "tounee-laptop-stand", imagesCount: 9, ext: "webp", link: "https://amzn.to/example40" },
+      { id: 41, name: "Branch Adjustable Wooden Laptop Stand Riser", slug: "branch-wooden-laptop-stand", imagesCount: 6, ext: "webp", link: "https://amzn.to/example41" },
+      { id: 42, name: "Aothia Leather Desk Pad Protector", slug: "aothia-leather-desk-pad", imagesCount: 8, ext: "webp", link: "https://amzn.to/example42" },
+      { id: 43, name: "Non-Slip Leather Desk Pad", slug: "non-slip-leather-desk-pad", imagesCount: 7, ext: "webp", link: "https://amzn.to/example43" },
+      { id: 44, name: "Kanagawa Japanese Sea Wave Gaming Desk Mat", slug: "kanagawa-wave-desk-mat", imagesCount: 7, ext: "avif", link: "https://amzn.to/example44" },
+      { id: 45, name: "Scalloped Desk Mat 31.5\" x 15.7\"", slug: "scalloped-desk-mat", imagesCount: 7, ext: "avif", link: "https://amzn.to/example45" },
+      { id: 46, name: "DAWNTREES Felt Dark Gray Desk Mat", slug: "dawntrees-felt-desk-mat", imagesCount: 9, ext: "avif", link: "https://amzn.to/example46" }
     ];
-
-    let cartCount = 0;
 
     function getProductImages(product) {
       const imgs = [];
@@ -489,7 +462,7 @@
         const hImg = imgs[1] || pImg;
 
         return `
-          <div class="oraimo-card">
+          <div class="product-card">
             <span class="card-badge">HOT</span>
             <div class="card-media">
               <img src="${pImg}" class="primary-img" alt="${item.name}">
@@ -498,7 +471,7 @@
             </div>
             <div class="card-info">
               <h3 class="product-title">${item.name}</h3>
-              <button class="btn-primary" onclick="addToCart()">Add To Cart</button>
+              <a href="${item.link}" target="_blank" class="btn-amazon">Buy on Amazon</a>
             </div>
           </div>
         `;
@@ -509,11 +482,6 @@
       const query = document.getElementById("search-input").value.toLowerCase();
       const filtered = products.filter(p => p.name.toLowerCase().includes(query));
       renderProducts(filtered);
-    }
-
-    function addToCart() {
-      cartCount++;
-      document.getElementById("cart-count").innerText = cartCount;
     }
 
     function openModal(id) {
@@ -531,10 +499,7 @@
         <img src="${imgSrc}" class="${idx === 0 ? 'active' : ''}" onclick="switchModalImg('${imgSrc}', this)">
       `).join('');
 
-      document.getElementById("modal-add-btn").onclick = () => {
-        addToCart();
-        closeModal();
-      };
+      document.getElementById("modal-amazon-link").href = product.link;
 
       document.getElementById("quickview-modal").classList.add("active");
     }
