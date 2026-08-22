@@ -605,7 +605,6 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
   <div class="hero-wrapper">
     <div class="hero-card">
       <div class="hero-bg-container">
@@ -620,7 +619,6 @@
       </div>
     </div>
 
-    <!-- Floating Search / Filter Bar -->
     <div class="hero-search-bar">
       <div class="search-field">
         <label>Search Item</label>
@@ -641,39 +639,25 @@
     </div>
   </div>
 
-  <!-- Value Propositions -->
   <section class="features-section">
     <div class="feature-card">
       <div class="feature-icon">✔</div>
-      <div class="feature-info">
-        <h4>Verified Listings</h4>
-        <p>Direct authentic Amazon links</p>
-      </div>
+      <div class="feature-info"><h4>Verified Listings</h4><p>Direct authentic Amazon links</p></div>
     </div>
     <div class="feature-card">
       <div class="feature-icon">⚡</div>
-      <div class="feature-info">
-        <h4>Fast Prime Shipping</h4>
-        <p>Eligible for Amazon Prime</p>
-      </div>
+      <div class="feature-info"><h4>Fast Prime Shipping</h4><p>Eligible for Amazon Prime</p></div>
     </div>
     <div class="feature-card">
       <div class="feature-icon">⭐</div>
-      <div class="feature-info">
-        <h4>Top Rated Gear</h4>
-        <p>4+ Star community reviews</p>
-      </div>
+      <div class="feature-info"><h4>Top Rated Gear</h4><p>4+ Star community reviews</p></div>
     </div>
     <div class="feature-card">
       <div class="feature-icon">🛡</div>
-      <div class="feature-info">
-        <h4>Secure Checkout</h4>
-        <p>Completed directly on Amazon</p>
-      </div>
+      <div class="feature-info"><h4>Secure Checkout</h4><p>Completed directly on Amazon</p></div>
     </div>
   </section>
 
-  <!-- Catalog Grid -->
   <main class="catalog-container" id="catalog">
     <div class="section-header">
       <div>
@@ -685,7 +669,6 @@
     <div id="product-grid" class="product-grid"></div>
   </main>
 
-  <!-- Quick View Modal & Loading Spinner -->
   <div class="modal-overlay" id="quickview-modal">
     <div class="modal-loader" id="modal-loader">
       <div class="spinner"></div>
@@ -697,9 +680,8 @@
       
       <div class="gallery-container">
         <div class="main-img-box">
-          <img id="modal-display-img" src="" alt="Product Detail Image">
+          <img id="modal-display-img" src="" alt="Product Detail Image" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80'">
         </div>
-        <!-- Touch & Drag Swipeable Thumbnails Bar -->
         <div class="modal-thumbs" id="modal-thumbs"></div>
       </div>
 
@@ -778,7 +760,7 @@
         id: 15, 
         name: "GRILLART Grill Brush", 
         slug: "grillart-grill-brush", 
-        customFirstImage: "images/grillart-grill-brush-1.avif", 
+        customFirstImage: "images/grill-brush-1.avif", 
         imagesCount: 7, 
         ext: "avif", 
         link: "https://amzn.to/example15", 
@@ -893,7 +875,6 @@
 
       const imgs = getProductImages(product);
       document.getElementById("modal-title").innerText = product.name;
-      document.getElementById("modal-display-img").src = imgs[0];
       document.getElementById("modal-score").innerText = product.rating;
       document.getElementById("modal-review-count").innerText = `(${product.reviews} Amazon Ratings)`;
 
@@ -901,6 +882,11 @@
       thumbsContainer.innerHTML = imgs.map((imgSrc, idx) => `
         <img src="${imgSrc}" class="${idx === 0 ? 'active' : ''}" onclick="switchModalImg('${imgSrc}', this)" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80'">
       `).join('');
+
+      const firstThumb = thumbsContainer.querySelector('img');
+      if (firstThumb) {
+        switchModalImg(imgs[0], firstThumb);
+      }
 
       document.getElementById("modal-amazon-link").href = product.link;
       initDragScroll(thumbsContainer);
@@ -949,3 +935,4 @@
   </script>
 </body>
 </html>
+
