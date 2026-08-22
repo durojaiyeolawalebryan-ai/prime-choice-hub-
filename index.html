@@ -826,8 +826,8 @@
         return `
           <div class="card">
             <div class="card-img-wrap" onclick="openModal(${item.id})">
-              <img src="${pImg}" class="primary-img" alt="${item.name}">
-              <img src="${hImg}" class="hover-img" alt="${item.name}">
+              <img src="${pImg}" class="primary-img" alt="${item.name}" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80'">
+              <img src="${hImg}" class="hover-img" alt="${item.name}" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80'">
               <button class="quick-btn" onclick="event.stopPropagation(); openModal(${item.id})">Quick View</button>
             </div>
             <div class="card-body">
@@ -881,7 +881,7 @@
 
       const thumbsContainer = document.getElementById("modal-thumbs");
       thumbsContainer.innerHTML = imgs.map((imgSrc, idx) => `
-        <img src="${imgSrc}" class="${idx === 0 ? 'active' : ''}" onclick="switchModalImg('${imgSrc}', this)">
+        <img src="${imgSrc}" class="${idx === 0 ? 'active' : ''}" onclick="switchModalImg('${imgSrc}', this)" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80'">
       `).join('');
 
       document.getElementById("modal-amazon-link").href = product.link;
@@ -890,7 +890,7 @@
       setTimeout(() => {
         loader.style.display = "none";
         card.style.display = "grid";
-      }, 400);
+      }, 300);
     }
 
     function switchModalImg(src, el) {
