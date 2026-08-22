@@ -10,14 +10,13 @@
   
   <style>
     /* ==========================================================================
-       MODERN LIGHT HERO UI (NESTORIA INSPIRED)
+       MODERN LIGHT HERO UI WITH MULTI-DEPARTMENT SLIDESHOW & REVIEWS
        ========================================================================== */
     :root {
       --primary-color: #6366f1;
       --primary-hover: #4f46e5;
       --accent-purple: #8b5cf6;
-      --amazon-orange: #ff9900;
-      --amazon-hover: #e38800;
+      --star-gold: #ffb703;
       --bg-body: #f8fafc;
       --bg-surface: #ffffff;
       --text-dark: #0f172a;
@@ -25,7 +24,7 @@
       --border-light: #e2e8f0;
       --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
       --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
-      --shadow-lg: 0 20px 30px -10px rgba(99, 102, 241, 0.15);
+      --shadow-lg: 0 20px 30px -10px rgba(99, 102, 241, 0.25);
       --radius-lg: 24px;
       --radius-md: 16px;
       --radius-sm: 12px;
@@ -130,22 +129,46 @@
       box-shadow: var(--shadow-md);
     }
 
-    /* Hero Background Overlay Animation */
-    .hero-bg {
+    /* Multi-Department Hero Image Crossfade Slideshow */
+    .hero-bg-container {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(180deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.4) 60%, rgba(15, 23, 42, 0.85) 100%),
-                  url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-      animation: heroZoom 20s infinite alternate ease-in-out;
+      top: 0; left: 0; width: 100%; height: 100%;
       z-index: 1;
     }
 
-    @keyframes heroZoom {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.08); }
+    .hero-slide {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      animation: crossfadeSlide 18s infinite ease-in-out;
+    }
+
+    .hero-slide:nth-child(1) {
+      background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.4) 60%, rgba(15, 23, 42, 0.85) 100%),
+                        url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80');
+      animation-delay: 0s;
+    }
+
+    .hero-slide:nth-child(2) {
+      background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.4) 60%, rgba(15, 23, 42, 0.85) 100%),
+                        url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1600&q=80');
+      animation-delay: 6s;
+    }
+
+    .hero-slide:nth-child(3) {
+      background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.4) 60%, rgba(15, 23, 42, 0.85) 100%),
+                        url('https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=1600&q=80');
+      animation-delay: 12s;
+    }
+
+    @keyframes crossfadeSlide {
+      0% { opacity: 0; transform: scale(1); }
+      5% { opacity: 1; }
+      33% { opacity: 1; }
+      38% { opacity: 0; transform: scale(1.06); }
+      100% { opacity: 0; }
     }
 
     .hero-content {
@@ -189,7 +212,7 @@
       margin-bottom: 24px;
     }
 
-    /* Floating Search Bar (Inside Hero) */
+    /* Floating Search Bar */
     .hero-search-bar {
       position: relative;
       z-index: 2;
@@ -223,13 +246,8 @@
     }
 
     .search-field input, .search-field select {
-      border: none;
-      outline: none;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text-dark);
-      background: transparent;
-      margin-top: 4px;
+      border: none; outline: none; font-size: 0.95rem; font-weight: 600;
+      color: var(--text-dark); background: transparent; margin-top: 4px;
     }
 
     .btn-search {
@@ -246,7 +264,7 @@
 
     .btn-search:hover { background: var(--primary-hover); }
 
-    /* Value Proposition Section */
+    /* Features Section */
     .features-section {
       max-width: 1280px;
       margin: 80px auto 40px;
@@ -268,15 +286,9 @@
     }
 
     .feature-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-sm);
-      background: rgba(99, 102, 241, 0.1);
-      color: var(--primary-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
+      width: 48px; height: 48px; border-radius: var(--radius-sm);
+      background: rgba(99, 102, 241, 0.1); color: var(--primary-color);
+      display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
     }
 
     .feature-info h4 { font-size: 0.95rem; font-weight: 700; }
@@ -305,7 +317,7 @@
       gap: 24px;
     }
 
-    /* Product Cards */
+    /* Cards */
     .card {
       background: var(--bg-surface);
       border: 1px solid var(--border-light);
@@ -328,14 +340,12 @@
       padding-top: 100%;
       background: #f1f5f9;
       overflow: hidden;
+      cursor: pointer;
     }
 
     .card-img-wrap img {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0; width: 100%; height: 100%;
       object-fit: cover;
       transition: opacity 0.3s, transform 0.3s;
     }
@@ -356,109 +366,222 @@
       font-size: 1rem;
       font-weight: 700;
       color: var(--text-dark);
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       line-height: 1.4;
     }
 
+    .card-rating-preview {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .card-rating-preview .stars { color: var(--star-gold); }
+
     .btn-amazon {
-      background: var(--amazon-orange);
-      color: #000;
+      background: var(--primary-color);
+      color: #fff;
       text-decoration: none;
       text-align: center;
       padding: 12px;
       border-radius: 30px;
       font-weight: 700;
       font-size: 0.9rem;
-      display: block;
-      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
     }
 
-    .btn-amazon:hover { background: var(--amazon-hover); }
+    .btn-amazon:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
+      transform: translateY(-1px);
+    }
 
-    /* Quick View Trigger */
     .quick-btn {
       position: absolute;
       bottom: -40px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       border: 1px solid var(--border-light);
-      padding: 6px 16px;
+      padding: 8px 18px;
       border-radius: 20px;
       font-size: 0.8rem;
       font-weight: 700;
       cursor: pointer;
       backdrop-filter: blur(4px);
       transition: all 0.3s;
+      box-shadow: var(--shadow-sm);
     }
 
     .card:hover .quick-btn { bottom: 12px; }
 
-    /* Modal */
+    /* Modal Experience */
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(15, 23, 42, 0.6);
-      backdrop-filter: blur(4px);
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(8px);
       z-index: 1000;
       display: flex;
       align-items: center;
       justify-content: center;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s;
+      transition: opacity 0.3s ease;
     }
 
     .modal-overlay.active { opacity: 1; pointer-events: all; }
+
+    .modal-loader {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid rgba(255, 255, 255, 0.2);
+      border-top-color: var(--primary-color);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
 
     .modal-card {
       background: var(--bg-surface);
       border-radius: var(--radius-lg);
       width: 90%;
-      max-width: 850px;
-      max-height: 90vh;
+      max-width: 1000px;
+      max-height: 88vh;
       overflow-y: auto;
-      padding: 32px;
+      padding: 36px;
       position: relative;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
+      display: none;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 36px;
+      transform: scale(0.95);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     }
 
-    @media (max-width: 768px) {
-      .modal-card { grid-template-columns: 1fr; }
+    .modal-overlay.active .modal-card { transform: scale(1); }
+
+    .modal-close {
+      position: absolute;
+      top: 20px; right: 24px;
+      background: var(--bg-body);
+      border: none;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      font-size: 1.4rem; cursor: pointer; color: var(--text-dark);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .modal-close:hover { background: var(--border-light); }
+
+    .gallery-container { display: flex; flex-direction: column; gap: 16px; }
+
+    .main-img-box {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: #f1f5f9;
+      position: relative;
+      border: 1px solid var(--border-light);
+    }
+
+    .main-img-box img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.4s ease; cursor: zoom-in;
+    }
+
+    .main-img-box:hover img { transform: scale(1.15); }
+
+    .modal-thumbs { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; }
+
+    .modal-thumbs img {
+      width: 68px; height: 68px; object-fit: cover;
+      border-radius: var(--radius-sm); cursor: pointer;
+      opacity: 0.6; border: 2px solid transparent; transition: all 0.2s;
+    }
+
+    .modal-thumbs img.active, .modal-thumbs img:hover {
+      opacity: 1; border-color: var(--primary-color);
+    }
+
+    .product-details { display: flex; flex-direction: column; }
+
+    .modal-title { font-size: 1.6rem; font-weight: 800; line-height: 1.25; margin-bottom: 8px; }
+
+    .rating-summary-box {
+      background: #f8fafc;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      margin: 16px 0 20px;
+    }
+
+    .rating-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+
+    .big-score { font-size: 1.4rem; font-weight: 800; color: var(--text-dark); }
+
+    .star-row { color: var(--star-gold); font-size: 1.1rem; }
+
+    .review-count-text { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+
+    .rating-bars { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
+
+    .bar-row { display: flex; align-items: center; gap: 8px; font-size: 0.75rem; color: var(--text-muted); }
+
+    .bar-bg { flex: 1; height: 6px; background: #e2e8f0; border-radius: 10px; overflow: hidden; }
+
+    .bar-fill { height: 100%; background: var(--star-gold); border-radius: 10px; }
+
+    .reviews-list {
+      margin-top: 12px; display: flex; flex-direction: column; gap: 12px;
+      max-height: 200px; overflow-y: auto; padding-right: 6px;
+    }
+
+    .review-card {
+      background: #fff; border: 1px solid var(--border-light);
+      border-radius: var(--radius-sm); padding: 12px; font-size: 0.85rem;
+    }
+
+    .reviewer-header { display: flex; justify-content: space-between; margin-bottom: 4px; font-weight: 700; }
+
+    .verified-tag { color: #10b981; font-size: 0.75rem; font-weight: 600; }
+
+    .review-text { color: var(--text-muted); line-height: 1.4; }
+
+    @media (max-width: 820px) {
+      .modal-card { grid-template-columns: 1fr; padding: 24px; }
       .hero-content h1 { font-size: 2.2rem; }
       .hero-search-bar { flex-direction: column; transform: translateY(0); margin-top: 20px; }
       .search-field { border-right: none; border-bottom: 1px solid var(--border-light); padding-bottom: 8px; width: 100%; }
     }
-
-    .modal-close {
-      position: absolute;
-      top: 16px; right: 20px;
-      background: transparent; border: none;
-      font-size: 1.8rem; cursor: pointer; color: var(--text-muted);
-    }
-
-    .modal-gallery img.main-img {
-      width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius-md);
-    }
-
-    .modal-thumbs {
-      display: flex; gap: 8px; margin-top: 12px; overflow-x: auto;
-    }
-
-    .modal-thumbs img {
-      width: 60px; height: 60px; object-fit: cover; border-radius: var(--radius-sm);
-      cursor: pointer; opacity: 0.6; border: 2px solid transparent;
-    }
-
-    .modal-thumbs img.active { opacity: 1; border-color: var(--primary-color); }
   </style>
 </head>
 <body>
 
   <div class="announcement">
-    🛒 Discover Top-Rated Kitchenware, Groceries & Everyday Amazon Deals
+    🛒 Discover Top-Rated Kitchenware, Tech Accessories, Drinkware & Amazon Deals
   </div>
 
   <header>
@@ -476,11 +599,15 @@
   <!-- Hero Section -->
   <div class="hero-wrapper">
     <div class="hero-card">
-      <div class="hero-bg"></div>
+      <div class="hero-bg-container">
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+      </div>
       <div class="hero-content">
-        <div class="hero-badge">📦 Handpicked Amazon Essentials</div>
-        <h1>Fresh Quality Products <span>That Feel Like Home</span></h1>
-        <p>Find premium groceries, cookware, knife sets, and home lifestyle products curated directly from top Amazon sellers.</p>
+        <div class="hero-badge">📦 Multi-Category Amazon Essentials</div>
+        <h1>Everything You Need <span>In One Modern Store</span></h1>
+        <p>Explore top-rated cookware, audio earbuds, laptop setups, tumblers, and premium everyday gear sourced directly from Amazon.</p>
       </div>
     </div>
 
@@ -488,7 +615,7 @@
     <div class="hero-search-bar">
       <div class="search-field">
         <label>Search Item</label>
-        <input type="text" id="search-input" placeholder="e.g. Chef Knife, Tumbler..." oninput="filterProducts()">
+        <input type="text" id="search-input" placeholder="e.g. Chef Knife, Earbuds, Stand..." oninput="filterProducts()">
       </div>
       <div class="search-field">
         <label>Category</label>
@@ -547,72 +674,126 @@
     <div id="product-grid" class="product-grid"></div>
   </main>
 
-  <!-- Quick View Modal -->
+  <!-- Quick View Modal & Loading Spinner -->
   <div class="modal-overlay" id="quickview-modal">
-    <div class="modal-card">
+    <div class="modal-loader" id="modal-loader">
+      <div class="spinner"></div>
+      <span>Loading Product Details...</span>
+    </div>
+
+    <div class="modal-card" id="modal-card">
       <button class="modal-close" onclick="closeModal()">&times;</button>
-      <div class="modal-gallery">
-        <img id="modal-display-img" class="main-img" src="" alt="Product">
+      
+      <div class="gallery-container">
+        <div class="main-img-box">
+          <img id="modal-display-img" src="" alt="Product Detail Image">
+        </div>
         <div class="modal-thumbs" id="modal-thumbs"></div>
       </div>
-      <div style="display: flex; flex-direction: column; justify-content: center;">
-        <h2 id="modal-title" style="font-size: 1.5rem; margin-bottom: 12px;"></h2>
-        <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem;">
-          High-quality product built to the highest standard. Click below to view detailed specifications, customer reviews, and exact pricing on Amazon.
-        </p>
-        <a id="modal-amazon-link" href="#" target="_blank" class="btn-amazon">Buy on Amazon</a>
+
+      <div class="product-details">
+        <h2 id="modal-title" class="modal-title"></h2>
+        
+        <div class="rating-summary-box">
+          <div class="rating-header">
+            <span class="big-score" id="modal-score">4.8</span>
+            <div class="star-row">★★★★★</div>
+            <span class="review-count-text" id="modal-review-count">(1,240 Amazon Ratings)</span>
+          </div>
+          
+          <div class="rating-bars">
+            <div class="bar-row">
+              <span>5 star</span>
+              <div class="bar-bg"><div class="bar-fill" style="width: 82%;"></div></div>
+              <span>82%</span>
+            </div>
+            <div class="bar-row">
+              <span>4 star</span>
+              <div class="bar-bg"><div class="bar-fill" style="width: 12%;"></div></div>
+              <span>12%</span>
+            </div>
+            <div class="bar-row">
+              <span>3 star</span>
+              <div class="bar-bg"><div class="bar-fill" style="width: 4%;"></div></div>
+              <span>4%</span>
+            </div>
+          </div>
+        </div>
+
+        <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;">Customer Reviews from Amazon</h4>
+        <div class="reviews-list">
+          <div class="review-card">
+            <div class="reviewer-header">
+              <span>Marcus T. <span class="stars" style="color:var(--star-gold);">★★★★★</span></span>
+              <span class="verified-tag">✓ Verified Purchase</span>
+            </div>
+            <p class="review-text">"Exceeded my expectations! Build quality is top-notch and arrived quickly with Prime."</p>
+          </div>
+          <div class="review-card">
+            <div class="reviewer-header">
+              <span>Sarah L. <span class="stars" style="color:var(--star-gold);">★★★★★</span></span>
+              <span class="verified-tag">✓ Verified Purchase</span>
+            </div>
+            <p class="review-text">"Exactly as described on Amazon. Daily use item for my house now!"</p>
+          </div>
+        </div>
+
+        <a id="modal-amazon-link" href="#" target="_blank" class="btn-amazon" style="margin-top: auto; padding: 14px;">
+          <span>Buy on Amazon</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
       </div>
     </div>
   </div>
 
   <script>
     const products = [
-      { id: 1, name: "Ground Beef", slug: "ground-beef", imagesCount: 4, ext: "avif", link: "https://amzn.to/example1", cat: "kitchen" },
-      { id: 2, name: "Cooker King Pan", slug: "cooker-king-pan", imagesCount: 7, ext: "avif", link: "https://amzn.to/example2", cat: "kitchen" },
-      { id: 3, name: "Inkbird Sous Vide", slug: "inkbird-sousvide", imagesCount: 9, ext: "avif", link: "https://amzn.to/example3", cat: "kitchen" },
-      { id: 4, name: "Anova Sous Vide", slug: "anova-sousvide", imagesCount: 10, ext: "avif", link: "https://amzn.to/example4", cat: "kitchen" },
-      { id: 5, name: "Imarku Chef Knife", slug: "imarku-chef-knife", imagesCount: 9, ext: "avif", link: "https://amzn.to/example5", cat: "kitchen" },
-      { id: 6, name: "Imarku Nakiri Knife", slug: "imarku-nakiri-knife", imagesCount: 9, ext: "avif", link: "https://amzn.to/example6", cat: "kitchen" },
-      { id: 7, name: "Cuisinart Chef Knife", slug: "cuisinart-chef-knife", imagesCount: 1, ext: "avif", link: "https://amzn.to/example7", cat: "kitchen" },
-      { id: 8, name: "AmazonBasics Chef Knife", slug: "amazonbasics-chef-knife", imagesCount: 6, ext: "avif", link: "https://amzn.to/example8", cat: "kitchen" },
-      { id: 9, name: "Titanium Cutting Board", slug: "titanium-cutting-board", imagesCount: 7, ext: "avif", link: "https://amzn.to/example9", cat: "kitchen" },
-      { id: 10, name: "Royal Craft Board", slug: "royal-craft-board", imagesCount: 9, ext: "avif", link: "https://amzn.to/example10", cat: "kitchen" },
-      { id: 11, name: "Snowclad Steel Board", slug: "snowclad-steel-board", imagesCount: 7, ext: "avif", link: "https://amzn.to/example11", cat: "kitchen" },
-      { id: 12, name: "Electric Sharpener", slug: "electric-sharpener", imagesCount: 9, ext: "avif", link: "https://amzn.to/example12", cat: "kitchen" },
-      { id: 13, name: "Yatoshi Sharpener", slug: "yatoshi-sharpener", imagesCount: 8, ext: "avif", link: "https://amzn.to/example13", cat: "kitchen" },
-      { id: 14, name: "Zwilling Knife Block", slug: "zwilling-knife-block", imagesCount: 7, ext: "avif", link: "https://amzn.to/example14", cat: "kitchen" },
-      { id: 15, name: "GRILLART Grill Brush", slug: "grillart-grill-brush", imagesCount: 7, ext: "avif", link: "https://amzn.to/example15", cat: "kitchen" },
-      { id: 16, name: "GRILLART Wire + Helix BBQ Brush", slug: "grillart-wire-helix-brush", imagesCount: 7, ext: "avif", link: "https://amzn.to/example16", cat: "kitchen" },
-      { id: 17, name: "GRILLART Grill Brush and Scraper 18\"", slug: "grillart-grill-brush-and-scraper", imagesCount: 7, ext: "avif", link: "https://amzn.to/example17", cat: "kitchen" },
-      { id: 18, name: "Kaluns BBQ Grill Tools Set", slug: "kaluns-bbq-tools-set", imagesCount: 9, ext: "avif", link: "https://amzn.to/example18", cat: "kitchen" },
-      { id: 19, name: "AI Translation Earbuds K08 White", slug: "ai-translation-earbuds-k08", imagesCount: 8, ext: "avif", link: "https://amzn.to/example19", cat: "tech" },
-      { id: 20, name: "Soundcore Anker P40i Wireless Earbuds", slug: "soundcore-p40i-earbuds", imagesCount: 7, ext: "avif", link: "https://amzn.to/example20", cat: "tech" },
-      { id: 21, name: "TOZO Hybrid Active Noise Cancelling Earbuds", slug: "tozo-anc-earbuds", imagesCount: 9, ext: "avif", link: "https://amzn.to/example21", cat: "tech" },
-      { id: 22, name: "Apple AirPods Pro Wireless Earbuds", slug: "apple-airpods-pro", imagesCount: 6, ext: "webp", link: "https://amzn.to/example22", cat: "tech" },
-      { id: 23, name: "NOBIS 90W 20,000mAh Laptop Power Bank", slug: "nobis-90w-powerbank", imagesCount: 7, ext: "avif", link: "https://amzn.to/example23", cat: "tech" },
-      { id: 24, name: "Charmast 20,000mAh Power Bank with Built-in Cables", slug: "charmast-20000mah-powerbank", imagesCount: 9, ext: "avif", link: "https://amzn.to/example24", cat: "tech" },
-      { id: 25, name: "Belkin 10K 23W Portable Charger Power Bank", slug: "belkin-10k-powerbank", imagesCount: 12, ext: "avif", link: "https://amzn.to/example25", cat: "tech" },
-      { id: 26, name: "INIU 45W Fast Charging 10,000mAh Travel Power Bank", slug: "iniu-45w-powerbank", imagesCount: 7, ext: "avif", link: "https://amzn.to/example26", cat: "tech" },
-      { id: 27, name: "WHOOP 5.0 Activity Tracker", slug: "whoop-5-tracker", imagesCount: 8, ext: "avif", link: "https://amzn.to/example27", cat: "tech" },
-      { id: 28, name: "Apple Watch Series 11 GPS 46mm Smartwatch", slug: "apple-watch-s11", imagesCount: 9, ext: "webp", link: "https://amzn.to/example28", cat: "tech" },
-      { id: 29, name: "TOZO S8 Smartwatch", slug: "tozo-s8-smartwatch", imagesCount: 9, ext: "avif", link: "https://amzn.to/example29", cat: "tech" },
-      { id: 30, name: "Amazfit Active Max Smart Watch", slug: "amazfit-active-max", imagesCount: 9, ext: "avif", link: "https://amzn.to/example30", cat: "tech" },
-      { id: 31, name: "Amazfit Bip 6 Smart Watch", slug: "amazfit-bip-6", imagesCount: 8, ext: "avif", link: "https://amzn.to/example31", cat: "tech" },
-      { id: 32, name: "RAYMYLO 64 oz Insulated Water Bottle", slug: "raymylo-64oz-water-bottle", imagesCount: 8, ext: "avif", link: "https://amzn.to/example32", cat: "drinkware" },
-      { id: 33, name: "Tervis Clear 16 oz Double Walled Tumbler Pack", slug: "tervis-16oz-tumbler-pack", imagesCount: 10, ext: "avif", link: "https://amzn.to/example33", cat: "drinkware" },
-      { id: 34, name: "BrüMate Era 40 oz Tumbler - Nightfall Blue", slug: "brumate-era-40oz-nightfall-blue", imagesCount: 7, ext: "avif", link: "https://amzn.to/example34", cat: "drinkware" },
-      { id: 35, name: "BrüMate Era 40 oz Tumbler - Dark Aura", slug: "brumate-era-40oz-dark-aura", imagesCount: 7, ext: "avif", link: "https://amzn.to/example35", cat: "drinkware" },
-      { id: 36, name: "40 oz Stainless Steel Tumbler - GreenPurple", slug: "40oz-tumbler-greenpurple", imagesCount: 8, ext: "avif", link: "https://amzn.to/example36", cat: "drinkware" },
-      { id: 37, name: "STANLEY Quencher H2.0 FlowState 40 oz Tumbler", slug: "stanley-quencher-40oz", imagesCount: 8, ext: "avif", link: "https://amzn.to/example37", cat: "drinkware" },
-      { id: 38, name: "Nulaxy 18\" Telescopic 360 Rotating Laptop Stand", slug: "nulaxy-laptop-stand", imagesCount: 8, ext: "avif", link: "https://amzn.to/example38", cat: "tech" },
-      { id: 39, name: "Lumbar Support Memory Foam Pillow", slug: "lumbar-support-pillow", imagesCount: 9, ext: "avif", link: "https://amzn.to/example39", cat: "kitchen" },
-      { id: 40, name: "tounee Telescopic 360-degree Swivel Base Laptop Stand", slug: "tounee-laptop-stand", imagesCount: 9, ext: "webp", link: "https://amzn.to/example40", cat: "tech" },
-      { id: 41, name: "Branch Adjustable Wooden Laptop Stand Riser", slug: "branch-wooden-laptop-stand", imagesCount: 6, ext: "webp", link: "https://amzn.to/example41", cat: "tech" },
-      { id: 42, name: "Aothia Leather Desk Pad Protector", slug: "aothia-leather-desk-pad", imagesCount: 8, ext: "webp", link: "https://amzn.to/example42", cat: "tech" },
-      { id: 43, name: "Non-Slip Leather Desk Pad", slug: "non-slip-leather-desk-pad", imagesCount: 7, ext: "webp", link: "https://amzn.to/example43", cat: "tech" },
-      { id: 44, name: "Kanagawa Japanese Sea Wave Gaming Desk Mat", slug: "kanagawa-wave-desk-mat", imagesCount: 7, ext: "avif", link: "https://amzn.to/example44", cat: "tech" },
-      { id: 45, name: "Scalloped Desk Mat 31.5\" x 15.7\"", slug: "scalloped-desk-mat", imagesCount: 7, ext: "avif", link: "https://amzn.to/example45", cat: "tech" },
-      { id: 46, name: "DAWNTREES Felt Dark Gray Desk Mat", slug: "dawntrees-felt-desk-mat", imagesCount: 9, ext: "avif", link: "https://amzn.to/example46", cat: "tech" }
+      { id: 1, name: "Ground Beef", slug: "ground-beef", imagesCount: 4, ext: "avif", link: "https://amzn.to/example1", cat: "kitchen", rating: 4.8, reviews: "2,410" },
+      { id: 2, name: "Cooker King Pan", slug: "cooker-king-pan", imagesCount: 7, ext: "avif", link: "https://amzn.to/example2", cat: "kitchen", rating: 4.7, reviews: "890" },
+      { id: 3, name: "Inkbird Sous Vide", slug: "inkbird-sousvide", imagesCount: 9, ext: "avif", link: "https://amzn.to/example3", cat: "kitchen", rating: 4.9, reviews: "3,150" },
+      { id: 4, name: "Anova Sous Vide", slug: "anova-sousvide", imagesCount: 10, ext: "avif", link: "https://amzn.to/example4", cat: "kitchen", rating: 4.8, reviews: "5,420" },
+      { id: 5, name: "Imarku Chef Knife", slug: "imarku-chef-knife", imagesCount: 9, ext: "avif", link: "https://amzn.to/example5", cat: "kitchen", rating: 4.6, reviews: "1,200" },
+      { id: 6, name: "Imarku Nakiri Knife", slug: "imarku-nakiri-knife", imagesCount: 9, ext: "avif", link: "https://amzn.to/example6", cat: "kitchen", rating: 4.7, reviews: "940" },
+      { id: 7, name: "Cuisinart Chef Knife", slug: "cuisinart-chef-knife", imagesCount: 1, ext: "avif", link: "https://amzn.to/example7", cat: "kitchen", rating: 4.5, reviews: "630" },
+      { id: 8, name: "AmazonBasics Chef Knife", slug: "amazonbasics-chef-knife", imagesCount: 6, ext: "avif", link: "https://amzn.to/example8", cat: "kitchen", rating: 4.4, reviews: "1,850" },
+      { id: 9, name: "Titanium Cutting Board", slug: "titanium-cutting-board", imagesCount: 7, ext: "avif", link: "https://amzn.to/example9", cat: "kitchen", rating: 4.8, reviews: "780" },
+      { id: 10, name: "Royal Craft Board", slug: "royal-craft-board", imagesCount: 9, ext: "avif", link: "https://amzn.to/example10", cat: "kitchen", rating: 4.9, reviews: "4,110" },
+      { id: 11, name: "Snowclad Steel Board", slug: "snowclad-steel-board", imagesCount: 7, ext: "avif", link: "https://amzn.to/example11", cat: "kitchen", rating: 4.6, reviews: "520" },
+      { id: 12, name: "Electric Sharpener", slug: "electric-sharpener", imagesCount: 9, ext: "avif", link: "https://amzn.to/example12", cat: "kitchen", rating: 4.7, reviews: "1,430" },
+      { id: 13, name: "Yatoshi Sharpener", slug: "yatoshi-sharpener", imagesCount: 8, ext: "avif", link: "https://amzn.to/example13", cat: "kitchen", rating: 4.5, reviews: "880" },
+      { id: 14, name: "Zwilling Knife Block", slug: "zwilling-knife-block", imagesCount: 7, ext: "avif", link: "https://amzn.to/example14", cat: "kitchen", rating: 4.9, reviews: "2,980" },
+      { id: 15, name: "GRILLART Grill Brush", slug: "grillart-grill-brush", imagesCount: 7, ext: "avif", link: "https://amzn.to/example15", cat: "kitchen", rating: 4.8, reviews: "6,200" },
+      { id: 16, name: "GRILLART Wire + Helix BBQ Brush", slug: "grillart-wire-helix-brush", imagesCount: 7, ext: "avif", link: "https://amzn.to/example16", cat: "kitchen", rating: 4.7, reviews: "3,110" },
+      { id: 17, name: "GRILLART Grill Brush and Scraper 18\"", slug: "grillart-grill-brush-and-scraper", imagesCount: 7, ext: "avif", link: "https://amzn.to/example17", cat: "kitchen", rating: 4.8, reviews: "4,500" },
+      { id: 18, name: "Kaluns BBQ Grill Tools Set", slug: "kaluns-bbq-tools-set", imagesCount: 9, ext: "avif", link: "https://amzn.to/example18", cat: "kitchen", rating: 4.6, reviews: "1,740" },
+      { id: 19, name: "AI Translation Earbuds K08 White", slug: "ai-translation-earbuds-k08", imagesCount: 8, ext: "avif", link: "https://amzn.to/example19", cat: "tech", rating: 4.5, reviews: "890" },
+      { id: 20, name: "Soundcore Anker P40i Wireless Earbuds", slug: "soundcore-p40i-earbuds", imagesCount: 7, ext: "avif", link: "https://amzn.to/example20", cat: "tech", rating: 4.8, reviews: "8,920" },
+      { id: 21, name: "TOZO Hybrid Active Noise Cancelling Earbuds", slug: "tozo-anc-earbuds", imagesCount: 9, ext: "avif", link: "https://amzn.to/example21", cat: "tech", rating: 4.7, reviews: "12,400" },
+      { id: 22, name: "Apple AirPods Pro Wireless Earbuds", slug: "apple-airpods-pro", imagesCount: 6, ext: "webp", link: "https://amzn.to/example22", cat: "tech", rating: 4.9, reviews: "45,200" },
+      { id: 23, name: "NOBIS 90W 20,000mAh Laptop Power Bank", slug: "nobis-90w-powerbank", imagesCount: 7, ext: "avif", link: "https://amzn.to/example23", cat: "tech", rating: 4.6, reviews: "640" },
+      { id: 24, name: "Charmast 20,000mAh Power Bank with Built-in Cables", slug: "charmast-20000mah-powerbank", imagesCount: 9, ext: "avif", link: "https://amzn.to/example24", cat: "tech", rating: 4.7, reviews: "3,890" },
+      { id: 25, name: "Belkin 10K 23W Portable Charger Power Bank", slug: "belkin-10k-powerbank", imagesCount: 12, ext: "avif", link: "https://amzn.to/example25", cat: "tech", rating: 4.8, reviews: "2,100" },
+      { id: 26, name: "INIU 45W Fast Charging 10,000mAh Travel Power Bank", slug: "iniu-45w-powerbank", imagesCount: 7, ext: "avif", link: "https://amzn.to/example26", cat: "tech", rating: 4.9, reviews: "9,450" },
+      { id: 27, name: "WHOOP 5.0 Activity Tracker", slug: "whoop-5-tracker", imagesCount: 8, ext: "avif", link: "https://amzn.to/example27", cat: "tech", rating: 4.5, reviews: "1,120" },
+      { id: 28, name: "Apple Watch Series 11 GPS 46mm Smartwatch", slug: "apple-watch-s11", imagesCount: 9, ext: "webp", link: "https://amzn.to/example28", cat: "tech", rating: 4.9, reviews: "14,300" },
+      { id: 29, name: "TOZO S8 Smartwatch", slug: "tozo-s8-smartwatch", imagesCount: 9, ext: "avif", link: "https://amzn.to/example29", cat: "tech", rating: 4.6, reviews: "2,300" },
+      { id: 30, name: "Amazfit Active Max Smart Watch", slug: "amazfit-active-max", imagesCount: 9, ext: "avif", link: "https://amzn.to/example30", cat: "tech", rating: 4.7, reviews: "1,890" },
+      { id: 31, name: "Amazfit Bip 6 Smart Watch", slug: "amazfit-bip-6", imagesCount: 8, ext: "avif", link: "https://amzn.to/example31", cat: "tech", rating: 4.6, reviews: "3,400" },
+      { id: 32, name: "RAYMYLO 64 oz Insulated Water Bottle", slug: "raymylo-64oz-water-bottle", imagesCount: 8, ext: "avif", link: "https://amzn.to/example32", cat: "drinkware", rating: 4.8, reviews: "1,560" },
+      { id: 33, name: "Tervis Clear 16 oz Double Walled Tumbler Pack", slug: "tervis-16oz-tumbler-pack", imagesCount: 10, ext: "avif", link: "https://amzn.to/example33", cat: "drinkware", rating: 4.7, reviews: "2,800" },
+      { id: 34, name: "BrüMate Era 40 oz Tumbler - Nightfall Blue", slug: "brumate-era-40oz-nightfall-blue", imagesCount: 7, ext: "avif", link: "https://amzn.to/example34", cat: "drinkware", rating: 4.9, reviews: "5,120" },
+      { id: 35, name: "BrüMate Era 40 oz Tumbler - Dark Aura", slug: "brumate-era-40oz-dark-aura", imagesCount: 7, ext: "avif", link: "https://amzn.to/example35", cat: "drinkware", rating: 4.9, reviews: "4,890" },
+      { id: 36, name: "40 oz Stainless Steel Tumbler - GreenPurple", slug: "40oz-tumbler-greenpurple", imagesCount: 8, ext: "avif", link: "https://amzn.to/example36", cat: "drinkware", rating: 4.6, reviews: "930" },
+      { id: 37, name: "STANLEY Quencher H2.0 FlowState 40 oz Tumbler", slug: "stanley-quencher-40oz", imagesCount: 8, ext: "avif", link: "https://amzn.to/example37", cat: "drinkware", rating: 4.9, reviews: "38,500" },
+      { id: 38, name: "Nulaxy 18\" Telescopic 360 Rotating Laptop Stand", slug: "nulaxy-laptop-stand", imagesCount: 8, ext: "avif", link: "https://amzn.to/example38", cat: "tech", rating: 4.8, reviews: "6,400" },
+      { id: 39, name: "Lumbar Support Memory Foam Pillow", slug: "lumbar-support-pillow", imagesCount: 9, ext: "avif", link: "https://amzn.to/example39", cat: "kitchen", rating: 4.5, reviews: "2,100" },
+      { id: 40, name: "tounee Telescopic 360-degree Swivel Base Laptop Stand", slug: "tounee-laptop-stand", imagesCount: 9, ext: "webp", link: "https://amzn.to/example40", cat: "tech", rating: 4.7, reviews: "1,450" },
+      { id: 41, name: "Branch Adjustable Wooden Laptop Stand Riser", slug: "branch-wooden-laptop-stand", imagesCount: 6, ext: "webp", link: "https://amzn.to/example41", cat: "tech", rating: 4.8, reviews: "720" },
+      { id: 42, name: "Aothia Leather Desk Pad Protector", slug: "aothia-leather-desk-pad", imagesCount: 8, ext: "webp", link: "https://amzn.to/example42", cat: "tech", rating: 4.7, reviews: "11,200" },
+      { id: 43, name: "Non-Slip Leather Desk Pad", slug: "non-slip-leather-desk-pad", imagesCount: 7, ext: "webp", link: "https://amzn.to/example43", cat: "tech", rating: 4.6, reviews: "3,100" },
+      { id: 44, name: "Kanagawa Japanese Sea Wave Gaming Desk Mat", slug: "kanagawa-wave-desk-mat", imagesCount: 7, ext: "avif", link: "https://amzn.to/example44", cat: "tech", rating: 4.9, reviews: "4,800" },
+      { id: 45, name: "Scalloped Desk Mat 31.5\" x 15.7\"", slug: "scalloped-desk-mat", imagesCount: 7, ext: "avif", link: "https://amzn.to/example45", cat: "tech", rating: 4.7, reviews: "1,250" },
+      { id: 46, name: "DAWNTREES Felt Dark Gray Desk Mat", slug: "dawntrees-felt-desk-mat", imagesCount: 9, ext: "avif", link: "https://amzn.to/example46", cat: "tech", rating: 4.5, reviews: "2,600" }
     ];
 
     function getProductImages(product) {
@@ -632,14 +813,23 @@
 
         return `
           <div class="card">
-            <div class="card-img-wrap">
+            <div class="card-img-wrap" onclick="openModal(${item.id})">
               <img src="${pImg}" class="primary-img" alt="${item.name}">
               <img src="${hImg}" class="hover-img" alt="${item.name}">
-              <button class="quick-btn" onclick="openModal(${item.id})">Quick View</button>
+              <button class="quick-btn" onclick="event.stopPropagation(); openModal(${item.id})">Quick View</button>
             </div>
             <div class="card-body">
-              <h3 class="card-title">${item.name}</h3>
-              <a href="${item.link}" target="_blank" class="btn-amazon">Buy on Amazon</a>
+              <div>
+                <h3 class="card-title">${item.name}</h3>
+                <div class="card-rating-preview">
+                  <span class="stars">★★★★★</span>
+                  <span>${item.rating} (${item.reviews})</span>
+                </div>
+              </div>
+              <a href="${item.link}" target="_blank" class="btn-amazon">
+                <span>Buy on Amazon</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
             </div>
           </div>
         `;
@@ -663,9 +853,19 @@
       const product = products.find(p => p.id === id);
       if (!product) return;
 
+      const modalOverlay = document.getElementById("quickview-modal");
+      const loader = document.getElementById("modal-loader");
+      const card = document.getElementById("modal-card");
+
+      card.style.display = "none";
+      loader.style.display = "flex";
+      modalOverlay.classList.add("active");
+
       const imgs = getProductImages(product);
       document.getElementById("modal-title").innerText = product.name;
       document.getElementById("modal-display-img").src = imgs[0];
+      document.getElementById("modal-score").innerText = product.rating;
+      document.getElementById("modal-review-count").innerText = `(${product.reviews} Amazon Ratings)`;
 
       const thumbsContainer = document.getElementById("modal-thumbs");
       thumbsContainer.innerHTML = imgs.map((imgSrc, idx) => `
@@ -673,7 +873,11 @@
       `).join('');
 
       document.getElementById("modal-amazon-link").href = product.link;
-      document.getElementById("quickview-modal").classList.add("active");
+
+      setTimeout(() => {
+        loader.style.display = "none";
+        card.style.display = "grid";
+      }, 400);
     }
 
     function switchModalImg(src, el) {
